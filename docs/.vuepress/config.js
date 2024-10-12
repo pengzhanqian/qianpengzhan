@@ -8,6 +8,7 @@ export default defineUserConfig({
   description: '钱鹏展随笔',
   bundler: viteBundler(),
   theme: defaultTheme({
+    logo: '/logo.png',
     navbar: [
       {
         text: '首页',
