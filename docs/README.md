@@ -1,13 +1,13 @@
 ---
 home: true
-heroImage: logo.png
-heroText: 钱鹏展随笔
+heroImage: logo1.png
+heroText: 随笔
 actions:
-  - text: 快速开始
+  - text: java基础
     link: /md/java/basic/java-basic-01.md
     type: primary
-  - text: 演示站点
-    link: http://localhost:8080/
+  - text: 待定
+    link: /md/java/basic/java-basic-01.md
     type: secondary
 features:
 - title: 简洁高效
