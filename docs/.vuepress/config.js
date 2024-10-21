@@ -16,7 +16,7 @@ import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { gitPlugin } from '@vuepress/plugin-git'
 
 export default defineUserConfig({
-  
+  base: '/qianpengzhan/',
   lang: 'zh-CN',
   title: '随笔',
   description: '随笔',
@@ -133,7 +133,7 @@ export default defineUserConfig({
     noticePlugin({
       config: [
         {
-          path: '/',
+          path: '/qianpengzhan/md/',
           title: 'Notice Title',
           content: 'Notice Content',
           actions: [
