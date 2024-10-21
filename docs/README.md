@@ -4,10 +4,10 @@ heroImage: logo1.png
 heroText: 随笔
 actions:
   - text: java基础
-    link: /md/java/basic/java-basic-01.md
+    link: /md/java/basic/001.Java_basic.md
     type: primary
   - text: 待定
-    link: /md/java/basic/java-basic-01.md
+    link: /md/java/basic/001.Java_basic.md
     type: secondary
 features:
 - title: 1

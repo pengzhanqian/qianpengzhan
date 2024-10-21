@@ -42,7 +42,7 @@ export default defineUserConfig({
       },
       {
         text: 'Java',
-        link: '/md/java/basic/java-basic-01.md'
+        link: '/md/java/basic/001.Java_basic.md'
       }
     ],
     // 侧边栏对象
@@ -103,11 +103,11 @@ export default defineUserConfig({
       '/md/java/':[
         {
           text: 'Java基础',
-          collapsible: true,
+          collapsible: false,
           children: [
             {
-              text: 'Java 基础 - Java语言背景',
-              link: '/md/java/basic/java-basic-01.md',
+              text: 'Java 基础知识',
+              link: '/md/java/basic/001.Java_basic.md',
               collapsible: false
             }
           ]
@@ -162,6 +162,7 @@ export default defineUserConfig({
     }),
     watermarkPlugin({
       // options
+      watermarkText: '钱鹏展',
     }),
     photoSwipePlugin({
       // 选项
