@@ -25,7 +25,7 @@ export default defineUserConfig({
     docsRepo: 'https://github.com/pengzhanqian/qianpengzhan',
     docsBranch: 'main',
     docsDir: 'docs',
-    editLinkPattern: ':repo/-/edit/:branch/:path',
+    editLinkPattern: ':repo/edit/:branch/:path',
     logo: '/logo.png',
     navbar: [
       {
@@ -131,7 +131,34 @@ export default defineUserConfig({
       // 配置项
     }),
     noticePlugin({
-      // 选项
+      config: [
+        {
+          path: '/',
+          title: 'Notice Title',
+          content: 'Notice Content',
+          actions: [
+            {
+              text: 'Primary Action',
+              link: 'https://theme-hope.vuejs.press/',
+              type: 'primary',
+            },
+            { text: 'Default Action' },
+          ],
+        },
+        {
+          path: '/zh/',
+          title: 'Notice Title',
+          content: 'Notice Content',
+          actions: [
+            {
+              text: 'Primary Action',
+              link: 'https://theme-hope.vuejs.press/',
+              type: 'primary',
+            },
+            { text: 'Default Action' },
+          ],
+        },
+      ],
     }),
     watermarkPlugin({
       // options
@@ -140,8 +167,12 @@ export default defineUserConfig({
       // 选项
     }),
     copyrightPlugin({
-      // options
-      author: 'qianpengzhan'
+      locales: {
+        '/md/': {
+          // Override link text
+          link: 'Original posted at :link',
+        },
+      },
     }),
     catalogPlugin({
       // 你的选项
