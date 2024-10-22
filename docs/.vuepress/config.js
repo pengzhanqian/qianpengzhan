@@ -61,8 +61,12 @@ export default defineUserConfig({
           },
           {
             text: '实操系列',
-            link: '/md/more/real-opertion/ro_001.md'
+            link: '/md/more/real-operation/ro_001.md'
           },
+          {
+            text: '工具',
+            link: '/md/more/tool/tool_001_fastgithub.md'
+          }
         ]
 
       },
