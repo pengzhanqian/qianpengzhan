@@ -20,11 +20,11 @@
 >  - 安装、升级、卸载RPM软件包
 >  - 维护重建RPM数据库信息等综合管理操作 
 
-![image-20221229114505086](../../.vuepress/public/images/image-20221229114505086.png)
+![image-20221229114505086](../../../.vuepress/public/images/image-20221229114505086.png)
 
 ##### 1.1.2 yum
 
-![image-20221229155857614](../../.vuepress/public/images/image-20221229155857614.png)
+![image-20221229155857614](../../../.vuepress/public/images/image-20221229155857614.png)
 
 ##### 1.1.3 CentOS7的安装包下载地址
 
@@ -74,7 +74,7 @@ yum-3.4.3-168.el7.centos.noarch
 [root@localhost02 yum]# yum -y update
 ```
 
-![image-20221229160330681](../../.vuepress/public/images/image-20221229160330681.png)
+![image-20221229160330681](../../../.vuepress/public/images/image-20221229160330681.png)
 
 ```shell
 [root@localhost02 yum]# rpm -qa | grep yum
@@ -244,7 +244,7 @@ Complete!
 # 说明不存在lrzsz命令
 ```
 
-![image-20221230174007750](../../.vuepress/public/images/image-20221230174007750.png)
+![image-20221230174007750](../../../.vuepress/public/images/image-20221230174007750.png)
 
 上图说明存在lrzsz命令
 
@@ -317,7 +317,7 @@ syntax on " 开启语法高亮
 然后输入 esc + :wq 进入退出界面
 ```
 
-![image-20230128094513456](../../.vuepress/public/images/image-20230128094513456.png)
+![image-20230128094513456](../../../.vuepress/public/images/image-20230128094513456.png)
 
 #### 1.6 使用rpm命令安装curl命令
 
@@ -331,7 +331,7 @@ python-pycurl-7.19.0-19.el7.x86_64
 [root@localhost02 ~]#
 ```
 
-![image-20230128095232458](../../.vuepress/public/images/image-20230128095232458.png)
+![image-20230128095232458](../../../.vuepress/public/images/image-20230128095232458.png)
 
 说明已经成功安装了curl
 
@@ -421,7 +421,7 @@ libcurl-7.29.0-59.el7.x86_64
 
 > 使用命令如下： **yum -y install telnet**
 
-![image-20230128105355834](../../.vuepress/public/images/image-20230128105355834.png)
+![image-20230128105355834](../../../.vuepress/public/images/image-20230128105355834.png)
 
 ``` shell
 [root@localhost02 /]# telnet 192.168.91.129
@@ -446,7 +446,7 @@ telnet: connect to address 192.168.91.129: No route to host
 
 > 使用命令： `yum -y install tree`
 
-![image-20230128111200479](../../.vuepress/public/images/image-20230128111200479.png)
+![image-20230128111200479](../../../.vuepress/public/images/image-20230128111200479.png)
 
 ``` shell
 [root@localhost02 yum]# tree
@@ -479,13 +479,13 @@ telnet: connect to address 192.168.91.129: No route to host
 [root@localhost02 usr]# yum -y install net-tools
 ```
 
-![image-20230128112201777](../../.vuepress/public/images/image-20230128112201777.png)
+![image-20230128112201777](../../../.vuepress/public/images/image-20230128112201777.png)
 
 ##### 1.9.3 查看IP
 
 > 可以使用 `ip addr`  或者 `ifconfig` 2个命令进行查看
 
-![image-20230128112407912](../../.vuepress/public/images/image-20230128112407912.png)
+![image-20230128112407912](../../../.vuepress/public/images/image-20230128112407912.png)
 
 #### 1.10 使用yum命令安装其他的依赖关系
 
@@ -575,7 +575,7 @@ yum -y install vim wget lrzsz curl telnet net-tools tree openssh-server gcc gcc-
 >
 >  wget http://ftp.gnu.org/pub/gnu/make/make-4.4.tar.gz
 >
->  ![image-20230223192725273](../../.vuepress/public/images/image-20230223192725273.png)
+>  ![image-20230223192725273](../../../.vuepress/public/images/image-20230223192725273.png)
 
 ``` shell
 [root@localhost1 qianpz]# mkdir make-tar
@@ -695,11 +695,11 @@ SELINUXTYPE=targeted
 [root@localhost02 ~]# vim /etc/selinux/config
 ```
 
-![image-20230128134959602](../../.vuepress/public/images/image-20230128134959602.png)
+![image-20230128134959602](../../../.vuepress/public/images/image-20230128134959602.png)
 
 > 修改**SELINUX=disabled**
 
-![image-20230128135800754](../../.vuepress/public/images/image-20230128135800754.png)
+![image-20230128135800754](../../../.vuepress/public/images/image-20230128135800754.png)
 
 ``` shell
 [root@localhost02 ~]# cat /etc/selinux/config
@@ -774,15 +774,15 @@ Sat Jan 28 14:58:00 CST 2023
 >
 > source /etc/profile
 
-![image-20230128150244727](../../.vuepress/public/images/image-20230128150244727.png)
+![image-20230128150244727](../../../.vuepress/public/images/image-20230128150244727.png)
 
 #### 2.4 绑定静态IP（只适用于虚拟机）
 
 > 这里需要注意： 静态IP和网关IP需要对照虚拟网络编辑器里面的配置是否一致
 
-![image-20230128151459836](../../.vuepress/public/images/image-20230128151459836.png)
+![image-20230128151459836](../../../.vuepress/public/images/image-20230128151459836.png)
 
-![image-20230128154600676](../../.vuepress/public/images/image-20230128154600676.png)
+![image-20230128154600676](../../../.vuepress/public/images/image-20230128154600676.png)
 
 > 查看当前服务器的ifcfg-ens名称: 
 

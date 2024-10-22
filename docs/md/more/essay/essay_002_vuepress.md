@@ -17,7 +17,7 @@ Node.js安装包自带了npm，但安装时不会自动给npm配置全局安装�
 
 2. 在该目录中新增**node_global 和 node_cache **文件夹
 
-![image-20240827102148794](../../.vuepress/public/images/image-20240827102148794.png)
+![image-20240827102148794](../../../.vuepress/public/images/image-20240827102148794.png)
 
 
 
@@ -35,7 +35,7 @@ npm config set prefix "E:\Program Files\nodejs\node_global"
 npm config set cache "E:\Program Files\nodejs\node_cache"
 ```
 
-![image-20240827102600606](../../.vuepress/public/images/image-20240827102600606.png)
+![image-20240827102600606](../../../.vuepress/public/images/image-20240827102600606.png)
 
 #### 3. 配置环境变量
 

@@ -1,13 +1,13 @@
 ---
 home: true
 heroImage: logo1.png
-heroText: 随笔
+heroText: 钱鹏展的知识梳理
 actions:
   - text: java基础
-    link: /md/java/basic/001.Java_basic.md
+    link: /md/java/basic/basic_001.md
     type: primary
   - text: 待定
-    link: /md/java/basic/001.Java_basic.md
+    link: /md/java/basic/basic_001.md
     type: secondary
 features:
 - title: 1

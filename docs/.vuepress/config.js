@@ -18,8 +18,8 @@ import { gitPlugin } from '@vuepress/plugin-git'
 export default defineUserConfig({
   base: '/qianpengzhan/',
   lang: 'zh-CN',
-  title: '随笔',
-  description: '随笔',
+  title: '钱鹏展的知识梳理',
+  description: '钱鹏展的知识梳理',
   bundler: viteBundler(),
   theme: defaultTheme({
     docsRepo: 'https://github.com/pengzhanqian/qianpengzhan',
@@ -33,73 +33,39 @@ export default defineUserConfig({
         link: '/'
       },
       {
-        text: '阿里云相关',
-        link: '/md/ali-cent-os/001.ali-cent-os-7-x86_64-Minimal-2207-02-download.md'
+        text: 'JAVA',
+        children:[
+          {
+            text: 'JAVA基础',
+            link: '/md/java/basic/basic_001.md'
+          }
+        ]
+
       },
       {
-        text: '随笔',
-        link: '/md/essay/001.markdown-convert-word-setting-in-windows11.md'
+        text: '更多',
+        children:[
+          {
+            text: '阿里',
+            link: '/md/more/ali/ali_001.md'
+          },
+          {
+            text: '随笔',
+            link: '/md/more/essay/essay_001_linux_command.md'
+          },
+          {
+            text: '实操系列',
+            link: '/md/more/real-opertion/ro_001.md'
+          },
+        ]
+
       },
-      {
-        text: 'Java',
-        link: '/md/java/basic/001.Java_basic.md'
-      }
+
     ],
     // 侧边栏对象
     // 不同子路径下的页面会使用不同的侧边栏
     sidebarDepth: 0,
     sidebar: {
-      '/md/ali-cent-os/': [
-        {
-          text: '阿里云相关',
-          collapsible: false,
-          children: [
-            {
-              text: 'Ali CentOS 7 Minimal的镜像下载',
-              link: '/md/ali-cent-os/001.ali-cent-os-7-x86_64-Minimal-2207-02-download.md',
-              collapsible: false,
-            },
-            {
-              text: 'Ali CentOS 7 Minimal 新手教程引导',
-              link: '/md/ali-cent-os/002.ali-cent-os-7-new-guide.md',
-              collapsible: false
-            }
-          ]
-        }
-      ],
-      '/md/essay/': [
-        {
-          text: '随笔',
-          collapsible: false,
-          children: [
-            {
-              text: '《实操系列 - Window OS系统下Markdown转word的设置》',
-              link: '/md/essay/001.markdown-convert-word-setting-in-windows11.md',
-              collapsible: false
-            },
-            {
-              text: '《实操系列 - Windows系统下Vmware Workstation中安装及使用CentOS7系统超详细图文教程》',
-              link: '/md/essay/002.install-vmware-workstation-in-windows11.md',
-              collapsible: false
-            },
-            {
-              text: '《实操系列 - Windows11系统下彻底卸载Vmware Workstation虚拟机超详细图文教程》',
-              link: '/md/essay/003.uninstall-vmware-workstation-in-windows11.md',
-              collapsible: false
-            },
-            {
-              text: 'Linux命令',
-              link: '/md/essay/004.linux-command.md',
-              collapsible: true
-            },
-            {
-              text: 'vuepress2.0随笔',
-              link: '/md/essay/005.nodejs-npm-essay.md',
-              collapsible: false
-            }
-          ]
-        }
-      ],
       '/md/java/':[
         {
           text: 'Java基础',
@@ -107,12 +73,70 @@ export default defineUserConfig({
           children: [
             {
               text: 'Java 基础知识',
-              link: '/md/java/basic/001.Java_basic.md',
+              link: '/md/java/basic/basic_001.md',
               collapsible: false
             }
           ]
         }
-      ]
+      ],
+      '/md/more/': [
+        {
+          text: '更多',
+          collapsible: false,
+          children: [
+            {
+              text: '阿里',
+              children: [
+                {
+                  text: 'Ali CentOS 7 Minimal的镜像下载',
+                  link: '/md/more/ali/ali_001.md',
+                  collapsible: false,
+                },
+                {
+                  text: 'Ali CentOS 7 Minimal 新手教程引导',
+                  link: '/md/more/ali/ali_002.md',
+                  collapsible: false
+                }
+              ]
+            },
+            {
+              text: '随笔',
+              children: [
+                {
+                  text: 'Linux命令',
+                  link: '/md/more/essay/essay_001_linux_command.md',
+                  collapsible: true
+                },
+                {
+                  text: 'vuepress2.0随笔',
+                  link: '/md/more/essay/essay_002_vuepress.md',
+                  collapsible: false
+                }
+              ]
+            },
+            {
+              text: '实操系列',
+              children: [
+                {
+                  text: 'Window OS系统下Markdown转word的设置',
+                  link: '/md/more/real-operation/ro_001.md',
+                  collapsible: false
+                },
+                {
+                  text: 'Windows系统下Vmware Workstation中安装及使用CentOS7系统超详细图文教程',
+                  link: '/md/more/real-operation/ro_002.md',
+                  collapsible: false
+                },
+                {
+                  text: 'Windows11系统下彻底卸载Vmware Workstation虚拟机超详细图文教程',
+                  link: '/md/more/real-operation/ro_003.md',
+                  collapsible: false
+                }
+              ]
+            }
+          ]
+        }
+      ],    
     }
   }),
   // use plugins
