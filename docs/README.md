@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: logo1.png
+heroImage: logo3.gif
 heroText: 钱鹏展的知识梳理
 actions:
   - text: java基础

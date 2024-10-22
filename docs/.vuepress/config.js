@@ -27,6 +27,12 @@ export default defineUserConfig({
     docsDir: 'docs',
     editLinkPattern: ':repo/edit/:branch/:path',
     logo: '/logo.png',
+    head: [
+      // 设置 favor.ico，.vuepress/public 下
+      [
+          'link', { rel: 'icon', href: '/favicon.ico' }
+      ]
+    ],
     navbar: [
       {
         text: '首页',
