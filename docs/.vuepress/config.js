@@ -139,6 +139,15 @@ export default defineUserConfig({
                   collapsible: false
                 }
               ]
+            },
+            {
+              text: '工具',
+              children: [
+                {
+                  text: 'FastGithub的下载及使用',
+                  link: '/md/more/tool/tool_001_fastgithub.md'
+                }
+              ]
             }
           ]
         }
