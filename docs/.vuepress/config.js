@@ -62,10 +62,6 @@ export default defineUserConfig({
           {
             text: '实操系列',
             link: '/md/more/real-operation/ro_001.md'
-          },
-          {
-            text: '工具',
-            link: '/md/more/tool/tool_001_fastgithub.md'
           }
         ]
 
@@ -143,15 +139,6 @@ export default defineUserConfig({
                   collapsible: false
                 }
               ]
-            },
-            {
-              text: '工具',
-              children: [
-                {
-                  text: 'FastGithub的下载及使用',
-                  link: '/md/more/tool/tool_001_fastgithub.md'
-                }
-              ]
             }
           ]
         }
@@ -176,7 +163,7 @@ export default defineUserConfig({
     noticePlugin({
       config: [
         {
-          path: '/qianpengzhan/md/',
+          path: '/qianpengzhan/',
           title: 'Notice Title',
           content: 'Notice Content',
           actions: [
@@ -189,7 +176,7 @@ export default defineUserConfig({
           ],
         },
         {
-          path: '/zh/',
+          path: '/qianpengzhan/en/',
           title: 'Notice Title',
           content: 'Notice Content',
           actions: [
