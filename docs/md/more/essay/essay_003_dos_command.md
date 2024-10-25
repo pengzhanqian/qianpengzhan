@@ -60,10 +60,6 @@ cd
 
 ![image-20241026010100477](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026010100477.png)
 
-![image-20241026010108769](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026010108769.png)
-
-
-
 #### （5）清屏
 
 ``` DOS
