@@ -2,6 +2,8 @@
 
 [[TOC]]
 
+> 说在前面的话，本文为个人学习各类视频、他人文章等多渠道后进行总结、摘抄的文章，本文主要用于学习<b>JAVA基础</b>。
+
 ### 【1】SUN 公司
 - <b>美国SUN(Stanford University Network)公司</b>
 - <b>在中国大陆的正式中文名为“太阳计算机系统（中国）有限公司”</b>
@@ -37,7 +39,104 @@
 - 2014年，JavaSE8.0
 - 2017年，JAVA 9.0
 - 2018年3月，JAVA 10
-- 2018年9月，JAVA 11
+- 2018年9月，JAVA 11 ，持续迭代
 - 2019年3月，JAVA 12
 - 2019年9月，JAVA 13
 - 2020年3月，JAVA 14
+- 2020年9月，JAVA 15
+- 2021年3月，JAVA 16
+- 2021年9月，JAVA 17，持续迭代
+- 后续的JAVA 18,19,20,21 待续….
+
+### 【5】不同JAVA的版本的特性说明
+
+![image-20241025140919364](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025140919364.png)
+
+- JAVASE 1.0 
+  -  于1997-02-19发行。
+  - 引入的新特性包括：
+    -    引入JDBC（Java Database Connectivity）；
+    -   支持内部类；
+    -    引入Java Bean；
+    -    引入RMI（Remote Method Invocation）；
+    -    引入反射（仅用于内省）。
+- JAVASE 1.2
+  - 开发代号为Playground（操场），于1998-12-08发行。
+  - 引入的新特性包括：
+    -    引入集合（Collection）框架；
+    -    对字符串常量做内存映射；
+    -    引入JIT（Just In Time）编译器；
+    -    引入对打包的Java文件进行数字签名；
+    -    引入控制授权访问系统资源的策略工具；
+    -    引入JFC（Java Foundation Classes），包括Swing 1.0、拖放和Java 2D类库；
+    -    引入Java 插件；
+    -    在JDBC中引入可滚动结果集、BLOB、CLOB、批量更新和用户自定义类型；
+    -    在Applet中添加声音支持。
+- JAVASE 1.3 
+  -   开发代号为Kestrel（红隼），于2000-05-08发行。
+  - 引入的新特性包括：
+    -    引入Java Sound API；
+    -    jar文件索引；
+    -    对Java的各个方面都做了大量优化和增强。
+- JAVASE 1.4 
+  - 开发代号为Merlin（隼），于2004-02-06发行（首次在JCP下发行）。
+  - 引入的新特性包括:
+    -    XML处理；
+    -    Java打印服务；
+    -    引入Logging API；
+    -    引入Java Web Start；
+    -    引入JDBC 3.0 API；
+    -    引入断言；
+    -    引入Preferences API；
+    -    引入链式异常处理；
+    -    支持IPv6；
+    -    支持正则表达式；
+    -    引入Image I/O slot machine API。
+- JAVASE 5
+  - 开发代号为Tiger（老虎），于2004-09-30发行。
+  - 引入的新特性包括:
+    -    引入泛型；
+    -    增强循环，可以使用迭代方式；
+    -    自动装箱与自动拆箱；
+    -    类型安全的枚举；
+    -    可变参数；
+    -    静态引入；
+    -    元数据（注解）；
+    -    引入Instrumentation。
+- JAVASE 6
+  - 开发代号为Mustang（野马），于2006-12-11发行。
+
+  - 引入的新特性包括：
+    -    支持脚本语言；
+    -    引入JDBC 4.0 API；
+    -    引入Java Compiler API；
+    -    可插拔注解；
+    -    增加对Native PKI(Public Key Infrastructure)、Java GSS(Generic Security Service)、Kerberos和LDAP(Lightweight Directory Access   Protocol)的支持；
+    -    继承Web Services；
+    -    做了很多优化。
+- JAVASE 7
+  - 开发代号是Dolphin（海豚），于2011-07-28发行。
+  - 引入的新特性包括：
+    -    switch语句块中允许以字符串作为分支条件；
+    -    在创建泛型对象时应用类型推断；
+    -    在一个语句块中捕获多种异常；
+    -    支持动态语言；
+    -    支持try-with-resources；
+    -    引入Java NIO.2开发包；
+    -    数值类型可以用2进制字符串表示，并且可以在字符串表示中添加下划线；
+    -    钻石型语法；
+    -    null值的自动处理。
+- JAVASE 8
+  - 开发代号是Spider（蜘蛛），于2014-03-18发行。
+  - 引入的新特性包括：
+    -   支持 lambda支持；
+    - 增强日期与时间API的功能；
+    -    对垃圾回收的性能也进行了改进；
+    -    并且移除了permgen区。
+    -    Lambdas表达式与Functional接口
+    -    接口的默认与静态方法
+    -    方法引用
+    -    重复注解
+    -    更好的类型推测机制
+    -    扩展注解的支持
+- 待续…

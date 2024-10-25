@@ -13,10 +13,11 @@ import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
 import { readingTimePlugin } from '@vuepress/plugin-reading-time'
 import { cachePlugin } from '@vuepress/plugin-cache'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
-import { gitPlugin } from '@vuepress/plugin-git'
 import { componentsPlugin } from "vuepress-plugin-components";
 import { commentPlugin } from '@vuepress/plugin-comment'
 import { palettePlugin } from '@vuepress/plugin-palette'
+import { sidebar } from './configs/sidebar.js'
+import { navbar } from './configs/navbar.js'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
@@ -36,122 +37,9 @@ export default defineUserConfig({
         'link', { rel: 'icon', href: '/favicon.ico' }
       ]
     ],
-    navbar: [
-      {
-        text: '首页',
-        link: '/'
-      },
-      {
-        text: 'JAVA',
-        children:[
-          {
-            text: 'JAVA基础',
-            link: '/md/java/basic/basic_001.md'
-          }
-        ]
-
-      },
-      {
-        text: '更多',
-        children:[
-          {
-            text: '阿里',
-            link: '/md/more/ali/ali_001.md'
-          },
-          {
-            text: '随笔',
-            link: '/md/more/essay/essay_001_linux_command.md'
-          },
-          {
-            text: '实操系列',
-            link: '/md/more/real-operation/ro_001.md'
-          }
-        ]
-
-      },
-
-    ],
-    // 侧边栏对象
-    // 不同子路径下的页面会使用不同的侧边栏
+    navbar: navbar,
     sidebarDepth: 0,
-    sidebar: {
-      '/md/java/':[
-        {
-          text: 'Java基础',
-          collapsible: true,
-          children: [
-            {
-              text: 'JAVA基础 - Java简史',
-              link: '/md/java/basic/basic_001.md',
-              collapsible: false
-            },
-            {
-              text: 'JAVA基础 - Java体系结构',
-              link: '/md/java/basic/basic_002.md',
-              collapsible: false
-            }
-          ]
-        }
-      ],
-      '/md/more/': [
-        {
-          text: '更多',
-          collapsible: false,
-          children: [
-            {
-              text: '阿里',
-              children: [
-                {
-                  text: 'Ali CentOS 7 Minimal的镜像下载',
-                  link: '/md/more/ali/ali_001.md',
-                  collapsible: false,
-                },
-                {
-                  text: 'Ali CentOS 7 Minimal 新手教程引导',
-                  link: '/md/more/ali/ali_002.md',
-                  collapsible: false
-                }
-              ]
-            },
-            {
-              text: '随笔',
-              children: [
-                {
-                  text: 'Linux命令',
-                  link: '/md/more/essay/essay_001_linux_command.md',
-                  collapsible: true
-                },
-                {
-                  text: 'vuepress2.0随笔',
-                  link: '/md/more/essay/essay_002_vuepress.md',
-                  collapsible: false
-                }
-              ]
-            },
-            {
-              text: '实操系列',
-              children: [
-                {
-                  text: 'Window OS系统下Markdown转word的设置',
-                  link: '/md/more/real-operation/ro_001.md',
-                  collapsible: false
-                },
-                {
-                  text: 'Windows系统下Vmware Workstation中安装及使用CentOS7系统超详细图文教程',
-                  link: '/md/more/real-operation/ro_002.md',
-                  collapsible: false
-                },
-                {
-                  text: 'Windows11系统下彻底卸载Vmware Workstation虚拟机超详细图文教程',
-                  link: '/md/more/real-operation/ro_003.md',
-                  collapsible: false
-                }
-              ]
-            }
-          ]
-        }
-      ],    
-    }
+    sidebar: sidebar,
   }),
   // use plugins
   plugins: [
@@ -163,9 +51,6 @@ export default defineUserConfig({
     }),
     componentsPlugin({
       // 插件选项
-    }),
-    gitPlugin({
-      // 配置项
     }),
     // 根据组件文件或目录自动注册 Vue 组件。
     registerComponentsPlugin({

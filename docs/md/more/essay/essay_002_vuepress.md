@@ -1,4 +1,4 @@
-## vuepress2.0随笔
+## 随笔 - vuepress2.x
 [[TOC]]
 
 ### 一、Node.js 配置 (windows系统)

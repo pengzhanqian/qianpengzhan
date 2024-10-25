@@ -8,8 +8,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["qianpengzhan","知识"],
+  "author": "qianpengzhan",
   "license": "ISC",
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.18",
@@ -19,7 +19,6 @@
     "@vuepress/plugin-comment": "2.0.0-rc.56",
     "@vuepress/plugin-copyright": "2.0.0-rc.55",
     "@vuepress/plugin-docsearch": "2.0.0-rc.54",
-    "@vuepress/plugin-git": "2.0.0-rc.54",
     "@vuepress/plugin-medium-zoom": "2.0.0-rc.55",
     "@vuepress/plugin-notice": "2.0.0-rc.55",
     "@vuepress/plugin-nprogress": "2.0.0-rc.55",
@@ -36,8 +35,5 @@
     "vuepress-plugin-components": "2.0.0-rc.59",
     "vuepress-theme-reco": "2.0.0-rc.22",
     "vuepress-theme-sidebar": "^0.1.0"
-  },
-  "dependencies": {
-    "vuepress-plugin-anchor-right": "0.0.1-beta.18"
   }
 }
