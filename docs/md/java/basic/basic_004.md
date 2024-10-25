@@ -6,18 +6,18 @@
 
 ### 【1】JAVA的跨平台
 
-![image-20241025151439846](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025151439846.png)
+![image-20241025151439846](../../../.vuepress/public/images/image-20241025151439846.png)
 
 ### 【2】C的跨平台
 
-![image-20241025151500017](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025151500017.png)
+![image-20241025151500017](../../../.vuepress/public/images/image-20241025151500017.png)
 
 ### 【3】总结
 
 **JVM(Java Virtual Machine)** 就是一个虚拟的用于执行bytecode字节码的”虚拟计算机”。他也定义了指令集、寄存器集、结构栈、垃圾收集堆、内存区域。JVM负责将Java字节码解释运行，边解释边运行，这样，速度就会受到一定的影响。
 不同的操作系统有不同的虚拟机。Java 虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，随处运行”。 Java虚拟机是实现跨平台的核心机制。如图所示：
 
-![image-20241025151527536](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025151527536.png)
+![image-20241025151527536](../../../.vuepress/public/images/image-20241025151527536.png)
 
 我们说的语言跨平台是编译后的文件跨平台，而不是源程序跨平台。
 接下来我们再比较下两种方式的差异：

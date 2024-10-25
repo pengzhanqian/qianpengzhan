@@ -21,4 +21,4 @@ JavaME是JavaSE的内伸，包含J2SE的一部分核心类，也有自己的扩�
 
 ### 【4】图解
 
-![image-20241025143105253](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025143105253.png)
+![image-20241025143105253](../../../.vuepress/public/images/image-20241025143105253.png)
