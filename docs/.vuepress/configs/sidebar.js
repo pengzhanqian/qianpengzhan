@@ -24,7 +24,13 @@ export const sidebar =
                     text: 'JAVA基础 - 跨平台性的原理',
                     link: '/md/java/basic/basic_004.md',
                     collapsible: false
+                }, 
+                {
+                    text: 'JAVA基础 - JDK的下载以及环境配置',
+                    link: '/md/java/basic/basic_005.md',
+                    collapsible: false
                 }
+
             ]
         }
     ],

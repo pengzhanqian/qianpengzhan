@@ -50,7 +50,7 @@
 
 ### 【5】不同JAVA的版本的特性说明
 
-![image-20241025140919364](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241025140919364.png)
+![image-20241026013203931](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026013203931.png)
 
 - JAVASE 1.0 
   -  于1997-02-19发行。
