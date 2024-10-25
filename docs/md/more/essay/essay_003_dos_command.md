@@ -11,7 +11,7 @@
 
 - DOS是单用户、单任务的操作系统.（只能执行一个任务）
 
-  ![image-20241026005223309](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026005223309.png)
+  ![image-20241026005223309](../../../.vuepress/public/images/image-20241026005223309.png)
 
 ### 【2】DOS命令
 
@@ -25,7 +25,7 @@
 
 `控制命令台：win+r--->cmd`
 
-![image-20241026005343828](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026005343828.png)
+![image-20241026005343828](../../../.vuepress/public/images/image-20241026005343828.png)
 
 ### 【4】具体dos命令
 
@@ -35,7 +35,7 @@
  c:  d:  e:   大小写没有区分
 ```
 
-![image-20241026005453804](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026005453804.png)
+![image-20241026005453804](../../../.vuepress/public/images/image-20241026005453804.png)
 
 #### （2）显示详细信息：dir
 
@@ -43,7 +43,7 @@
 dir
 ```
 
-![image-20241026005626840](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026005626840.png)
+![image-20241026005626840](../../../.vuepress/public/images/image-20241026005626840.png)
 
 #### (3) 改变当前目录
 
@@ -51,14 +51,14 @@ dir
 cd
 ```
 
-![image-20241026005845397](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026005845397.png)
+![image-20241026005845397](../../../.vuepress/public/images/image-20241026005845397.png)
 
 #### （4）目录
 
 > . 当前目录
 >         ..  代表上一层目录
 
-![image-20241026010100477](../../../../../../../gitee/qianpz/docs/.vuepress/public/images/image-20241026010100477.png)
+![image-20241026010100477](../../../.vuepress/public/images/image-20241026010100477.png)
 
 #### （5）清屏
 
