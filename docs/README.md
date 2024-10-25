@@ -1,20 +1,20 @@
 ---
 home: true
 heroImage: logo3.gif
-heroText: 钱鹏展的知识梳理
+heroText: 知识海洋
 actions:
-  - text: java基础
+  - text: 知识海洋
     link: /md/java/basic/basic_001.md
     type: primary
-  - text: 待定
+  - text: 知识海洋
     link: /md/java/basic/basic_001.md
     type: secondary
 features:
-- title: 1
-  details: 1
-- title: 2
-  details: 2
-- title: 3
-  details: 3
-footer: MIT Licensed | Copyright (c) 2024 qianpengzhan
+  - title: 夯实基础
+    details: 不积跬步无以至千里, 仰望星空还需脚踏实地
+  - title: 构建体系
+    details: 告别碎片化学习，帮助你构筑你自己的知识体系
+  - title: 个人积累
+    details: 记录多年来技术生涯遇到的点点滴滴
+footer: MIT Licensed | Copyright (c) © 2024-qianpengzhan <873373549@qq.com>
 ---

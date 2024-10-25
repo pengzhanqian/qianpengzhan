@@ -14,12 +14,15 @@ import { readingTimePlugin } from '@vuepress/plugin-reading-time'
 import { cachePlugin } from '@vuepress/plugin-cache'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { gitPlugin } from '@vuepress/plugin-git'
+import { componentsPlugin } from "vuepress-plugin-components";
+import { commentPlugin } from '@vuepress/plugin-comment'
+import { palettePlugin } from '@vuepress/plugin-palette'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
   lang: 'zh-CN',
-  title: '钱鹏展的知识梳理',
-  description: '钱鹏展的知识梳理',
+  title: '知识海洋',
+  description: '知识海洋',
   bundler: viteBundler(),
   theme: defaultTheme({
     docsRepo: 'https://github.com/pengzhanqian/qianpengzhan',
@@ -30,7 +33,7 @@ export default defineUserConfig({
     head: [
       // 设置 favor.ico，.vuepress/public 下
       [
-          'link', { rel: 'icon', href: '/favicon.ico' }
+        'link', { rel: 'icon', href: '/favicon.ico' }
       ]
     ],
     navbar: [
@@ -75,11 +78,16 @@ export default defineUserConfig({
       '/md/java/':[
         {
           text: 'Java基础',
-          collapsible: false,
+          collapsible: true,
           children: [
             {
-              text: 'Java 基础知识',
+              text: 'JAVA基础 - Java简史',
               link: '/md/java/basic/basic_001.md',
+              collapsible: false
+            },
+            {
+              text: 'JAVA基础 - Java体系结构',
+              link: '/md/java/basic/basic_002.md',
               collapsible: false
             }
           ]
@@ -147,6 +155,15 @@ export default defineUserConfig({
   }),
   // use plugins
   plugins: [
+    palettePlugin({
+      // 配置项
+    }),
+    commentPlugin({
+      // 选项
+    }),
+    componentsPlugin({
+      // 插件选项
+    }),
     gitPlugin({
       // 配置项
     }),
@@ -163,7 +180,7 @@ export default defineUserConfig({
     noticePlugin({
       config: [
         {
-          path: '/qianpengzhan/',
+          path: '/',
           title: 'Notice Title',
           content: 'Notice Content',
           actions: [
@@ -174,20 +191,7 @@ export default defineUserConfig({
             },
             { text: 'Default Action' },
           ],
-        },
-        {
-          path: '/qianpengzhan/en/',
-          title: 'Notice Title',
-          content: 'Notice Content',
-          actions: [
-            {
-              text: 'Primary Action',
-              link: 'https://theme-hope.vuejs.press/',
-              type: 'primary',
-            },
-            { text: 'Default Action' },
-          ],
-        },
+        }
       ],
     }),
     watermarkPlugin({
