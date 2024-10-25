@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      vuepress-plugin-anchor-right:
-        specifier: 0.0.1-beta.18
-        version: 0.0.1-beta.18
     devDependencies:
       '@vuepress/bundler-vite':
         specifier: 2.0.0-rc.18
@@ -33,9 +29,6 @@ importers:
       '@vuepress/plugin-docsearch':
         specifier: 2.0.0-rc.54
         version: 2.0.0-rc.54(@algolia/client-search@4.24.0)(search-insights@2.17.2)(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.7.5)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.79.5)(sass@1.80.3)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
-      '@vuepress/plugin-git':
-        specifier: 2.0.0-rc.54
-        version: 2.0.0-rc.54(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.7.5)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.79.5)(sass@1.80.3)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
       '@vuepress/plugin-medium-zoom':
         specifier: 2.0.0-rc.55
         version: 2.0.0-rc.55(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.7.5)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.79.5)(sass@1.80.3)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
