@@ -285,3 +285,15 @@ pnpm i -D @vuepress/plugin-git@next
 pnpm add -D vuepress-theme-reco@next
 ```
 
+#### 4.8 重新部署
+
+删除 node_modules lock.yaml 然后执行以下命令
+
+``` shell
+# 1) 安装打包工具和主题
+pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded
+
+# 2) 安装相关插件
+pnpm i -D @vuepress/plugin-docsearch@next @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next @vuepress/plugin-copyright@next @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-notice@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-reading-time@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next
+```
+
