@@ -99,6 +99,7 @@ export default defineUserConfig({
     }),
     sitemapPlugin({
       // 选项
+      hostname: ''
     }),
     docsearchPlugin({
       appId: '34YFD9IUQ2',
