@@ -29,8 +29,17 @@ export const sidebar =
                     text: 'JAVA基础 - JDK的下载以及环境配置',
                     link: '/md/java/basic/basic_005.md',
                     collapsible: false
+                }, 
+                {
+                    text: 'JAVA基础 - Hello World',
+                    link: '/md/java/basic/basic_006.md',
+                    collapsible: false
+                }, 
+                {
+                    text: 'JAVA基础 - JAVA基础知识和概念',
+                    link: '/md/java/basic/basic_007.md',
+                    collapsible: false
                 }
-
             ]
         }
     ],

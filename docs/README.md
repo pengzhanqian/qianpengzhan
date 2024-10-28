@@ -3,11 +3,11 @@ home: true
 heroImage: logo3.gif
 heroText: 知识海洋
 actions:
-  - text: 知识海洋
+  - text: 知识体系
     link: /md/java/basic/basic_001.md
     type: primary
-  - text: 知识海洋
-    link: /md/java/basic/basic_001.md
+  - text: 面试题
+    link: /md/
     type: secondary
 features:
   - title: 夯实基础
