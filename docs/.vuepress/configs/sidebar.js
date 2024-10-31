@@ -46,7 +46,11 @@ export const sidebar =
             text: 'JAVA基础知识',
             collapsible: true,
             children: [
-                
+                {
+                    text: 'JAVA基础知识 - 学习注释',
+                    link: '/md/java/basic/basic_001.md',
+                    collapsible: false
+                }
             ]
         }
     ],
