@@ -57,10 +57,11 @@ export const sidebar =
     '/md/more/': [
         {
             text: '更多',
-            collapsible: false,
+            collapsible: true,
             children: [
                 {
                     text: '阿里',
+                    collapsible: true,
                     children: [
                         {
                             text: 'Ali CentOS 7 Minimal的镜像下载',
@@ -76,11 +77,12 @@ export const sidebar =
                 },
                 {
                     text: '随笔',
+                    collapsible: true,
                     children: [
                         {
                             text: '随笔 - Linux命令',
                             link: '/md/more/essay/essay_001_linux_command.md',
-                            collapsible: true
+                            collapsible: false
                         },
                         {
                             text: '随笔 - vuepress2.x',
@@ -101,6 +103,7 @@ export const sidebar =
                 },
                 {
                     text: '实操系列',
+                    collapsible: true,
                     children: [
                         {
                             text: 'Window OS系统下Markdown转word的设置',
