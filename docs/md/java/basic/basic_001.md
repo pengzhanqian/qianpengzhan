@@ -78,7 +78,7 @@ public class HelloWorld3{
 一般文档注释可以配合：jdk提供的工具javadoc.exe来一起使用，通过javadoc.exe可以对文档注释进行解析，生成一套以网页文件形式体现的该程序的说明文档。（自定义类对应的API）
 
 ``` shell
-javadoc -d hello -author -date HelloWorld3.java
+javadoc -d hello -author -version HelloWorld3.java
 ```
 
 ![image-20241031180316012](../../../.vuepress/public/images/image-20241031180316012.png)
