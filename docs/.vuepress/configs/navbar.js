@@ -8,7 +8,11 @@ export const navbar =
       text: 'JAVA',
       children:[
         {
-          text: 'JAVA基础',
+          text: '初识JAVA',
+          link: '/md/java/first/first_001.md'
+        },
+        {
+          text: 'JAVA基础知识',
           link: '/md/java/basic/basic_001.md'
         }
       ]

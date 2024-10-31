@@ -2,44 +2,51 @@ export const sidebar =
 {
     '/md/java/':[
         {
-            text: 'Java基础',
+            text: '初识JAVA',
             collapsible: true,
             children: [
                 {
-                    text: 'JAVA基础 - Java简史',
-                    link: '/md/java/basic/basic_001.md',
+                    text: '初识JAVA - Java简史',
+                    link: '/md/java/first/first_001.md',
                     collapsible: false
                 },
                 {
-                    text: 'JAVA基础 - Java体系结构',
-                    link: '/md/java/basic/basic_002.md',
+                    text: '初识JAVA - Java体系结构',
+                    link: '/md/java/first/first_002.md',
                     collapsible: false
                 },
                 {
-                    text: 'JAVA基础 - Java特性和优势',
-                    link: '/md/java/basic/basic_003.md',
+                    text: '初识JAVA - Java特性和优势',
+                    link: '/md/java/first/first_003.md',
                     collapsible: false
                 },
                 {
-                    text: 'JAVA基础 - 跨平台性的原理',
-                    link: '/md/java/basic/basic_004.md',
+                    text: '初识JAVA - 跨平台性的原理',
+                    link: '/md/java/first/first_004.md',
                     collapsible: false
                 }, 
                 {
-                    text: 'JAVA基础 - JDK的下载以及环境配置',
-                    link: '/md/java/basic/basic_005.md',
+                    text: '初识JAVA - JDK的下载以及环境配置',
+                    link: '/md/java/first/first_005.md',
                     collapsible: false
                 }, 
                 {
-                    text: 'JAVA基础 - Hello World',
-                    link: '/md/java/basic/basic_006.md',
+                    text: '初识JAVA - Hello World',
+                    link: '/md/java/first/first_006.md',
                     collapsible: false
                 }, 
                 {
-                    text: 'JAVA基础 - JAVA基础知识和概念',
-                    link: '/md/java/basic/basic_007.md',
+                    text: '初识JAVA - IDE工具 - Intellj idea',
+                    link: '/md/java/first/first_007.md',
                     collapsible: false
                 }
+            ]
+        },
+        {
+            text: 'JAVA基础知识',
+            collapsible: true,
+            children: [
+                
             ]
         }
     ],
@@ -79,6 +86,11 @@ export const sidebar =
                         {
                             text: '随笔 - 常用DOS命令',
                             link: '/md/more/essay/essay_003_dos_command.md',
+                            collapsible: false
+                        },
+                        {
+                            text: '随笔 - windows下安装NodePad++',
+                            link: '/md/more/essay/essay_004_nodepad.md',
                             collapsible: false
                         }
                     ]

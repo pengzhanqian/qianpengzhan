@@ -4,7 +4,7 @@ heroImage: logo3.gif
 heroText: 知识海洋
 actions:
   - text: 知识体系
-    link: /md/java/basic/basic_001.md
+    link: /md/java/first/first_001.md
     type: primary
   - text: 面试题
     link: /md/
