@@ -32,7 +32,7 @@ export default defineUserConfig({
     head: [
       // 设置 favor.ico，.vuepress/public 下
       [
-        'link', { rel: 'icon', href: '/qianpengzhan/favicon.ico' }
+        'link', { rel: 'icon', href: '/favicon.ico' }
       ]
     ],
     navbar: navbar,
