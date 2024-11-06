@@ -18,7 +18,7 @@ import { sidebar } from './configs/sidebar.js'
 import { navbar } from './configs/navbar.js'
 
 export default defineUserConfig({
-  base: '/qianpengzhan/',
+  base: '/',
   lang: 'zh-CN',
   title: '知识海洋',
   description: '知识海洋',
