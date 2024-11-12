@@ -282,7 +282,9 @@ pnpm i -D @vuepress/plugin-reading-time@next
 pnpm i -D @vuepress/plugin-cache@next
 pnpm i -D @vuepress/plugin-register-components@next
 pnpm i -D @vuepress/plugin-git@next
-pnpm add -D vuepress-theme-reco@next
+pnpm i -D @vuepress/plugin-markdown-math@next
+pnpm i -D mathjax-full
+pnpm i -D katex
 ```
 
 #### 4.8 重新部署
@@ -294,6 +296,6 @@ pnpm add -D vuepress-theme-reco@next
 pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded
 
 # 2) 安装相关插件
-pnpm i -D @vuepress/plugin-docsearch@next @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next @vuepress/plugin-copyright@next @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-notice@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-reading-time@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next
+pnpm i -D @vuepress/plugin-docsearch@next @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next @vuepress/plugin-copyright@next @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-notice@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-reading-time@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex
 ```
 

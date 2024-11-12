@@ -52,8 +52,13 @@ export const sidebar =
                     collapsible: false
                 },
                 {
-                    text: 'JAVA基础知识 - 数据类型',
+                    text: 'JAVA基础知识 -  基础概念',
                     link: '/md/java/basic/basic_002.md',
+                    collapsible: false
+                },
+                {
+                    text: 'JAVA基础知识 - 基本数据类型',
+                    link: '/md/java/basic/basic_003.md',
                     collapsible: false
                 }
             ]

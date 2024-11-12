@@ -16,6 +16,7 @@ import { componentsPlugin } from "vuepress-plugin-components";
 import { commentPlugin } from '@vuepress/plugin-comment'
 import { sidebar } from './configs/sidebar.js'
 import { navbar } from './configs/navbar.js'
+import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
@@ -41,6 +42,9 @@ export default defineUserConfig({
   }),
   // use plugins
   plugins: [
+    markdownMathPlugin({
+      // 选项
+    }),
     commentPlugin({
       // 选项
     }),
