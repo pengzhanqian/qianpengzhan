@@ -17,6 +17,7 @@ import { commentPlugin } from '@vuepress/plugin-comment'
 import { sidebar } from './configs/sidebar.js'
 import { navbar } from './configs/navbar.js'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
+import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
@@ -42,6 +43,12 @@ export default defineUserConfig({
   }),
   // use plugins
   plugins: [
+    markdownHintPlugin({
+      // 启用提示容器，默认启用
+      hint: true,
+      // 启用 GFM 警告
+      alert: true,
+    }),
     markdownMathPlugin({
       // 选项
     }),
