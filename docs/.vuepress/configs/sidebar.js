@@ -60,7 +60,12 @@ export const sidebar =
                     text: 'JAVA基础知识 - 基本数据类型',
                     link: '/md/java/basic/basic_003.md',
                     collapsible: false
-                }
+                },
+                {
+                    text: 'JAVA基础知识 - 运算符',
+                    link: '/md/java/basic/basic_004.md',
+                    collapsible: false
+                },
             ]
         }
     ],

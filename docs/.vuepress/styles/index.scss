@@ -1,3 +1,9 @@
 :root {
     --content-width: 1600px
 }
+
+blockquote {
+    border-inline-start: .2rem solid #19a71c;
+    color: rgb(118, 22, 174);
+    font-size: 1.2rem;
+}
