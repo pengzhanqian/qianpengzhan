@@ -37,67 +37,67 @@ export default defineUserConfig({
     navbar: navbar,
     sidebarDepth: 0,
     sidebar: sidebar,
-    // use plugins
-    plugins: [
-      markdownHintPlugin({
-        // 启用提示容器，默认启用
-        hint: true,
-        // 启用 GFM 警告
-        alert: true,
-      }),
-      markdownMathPlugin({
-        // 选项
-      }),
-      commentPlugin({
-        // 选项
-      }),
-      componentsPlugin({
-        // 插件选项
-      }),
-      // 根据组件文件或目录自动注册 Vue 组件。
-      registerComponentsPlugin({
-        // 配置项
-      }),
-      mediumZoomPlugin({
-        // 配置项
-      }),
-      noticePlugin({
-        config: [
-          {
-            path: '/',
-            title: 'Notice Title',
-            content: 'Notice Content',
-            actions: [
-              {
-                text: 'Primary Action',
-                link: 'https://theme-hope.vuejs.press/',
-                type: 'primary',
-              },
-              { text: 'Default Action' },
-            ],
-          }
-        ],
-      }),
-      watermarkPlugin({
-        // options
-        watermarkText: '钱鹏展',
-      }),
-      photoSwipePlugin({
-        // 选项
-      }),
-      catalogPlugin({
-        // 你的选项
-      }),
-      sitemapPlugin({
-        // 选项
-        hostname: ''
-      }),
-      // 作为最后一个插件使用
-      cachePlugin({
-        // 配置项
-        type: 'filesystem',
-        enableInCi: true
-      }),
-    ]
   }),
+   // use plugins
+   plugins: [
+    markdownHintPlugin({
+      // 启用提示容器，默认启用
+      hint: true,
+      // 启用 GFM 警告
+      alert: true,
+    }),
+    markdownMathPlugin({
+      // 选项
+    }),
+    commentPlugin({
+      // 选项
+    }),
+    componentsPlugin({
+      // 插件选项
+    }),
+    // 根据组件文件或目录自动注册 Vue 组件。
+    registerComponentsPlugin({
+      // 配置项
+    }),
+    mediumZoomPlugin({
+      // 配置项
+    }),
+    noticePlugin({
+      config: [
+        {
+          path: '/',
+          title: 'Notice Title',
+          content: 'Notice Content',
+          actions: [
+            {
+              text: 'Primary Action',
+              link: 'https://theme-hope.vuejs.press/',
+              type: 'primary',
+            },
+            { text: 'Default Action' },
+          ],
+        }
+      ],
+    }),
+    watermarkPlugin({
+      // options
+      watermarkText: '钱鹏展',
+    }),
+    photoSwipePlugin({
+      // 选项
+    }),
+    catalogPlugin({
+      // 你的选项
+    }),
+    sitemapPlugin({
+      // 选项
+      hostname: ''
+    }),
+    // 作为最后一个插件使用
+    cachePlugin({
+      // 配置项
+      type: 'filesystem',
+      enableInCi: true
+    }),
+  ]
 })
