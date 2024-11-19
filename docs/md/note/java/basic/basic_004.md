@@ -364,9 +364,72 @@ E:\pri-workspace\java\operators>
 
 :::
 
-### 【2.7】自减运算符–
+### 【2.7】自减运算符`--`
 
+1. 什么是自减运算符？
 
+::: info 自减运算符
+
+​	顾名思义，就是使用了该运算符，原变量自己减少1的操作
+
+:::
+
+2. 自减运算符的特点 
+   1. 前提： 设a为变量， `--` 为自减运算符
+   2. 无论是 a`--` 还是 `--`a，只要是自减运算符单独使用的时候， 都可以简单的理解为 a = a - 1，都是减1操作
+   3. 将`--`参与到运算中, 则看`--`在前还是在后，如果`--`在后：先运算，后减1   如果`--`在前，先减1，后运算
+3. 代码演示
+
+::: important 直接代码演示自减运算符 `--`
+
+``` java
+// 代码演示自减运算符  --
+public class OperDoubleSub {
+	public static void main(String[] args) {
+		int a = 5;
+		a--;//理解为：相当于  a=a-1 操作  
+		System.out.println(a);//4
+		
+		a = 5;
+		--a;//理解为：相当于  a=a-1 操作  
+		System.out.println(a); //4
+		
+		//总结：--单独使用的时候，无论放在前还是后，都是减1操作
+		
+		//将--参与到运算中：
+		//规则：看--在前还是在后，如果--在后：先运算，后减1   如果--在前，先减1，后运算
+		a = 5;
+		int m = a-- - 7;//先运算  m=a-7  再减1：  a = a-1 
+		System.out.println(m);//-2
+		System.out.println(a);//4
+		
+		a = 5;
+		int n = --a - 7;//先减1  a=a-1  再运算：  n = a - 7 
+		System.out.println(n);//-3
+		System.out.println(a);//4
+	}
+}
+```
+
+编译执行下, 看结果是否和我们注释后的答案一致 `javac -encoding utf-8  OperDoubleSub.java` `java OperDoubleSub`
+
+``` powershell
+E:\pri-workspace\java\operators>javac -encoding utf-8 OperDoubleSub.java
+
+E:\pri-workspace\java\operators>java OperDoubleSub
+4
+4
+-2
+4
+-3
+4
+
+E:\pri-workspace\java\operators>
+```
+
+源码大家参考下，稍微看下即可，就不过多解释了
+
+![image-20241119235750515](../../../../.vuepress/public/images/image-20241119235750515.png)
 
 ## 【3】赋值运算符
 
