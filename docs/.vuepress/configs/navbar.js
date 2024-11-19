@@ -1,21 +1,39 @@
-export const navbar = 
+export const navbar =
 [
     {
       text: '首页',
       link: '/'
     },
     {
-      text: 'JAVA',
+      text: '学习笔记',
       children:[
         {
-          text: '初识JAVA',
-          link: '/md/java/first/first_001.md'
+          text: '学习笔记 - JAVA',
+          children: [
+            {
+              text: '初识JAVA',
+              link: '/md/note/java/first/first_001.md'
+            },
+            {
+              text: 'JAVA基础知识',
+              link: '/md/java/basic/basic_001.md'
+            }
+          ]
         },
         {
-          text: 'JAVA基础知识',
-          link: '/md/java/basic/basic_001.md'
+          text: '学习笔记 - GO',
+          children: [
+            {
+              text: '初识GO语言',
+              link: '/md/note/go/first/'
+            }
+          ]
         }
       ]
+    },
+    {
+      text: '常见问题',
+      link: '/md/question/'
     },
     {
       text: '更多',

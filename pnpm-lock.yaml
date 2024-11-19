@@ -32,9 +32,6 @@ importers:
       '@vuepress/plugin-medium-zoom':
         specifier: 2.0.0-rc.57
         version: 2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
-      '@vuepress/plugin-notice':
-        specifier: 2.0.0-rc.57
-        version: 2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
       '@vuepress/plugin-nprogress':
         specifier: 2.0.0-rc.57
         version: 2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
@@ -758,11 +755,6 @@ packages:
 
   '@vuepress/plugin-medium-zoom@2.0.0-rc.57':
     resolution: {integrity: sha512-CXZRnqcr02G+rxVxI89FwFipIpmiFuXFT3Hn8BzDbjeTddKR11l15wJwTAxcI+U3NrjniT9WIR4oV+Wmpg3nFQ==}
-    peerDependencies:
-      vuepress: 2.0.0-rc.18
-
-  '@vuepress/plugin-notice@2.0.0-rc.57':
-    resolution: {integrity: sha512-iguerSVFkeUJgmqGOmHrixFrsSmf0hz/9gkojunNmz0jNCSxtp2WBNGfq071ve4MzYzscOJI0B4tZYxBAeiRKw==}
     peerDependencies:
       vuepress: 2.0.0-rc.18
 
@@ -2960,16 +2952,6 @@ snapshots:
     dependencies:
       '@vuepress/helper': 2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
       medium-zoom: 1.1.0
-      vue: 3.5.12
-      vuepress: 2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
-
-  '@vuepress/plugin-notice@2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))':
-    dependencies:
-      '@vuepress/helper': 2.0.0-rc.57(vuepress@2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12))
-      '@vueuse/core': 11.1.0(vue@3.5.12)
       vue: 3.5.12
       vuepress: 2.0.0-rc.18(@vuepress/bundler-vite@2.0.0-rc.18(@types/node@22.8.0)(jiti@1.21.6)(lightningcss@1.27.0)(sass-embedded@1.80.4)(sass@1.80.5)(terser@5.36.0)(yaml@2.6.0))(vue@3.5.12)
     transitivePeerDependencies:

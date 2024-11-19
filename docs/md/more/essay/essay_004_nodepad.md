@@ -1,10 +1,10 @@
-## 随笔 - windows下安装NodePad++
+# 随笔 - windows下安装NodePad++
 
-[[TOC]]
+[[toc]]
 
-> 说在前面的话，本文为个人学习各类视频、他人文章等多渠道后进行总结的文章，本文主要用于<b>随笔</b>记录。
+> 说在前面的话，本文为个人学习[B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)后进行总结的文章，本文主要用于<b>随笔</b>记录。
 
-### 【1】下载NodePad++
+## 【1】下载NodePad++
 
 本次下载的NodePad++ | 版本号: 8.1.9  | 免费版本
 
@@ -14,7 +14,7 @@
 - 提取码: fuga 
 - ![image-20241030104832466](../../../.vuepress/public/images/image-20241030104832466.png)
 
-### 【2】NodePad++介绍
+## 【2】NodePad++介绍
 
 **Notepad++**  是一款功能强大的代码编辑器，专为程序员和开发人员设计。无论是编写代码、处理文本文件，还是进行快速编辑，**Notepad++**  都能提供卓越的性能和便利的功能，极大提升您的工作效率。
 
@@ -28,7 +28,7 @@
 - **宏录制和回放** ：支持宏录制和回放功能，您可以录制常用操作并重复执行，提高工作效率。
 - **轻量高效** ：**Notepad++**  运行轻巧，占用系统资源少，启动和运行速度快，适合长时间使用。
 
-### 【3】 NodePad ++ 安装
+## 【3】 NodePad ++ 安装
 
 - ![image-20241030104855620](../../../.vuepress/public/images/image-20241030104855620.png)
 - ![image-20241030104904724](../../../.vuepress/public/images/image-20241030104904724.png)
@@ -38,7 +38,7 @@
 - ![image-20241030105002305](../../../.vuepress/public/images/image-20241030105002305.png)
 - ![image-20241030105012854](../../../.vuepress/public/images/image-20241030105012854.png)
 
-### 【4】 NodePadd ++ 卸载
+## 【4】 NodePadd ++ 卸载
 
 - 找到控制面板，打开，找到程序->卸载程序，打开
 

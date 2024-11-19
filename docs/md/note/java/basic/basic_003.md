@@ -1,22 +1,22 @@
-## JAVA基础知识 \- 基本数据类型
+# JAVA基础知识 \- 基本数据类型
 
-[[TOC]]
+[[toc]]
 
-> 说在前面的话，本文为个人学习各类视频、他人文章等多渠道后进行总结的文章，本文主要用于<b>JAVA基础知识</b>。
+> 说在前面的话，本文为个人学习[B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)后进行总结的文章，本文主要用于<b>JAVA基础知识</b>。
 
-### 【1】本文重点
+## 【1】本文重点
 
 Java是一种**强类型语言** ，每个变量都必须声明其数据类型。 
 
 Java的数据类型可分为两大类：**基本数据类型（primitive data type）** 和**引用数据类型（reference data type）** 。
 
-![image-20241111113026059](../../../.vuepress/public/images/image-20241111113026059.png)
+![image-20241111113026059](../../../../.vuepress/public/images/image-20241111113026059.png)
 
 巧妙记忆：除了基本数据类型以外的所有类型都属于引用数据类型，本文重点：**基本数据类型（primitive data type）**
 
-### 【2】整数类型
+## 【2】整数类型
 
-#### 【2.1】整数类型的常量
+### 【2.1】整数类型的常量
 
 - 首先，我们需要了解下进制？
 
@@ -36,7 +36,7 @@ Java的数据类型可分为两大类：**基本数据类型（primitive data ty
 
 以下这张图则是不同进制下的常量
 
-![image-20241111135923200](../../../.vuepress/public/images/image-20241111135923200.png)
+![image-20241111135923200](../../../../.vuepress/public/images/image-20241111135923200.png)
 
 - 进制之间的转换
 
@@ -56,7 +56,7 @@ Java的数据类型可分为两大类：**基本数据类型（primitive data ty
 
     若要转为二进制，则对2求余数，一直到为0为止，然后余数倒排，则为二进制数
 
-    ![image-20241111141521772](../../../.vuepress/public/images/image-20241111141521772.png)
+    ![image-20241111141521772](../../../../.vuepress/public/images/image-20241111141521772.png)
 
     所以，十进制数13转为二进制数为1101.
 
@@ -74,7 +74,7 @@ Java的数据类型可分为两大类：**基本数据类型（primitive data ty
 
     若要转为八进制，则对8求余数，一直到为0为止，然后余数倒排，则为二进制数
 
-    ![image-20241112071648847](../../../.vuepress/public/images/image-20241112071648847.png)
+    ![image-20241112071648847](../../../../.vuepress/public/images/image-20241112071648847.png)
 
     所以十进制数14转为八进制数为16.
 
@@ -84,9 +84,7 @@ Java的数据类型可分为两大类：**基本数据类型（primitive data ty
 
     先把八进制转为十进制,再把十进制数转为十六进制即可。
 
-  
-
-#### 【2.2】整数类型的变量
+### 【2.2】整数类型的变量
 
 首先，我们先了解下Java中有哪些整数类型：
 
@@ -128,13 +126,13 @@ public class IntVar01 {
 
 执行下编译后的代码： `java IntVar01`
 
-![image-20241113104619744](../../../.vuepress/public/images/image-20241113104619744.png)
+![image-20241113104619744](../../../../.vuepress/public/images/image-20241113104619744.png)
 
  可以发现，输出的都是十进制，但是定义都是按照不同的进制进行定义的。
 
 再打开看下编译后的代码：
 
-![image-20241113104746048](../../../.vuepress/public/images/image-20241113104746048.png)
+![image-20241113104746048](../../../../.vuepress/public/images/image-20241113104746048.png)
 
 我们可以发现，我们定义是int, 但是实际上编译为 byte了。值都被转完成了，这就解释了为什么执行后都是十进制了。
 
@@ -163,11 +161,11 @@ public class IntVar02 {
 
 `java IntVar02`
 
-![image-20241113105349417](../../../.vuepress/public/images/image-20241113105349417.png)
+![image-20241113105349417](../../../../.vuepress/public/images/image-20241113105349417.png)
 
 编译后的代码如下：
 
-![image-20241113105459609](../../../.vuepress/public/images/image-20241113105459609.png)
+![image-20241113105459609](../../../../.vuepress/public/images/image-20241113105459609.png)
 
 正常输出。
 
@@ -175,7 +173,7 @@ public class IntVar02 {
 
 `javac -encoding utf-8 IntVar02.java`
 
-![image-20241113105544622](../../../.vuepress/public/images/image-20241113105544622.png)
+![image-20241113105544622](../../../../.vuepress/public/images/image-20241113105544622.png)
 
 可以看到在编译阶段就直接报错了，故我们定义变量不可以超出它的数值范围。
 
@@ -213,9 +211,9 @@ public class IntVar03 {
 
 `java IntVar03`
 
-![image-20241113110033704](../../../.vuepress/public/images/image-20241113110033704.png)
+![image-20241113110033704](../../../../.vuepress/public/images/image-20241113110033704.png)
 
-![image-20241113110158420](../../../.vuepress/public/images/image-20241113110158420.png)
+![image-20241113110158420](../../../../.vuepress/public/images/image-20241113110158420.png)
 
 这里可以看到，有些比较特殊。
 
@@ -224,9 +222,9 @@ public class IntVar03 {
 
 注释上已经进行了说明，但是还是比较重要的，涉及基本数据类型之间的转换，后续再说。
 
-### 【3】浮点数类型
+## 【3】浮点数类型
 
-#### 【3.1】 浮点数类型常量
+### 【3.1】 浮点数类型常量
 
 ::: info 浮点数类型的常量
 
@@ -238,7 +236,7 @@ public class IntVar03 {
 
 ::: 
 
-#### 【3.2】浮点数类型变量
+### 【3.2】浮点数类型变量
 
 ::: info 浮点数类型的变量  
 
@@ -320,9 +318,9 @@ E:\pri-workspace\java\var>
 
 ::: 
 
-### 【4】字符类型
+## 【4】字符类型
 
-#### 【4.1】 什么是编码？
+### 【4.1】 什么是编码？
 
 ::: info 编码
 
@@ -348,7 +346,7 @@ FROM [百度百科](https://upimg.baike.so.com/doc/2161876-32333087.html)
 
 :::
 
-#### 【4.2】生活例子
+### 【4.2】生活例子
 
 ::: info 例子
 
@@ -360,7 +358,7 @@ FROM [百度百科](https://upimg.baike.so.com/doc/2161876-32333087.html)
 
 :::
 
-#### 【4.3】字符集
+### 【4.3】字符集
 
 ::: info 字符集
 
@@ -385,9 +383,9 @@ FROM [百度百科](https://upimg.baike.so.com/doc/2161876-32333087.html)
   - UTF-16
   - UTF-32
 - UTF-8标准是Unicode符号的落地方案
-  - ![image-20241114102800145](../../../.vuepress/public/images/image-20241114102800145.png)
+  - ![image-20241114102800145](../../../../.vuepress/public/images/image-20241114102800145.png)
   - UTF-8标准最多6个字节
-    - ![image-20241114102915000](../../../.vuepress/public/images/image-20241114102915000.png)
+    - ![image-20241114102915000](../../../../.vuepress/public/images/image-20241114102915000.png)
   - 无需背诵，需要的时候使用程序员计算机去转换即可。
 
 :::
@@ -401,7 +399,7 @@ FROM [百度百科](https://upimg.baike.so.com/doc/2161876-32333087.html)
 
 :::
 
-#### 【4.4】字符类型
+### 【4.4】字符类型
 
 ::: info 字符类型
 
@@ -413,11 +411,11 @@ FROM [百度百科](https://upimg.baike.so.com/doc/2161876-32333087.html)
 
 - 转义字符:
 
-![image-20241114104606526](../../../.vuepress/public/images/image-20241114104606526.png)
+![image-20241114104606526](../../../../.vuepress/public/images/image-20241114104606526.png)
 
 - ASCII表
 
-![image-20241114104649454](../../../.vuepress/public/images/image-20241114104649454.png)
+![image-20241114104649454](../../../../.vuepress/public/images/image-20241114104649454.png)
 
 - [Unicode编码表](https://www.cnblogs.com/csguo/p/7401874.html)
   - 网上找的，若过期了，请自己百度
@@ -584,13 +582,13 @@ E:\pri-workspace\java\var>
 
 .class文件如下:
 
-![image-20241114110410549](../../../.vuepress/public/images/image-20241114110410549.png)
+![image-20241114110410549](../../../../.vuepress/public/images/image-20241114110410549.png)
 
 可以看到这是(byte b2 = 52 )编码52 表示'4' 那么 '2'的编码就是50 
 
 :::
 
-### 【5】布尔类型
+## 【5】布尔类型
 
 ::: info 布尔类型
 
@@ -634,24 +632,24 @@ E:\pri-workspace\java\var>
 
 :::
 
-### 【6】基本数据类型的转换
+## 【6】基本数据类型的转换
 
 前面，我们都看过编译后的文件，里面都多多少少涉及到了基本数据类型的转换。
 
-#### 【6.1】什么是数据类型转换?
+### 【6.1】什么是数据类型转换?
 
 在赋值运算或者算数运算的时候，要求数据类型一致，就要进行类型的转换。
 
-#### 【6.2】类型转换的种类
+### 【6.2】类型转换的种类
 
 - 自动转换
 - 强制转换
 
-#### 【6.3】内存演示
+### 【6.3】内存演示
 
-![image-20241114113125520](../../../.vuepress/public/images/image-20241114113125520.png)
+![image-20241114113125520](../../../../.vuepress/public/images/image-20241114113125520.png)
 
-#### 【6.4】代码演示
+### 【6.4】代码演示
 
 ``` java
 // 演示基本数据类型的转换
@@ -715,6 +713,10 @@ E:\pri-workspace\java\var>
 
 .class文件如下:
 
-![image-20241114113606819](../../../.vuepress/public/images/image-20241114113606819.png)
+![image-20241114113606819](../../../../.vuepress/public/images/image-20241114113606819.png)
 
 至此，所有的基本数据类型就介绍完毕了。
+
+## 【7】参考资料
+
+- [B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)

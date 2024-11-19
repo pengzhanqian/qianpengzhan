@@ -1,10 +1,10 @@
-## JAVA基础知识 \- 学习注释
+# JAVA基础知识 \- 学习注释
 
-[[TOC]]
+[[toc]]
 
-> 说在前面的话，本文为个人学习各类视频、他人文章等多渠道后进行总结的文章，本文主要用于<b>JAVA基础知识</b>。
+> 说在前面的话，本文为个人学习[B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)后进行总结的文章，本文主要用于<b>JAVA基础知识</b>。
 
-### 【1】多行注释
+## 【1】多行注释
 
 > 语法：
 >
@@ -38,7 +38,7 @@ public class HelloWorld{
 }
 ```
 
-### 【2】 文档注释
+## 【2】 文档注释
 
 > 语法：
 >
@@ -62,15 +62,15 @@ public class HelloWorld{
 这是文档注释的代码，比较重要
 */
 public class HelloWorld3{
-	public static void main(String[] args){	
-			System.out.println("hi....java1");	
+	public static void main(String[] args){
+			System.out.println("hi....java1");
 	}
 	/**
 	@param name 姓名
 	@param age 年龄
 	*/
 	public void eat(String name,int age){
-			System.out.println("hello");	
+			System.out.println("hello");
 	}
 }
 ```
@@ -81,13 +81,13 @@ public class HelloWorld3{
 javadoc -d hello -author -version HelloWorld3.java
 ```
 
-![image-20241031180316012](../../../.vuepress/public/images/image-20241031180316012.png)
+![image-20241031180316012](../../../../.vuepress/public/images/image-20241031180316012.png)
 
-![image-20241031180358241](../../../.vuepress/public/images/image-20241031180358241.png)
+![image-20241031180358241](../../../../.vuepress/public/images/image-20241031180358241.png)
 
 存在编码问题，这个忽略。基本实现了文档注释生成API了
 
-### 【3】单行注释
+## 【3】单行注释
 
 > 语法：
 >
@@ -103,7 +103,7 @@ public class HelloWorld2{
 }
 ```
 
-### 【4】注释的作用
+## 【4】注释的作用
 
 1. 注释不会参与编译，编译后产生的字节码文件中不会有注释的内容
 2. 注释的作用：
@@ -111,3 +111,6 @@ public class HelloWorld2{
    2. 是一个非常良好，非常专业的习惯！！！
    3. 方便代码的调试
 
+## 【5】参考资料
+
+- [B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)

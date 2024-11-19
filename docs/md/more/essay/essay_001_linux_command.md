@@ -1,11 +1,12 @@
-## 随笔 - Linux命令
-[[TOC]]
+# 随笔 - Linux命令
 
-### 一、CentOS7中常用命令安装和使用
+[[toc]]
 
-#### 1.1 此时最小化安装的环境存在了以下命令：
+## 一、CentOS7中常用命令安装和使用
 
-##### 1.1.1 rpm
+### 1.1 此时最小化安装的环境存在了以下命令：
+
+#### 1.1.1 rpm
 
 >  Red-Hat Package Mananger
 >
@@ -22,15 +23,15 @@
 
 ![image-20221229114505086](../../../.vuepress/public/images/image-20221229114505086.png)
 
-##### 1.1.2 yum
+#### 1.1.2 yum
 
 ![image-20221229155857614](../../../.vuepress/public/images/image-20221229155857614.png)
 
-##### 1.1.3 CentOS7的安装包下载地址
+#### 1.1.3 CentOS7的安装包下载地址
 
 http://mirror.centos.org/centos/7/os/x86_64/Packages/
 
-##### 1.1.4 ping
+#### 1.1.4 ping
 
 ```shell
 [root@localhost02 ~]# ping www.baidu.com
@@ -45,7 +46,7 @@ rtt min/avg/max/mdev = 30.085/31.343/33.245/1.382 ms
 [root@localhost02 ~]# 
 ```
 
-##### 1.1.5 vi
+#### 1.1.5 vi
 
 ``` shell
 [root@localhost02 ~]# vi --help
@@ -56,9 +57,9 @@ usage: vim [arguments] [file ..]       edit specified file(s)
    or: vim [arguments] -t tag          edit file where tag is defined
 ```
 
-#### 1.2 yum命令安装更新
+### 1.2 yum命令安装更新
 
-##### 1.2.1 查看是否存在YUM命令
+#### 1.2.1 查看是否存在YUM命令
 
 ``` shell
 [root@localhost02 ~]# rpm -qa yum
@@ -68,7 +69,7 @@ yum-3.4.3-168.el7.centos.noarch
 
 > 上述说明yum存在，但是需要升级更新下
 
-##### 1.2.2 升级yum命令
+#### 1.2.2 升级yum命令
 
 ```shell
 [root@localhost02 yum]# yum -y update
@@ -86,7 +87,7 @@ yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch
 
 > 出现上述版本号和插件镜像则说明升级完毕
 
-##### 1.2.3 卸载yum
+#### 1.2.3 卸载yum
 
 ```shell
 [root@localhost02 yum]# rpm -qa | grep yum
@@ -99,7 +100,7 @@ yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch
 [root@localhost02 yum]# 
 ```
 
-##### 1.2.4 重新安装yum
+#### 1.2.4 重新安装yum
 
 > 从centos官网上下载和yum有关的rpm包  
 >
@@ -139,20 +140,20 @@ total 1336
 ``` shell
 [root@localhost02 yum]# rpm -ivh --nodeps --force yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm 
 warning: yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:yum-plugin-fastestmirror-1.1.31-5################################# [100%]
+   1:yum-plugin-fastestmirror-1.1.31-5################# [100%]
 [root@localhost02 yum]# 
 [root@localhost02 yum]# rpm -ivh --nodeps --force yum-metadata-parser-1.1.4-10.el7.x86_64.rpm 
 warning: yum-metadata-parser-1.1.4-10.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:yum-metadata-parser-1.1.4-10.el7 ################################# [100%]
+   1:yum-metadata-parser-1.1.4-10.el7 ################# [100%]
 [root@localhost02 yum]# rpm -ivh yum-3.4.3-168.el7.centos.noarch.rpm 
 warning: yum-3.4.3-168.el7.centos.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:yum-3.4.3-168.el7.centos         ################################# [100%]
+   1:yum-3.4.3-168.el7.centos         ################# [100%]
 [root@localhost02 yum]# 
 ```
 
@@ -166,9 +167,9 @@ yum-3.4.3-168.el7.centos.noarch
 [root@localhost02 yum]# 
 ```
 
-#### 1.3 使用yum命令安装wget命令
+### 1.3 使用yum命令安装wget命令
 
-##### 1.3.1 查看是否存在wget命令
+#### 1.3.1 查看是否存在wget命令
 
 ``` shell
 [root@localhost02 usr]# wget
@@ -185,7 +186,7 @@ Try `wget --help' for more options.
 # 说明存在wget命令
 ```
 
-##### 1.3.2 安装wget命令
+#### 1.3.2 安装wget命令
 
 > 使用命令： `yum -y install wget`
 
@@ -231,9 +232,9 @@ Complete!
 [root@localhost02 usr]#
 ```
 
-#### 1.4 使用yum命令安装lrzsz命令
+### 1.4 使用yum命令安装lrzsz命令
 
-##### 1.4.1 查看是否存在lrzsz命令
+#### 1.4.1 查看是否存在lrzsz命令
 
 ``` shell
 [root@localhost02 usr]# rz
@@ -248,7 +249,7 @@ Complete!
 
 上图说明存在lrzsz命令
 
-##### 1.4.2 安装lrzsz命令
+#### 1.4.2 安装lrzsz命令
 
 > 使用命令：`yum -y install lrzsz`
 
@@ -264,9 +265,9 @@ Nothing to do
 [root@localhost02 usr]#
 ```
 
-#### 1.5 使用yum命令安装vim命令
+### 1.5 使用yum命令安装vim命令
 
-##### 1.5.1 查看是否存在vim命令
+#### 1.5.1 查看是否存在vim命令
 
 ``` shell
 [root@localhost02 ~]# vim
@@ -275,7 +276,7 @@ Nothing to do
 # 说明找不到vim命令
 ```
 
-##### 1.5.2 安装vim命令
+#### 1.5.2 安装vim命令
 
 > 使用命令:  `yum -y install vim`
 
@@ -300,7 +301,7 @@ Complete!
 # 此时已经安装完毕
 ```
 
-##### 1.5.3 修改VIM配置
+#### 1.5.3 修改VIM配置
 
 ```shell
 vim ~/.vimrc
@@ -319,9 +320,9 @@ syntax on " 开启语法高亮
 
 ![image-20230128094513456](../../../.vuepress/public/images/image-20230128094513456.png)
 
-#### 1.6 使用rpm命令安装curl命令
+### 1.6 使用rpm命令安装curl命令
 
-##### 1.6.1 查看是否存在curl命令
+#### 1.6.1 查看是否存在curl命令
 
 ``` shell
 ^C[root@localhost02 ~]# rpm -qa | grep curl
@@ -335,7 +336,7 @@ python-pycurl-7.19.0-19.el7.x86_64
 
 说明已经成功安装了curl
 
-##### 1.6.2 卸载curl命令
+#### 1.6.2 卸载curl命令
 
 ``` shell
 [root@localhost02 ~]# rpm -qa | grep curl
@@ -347,7 +348,7 @@ python-pycurl-7.19.0-19.el7.x86_64
 [root@localhost02 ~]#
 ```
 
-##### 1.6.3 使用rpm命令重新安装curl命令
+#### 1.6.3 使用rpm命令重新安装curl命令
 
 > 从centos官网上下载和yum有关的rpm包  
 >
@@ -384,18 +385,18 @@ total 580
 
 ``` shell
 [root@localhost02 curl]# rpm -ivh --nodeps python-pycurl-7.19.0-19.el7.x86_64.rpm 
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:python-pycurl-7.19.0-19.el7      ################################# [100%]
+   1:python-pycurl-7.19.0-19.el7      ################# [100%]
 [root@localhost02 curl]# rpm -ivh --nodeps libcurl-7.29.0-59.el7.x86_64.rpm 
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:libcurl-7.29.0-59.el7            ################################# [100%]
+   1:libcurl-7.29.0-59.el7            ################# [100%]
 [root@localhost02 curl]# 
 [root@localhost02 curl]# rpm -ivh --nodeps curl-7.29.0-59.el7.x86_64.rpm 
-Preparing...                          ################################# [100%]
+Preparing...                          ################# [100%]
 Updating / installing...
-   1:curl-7.29.0-59.el7               ################################# [100%]
+   1:curl-7.29.0-59.el7               ################# [100%]
 [root@localhost02 curl]# rpm -qa | grep curl
 python-pycurl-7.19.0-19.el7.x86_64
 curl-7.29.0-59.el7.x86_64
@@ -405,9 +406,9 @@ libcurl-7.29.0-59.el7.x86_64
 
 至此，curl命令则安装完毕。
 
-#### 1.7 使用yum命令安装telnet命令
+### 1.7 使用yum命令安装telnet命令
 
-##### 1.7.1 查看是否存在telnet命令
+#### 1.7.1 查看是否存在telnet命令
 
 ``` shell
 [root@localhost02 curl]# telnet
@@ -417,7 +418,7 @@ libcurl-7.29.0-59.el7.x86_64
 
 说明telnet命令不存在
 
-##### 1.7.2 安装telnet命令
+#### 1.7.2 安装telnet命令
 
 > 使用命令如下： **yum -y install telnet**
 
@@ -430,9 +431,9 @@ telnet: connect to address 192.168.91.129: No route to host
 [root@localhost02 /]# 
 ```
 
-#### 1.8 使用 yum命令安装tree命令
+### 1.8 使用 yum命令安装tree命令
 
-##### 1.8.1 查看是否存在tree命令
+#### 1.8.1 查看是否存在tree命令
 
 ``` shell
 [root@localhost02 /]# tree
@@ -442,7 +443,7 @@ telnet: connect to address 192.168.91.129: No route to host
 
 说明不存在tree命令
 
-##### 1.8.2 使用yum命令安装tree
+#### 1.8.2 使用yum命令安装tree
 
 > 使用命令： `yum -y install tree`
 
@@ -459,9 +460,9 @@ telnet: connect to address 192.168.91.129: No route to host
 [root@localhost02 yum]# 
 ```
 
-#### 1.9 使用yum命令安装ifconfig命令
+### 1.9 使用yum命令安装ifconfig命令
 
-##### 1.9.1 查看ifconfig命令是否存在
+#### 1.9.1 查看ifconfig命令是否存在
 
 ``` shell
 [root@localhost02 usr]# ifconfig
@@ -471,7 +472,7 @@ telnet: connect to address 192.168.91.129: No route to host
 
 说明不存在
 
-##### 1.9.2 安装命令
+#### 1.9.2 安装命令
 
 > 使用命名：  `yum -y install net-tools`
 
@@ -481,19 +482,19 @@ telnet: connect to address 192.168.91.129: No route to host
 
 ![image-20230128112201777](../../../.vuepress/public/images/image-20230128112201777.png)
 
-##### 1.9.3 查看IP
+#### 1.9.3 查看IP
 
 > 可以使用 `ip addr`  或者 `ifconfig` 2个命令进行查看
 
 ![image-20230128112407912](../../../.vuepress/public/images/image-20230128112407912.png)
 
-#### 1.10 使用yum命令安装其他的依赖关系
+### 1.10 使用yum命令安装其他的依赖关系
 
 > 使用如下命令：
 >
 > **`yum -y install gcc gcc-c++ make autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5-devel libidn libidn-devel openssl openssl-devel libxslt-devel libevent-devel libtool libtool-ltdl bison gd gd-devel vim-enhanced pcre-devel zip unzip ntpdate sysstat patch bc expect rsync`**
 
-#### 1.11 查看磁盘的大小
+### 1.11 查看磁盘的大小
 
 > **`df -h`**
 
@@ -511,7 +512,7 @@ tmpfs                    1.6G     0  1.6G   0% /run/user/0
 
 ```
 
-#### 1.12 在远程Linux主机上安装ssh服务器
+### 1.12 在远程Linux主机上安装ssh服务器
 
 > \# 安装
 >
@@ -537,14 +538,14 @@ root       2461   1625  0 18:21 pts/1    00:00:00 grep --color=auto ssh
 [root@localhost02 /]# 
 ```
 
-#### 1.13 忽略1~12进行一次性安装脚本
+### 1.13 忽略1~12进行一次性安装脚本
 
 ``` powershell
 # 安装相关基础依赖
 yum -y install vim wget lrzsz curl telnet net-tools tree openssh-server gcc gcc-c++ make autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5-devel libidn libidn-devel openssl openssl-devel libxslt-devel libevent-devel libtool libtool-ltdl bison gd gd-devel vim-enhanced pcre-devel zip unzip ntpdate sysstat patch bc expect rsync
 ```
 
-#### 1.14 查看磁盘空间大小
+### 1.14 查看磁盘空间大小
 
 > du -h /root --max-depth=1
 >
@@ -567,9 +568,9 @@ yum -y install vim wget lrzsz curl telnet net-tools tree openssh-server gcc gcc-
 [root@test data]# 
 ```
 
-#### 1.15 升级make
+### 1.15 升级make
 
-##### 1.15.1下载make最新安装包
+#### 1.15.1下载make最新安装包
 
 >  #到 http://ftp.gnu.org/pub/gnu/make/ 查找最新安装包
 >
@@ -597,19 +598,19 @@ total 2256
 -rw-r--r-- 1 root root 2307891 Oct 31 14:49 make-4.4.tar.gz
 ```
 
-##### 1.15.2 解压配置
+#### 1.15.2 解压配置
 
 > tar -zxvf make-4.3.tar.gz
 >     cd make-4.3
 >     ./configure --prefix=/usr
 
-##### 1.15.3 编译安装
+#### 1.15.3 编译安装
 
 > type make
 > 		make check
 > 		make install
 
-##### 1.15.4 验证安装
+#### 1.15.4 验证安装
 
 ``` shell
 [root@localhost1 make-4.4]# make -v
@@ -622,17 +623,17 @@ There is NO WARRANTY, to the extent permitted by law.
 [root@localhost1 make-4.4]# 
 ```
 
-#### 1.16 持续更新中...
+### 1.16 持续更新中...
 
-### 二、CentOS7中常用设置
+## 二、CentOS7中常用设置
 
-#### 2.1 关闭SELinux
+### 2.1 关闭SELinux
 
-##### 2.1.1 SELinux背景
+#### 2.1.1 SELinux背景
 
 > seLinux是linux的一些强制安全策略，会限制一些软件的目录、端口和用户等，在日常操作中，常常会遇到不少莫名其妙的权限问题是由seLinux产生的。很多架构实现都会关闭selinux
 
-##### 2.1.2 检查selinux是否开启
+#### 2.1.2 检查selinux是否开启
 
 > 在关闭selinux之前，可以通过以下命令来查看seLinux是否开启。  
 >
@@ -654,7 +655,7 @@ Max kernel policy version:      31
 
 > 看到 SELinux status:                 enabled说明是开启的。
 
-##### 2.1.3 临时关闭SELinux
+#### 2.1.3 临时关闭SELinux
 
 > 要暂时禁用 SELinux，您必须修改 /selinux/enforce 文件。
 >
@@ -668,7 +669,7 @@ Max kernel policy version:      31
 >
 > **setenforce 0**
 
-##### 2.1.4 永久关闭SELinux
+#### 2.1.4 永久关闭SELinux
 
 > 要永久禁用 SELinux，请修改 /etc/selinux/config 并将 SELINUX=disabled
 
@@ -730,9 +731,9 @@ SELinux status:                 disabled
 
 > 此时说明： 已经关闭了SELinux
 
-#### 2.2 设置时区为上海时区
+### 2.2 设置时区为上海时区
 
-##### 2.2.1 查询服务器的当前时区
+#### 2.2.1 查询服务器的当前时区
 
 > 使用命令： `ll /etc/localtime`  进行时区查询
 
@@ -744,7 +745,7 @@ lrwxrwxrwx. 1 root root 36 Dec 30 16:07 /etc/localtime -> ../usr/share/zoneinfo/
 
 > 说明，使用的是香港时区
 
-##### 2.2.2 配置上海时区
+#### 2.2.2 配置上海时区
 
 >  若需要变更，则使用`rm -rf /etc/localtime`和`ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`命令进行修改，`date -s`修改具体时间,`clock -w`,`hwclock -w` 复位时间
 
@@ -762,7 +763,7 @@ Sat Jan 28 14:58:00 CST 2023
 [root@localhost02 Asia]# 
 ```
 
-#### 2.3 配置Linux历史命令大小
+### 2.3 配置Linux历史命令大小
 
 > 即修改history的存储大小
 >
@@ -776,7 +777,7 @@ Sat Jan 28 14:58:00 CST 2023
 
 ![image-20230128150244727](../../../.vuepress/public/images/image-20230128150244727.png)
 
-#### 2.4 绑定静态IP（只适用于虚拟机）
+### 2.4 绑定静态IP（只适用于虚拟机）
 
 > 这里需要注意： 静态IP和网关IP需要对照虚拟网络编辑器里面的配置是否一致
 
@@ -878,9 +879,9 @@ Restarting network (via systemctl):                        [  OK  ]
 [root@localhost02 network-scripts]# 
 ```
 
-#### 2.5 修改yum源为阿里yum源
+### 2.5 修改yum源为阿里yum源
 
-##### 2.5.1 查看yum源信息
+#### 2.5.1 查看yum源信息
 
 > yum repolist
 
@@ -899,7 +900,7 @@ repolist: 15,278
 [root@localhost02 network-scripts]# 
 ```
 
-##### 2.5.2 找到base reop源文件目录位置
+#### 2.5.2 找到base reop源文件目录位置
 
 > cd /etc/yum.repos.d
 
@@ -918,7 +919,7 @@ total 40
 [root@localhost02 yum.repos.d]# 
 ```
 
-##### 2.5.3 备份旧的配置文件
+#### 2.5.3 备份旧的配置文件
 
 > sudo mv CentOS-Base.repo CentOS-Base.repo.bak
 
@@ -937,19 +938,19 @@ total 40
 [root@localhost02 yum.repos.d]# 
 ```
 
-##### 2.5.4 下载阿里源的文件
+#### 2.5.4 下载阿里源的文件
 
 > sudo wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 
-##### 2.5.5 清理缓存
+#### 2.5.5 清理缓存
 
 > yum clean all
 
-##### 2.5.6 重新生成缓存
+#### 2.5.6 重新生成缓存
 
 > yum makecache
 
-##### 2.5.7 再次查看yum源信息
+#### 2.5.7 再次查看yum源信息
 
 > yum repolist
 
@@ -969,19 +970,19 @@ repolist: 15,278
 
 ```
 
-##### 2.5.8 更新安装yum
+#### 2.5.8 更新安装yum
 
 > yum -y update
 >
 > 等待更新完成即可
 
-#### 2.6 开放端口号设置
+### 2.6 开放端口号设置
 
-##### 2.6.1 开启防火墙
+#### 2.6.1 开启防火墙
 
 > systemctl start firewalld
 
-##### 2.6.2 开放指定端口号
+#### 2.6.2 开放指定端口号
 
 > firewall-cmd --zone=public --add-port=1935/tcp  --permanent
 >
@@ -1001,7 +1002,7 @@ repolist: 15,278
 >
 > --permanent  #永久生效，没有此参数重启后失效
 
-##### 2.6.3 重启防火墙
+#### 2.6.3 重启防火墙
 
 > firewall-cmd --reload
 
@@ -1027,7 +1028,7 @@ success
 
 ```
 
-##### 2.6.4 查看端口号
+#### 2.6.4 查看端口号
 
 > netstat -ntlp  #查看当前所有tcp端口·	
 >
@@ -1041,7 +1042,7 @@ success
 >
 > netstat -ntulp |grep 8083  #查看所有8083端口使用情况·
 
-#### 2.7 合并一和二的所有命令 以及安装JDK8 git 
+### 2.7 合并一和二的所有命令 以及安装JDK8 git 
 
 ``` shell
 # 安装相关基础依赖

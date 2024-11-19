@@ -1,10 +1,10 @@
-## 初识JAVA - Java特性和优势
+# 初识JAVA - Java特性和优势
 
-[[TOC]]
+[[toc]]
 
-> 说在前面的话，本文为个人学习各类视频、他人文章等多渠道后进行总结的文章，本文主要用于<b>初步了解JAVA</b>。
+> 说在前面的话，本文为个人学习[B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)后进行总结的文章，本文主要用于<b>初步了解JAVA</b>。
 
-### 【1】Java的主要特性
+## 【1】Java的主要特性
 
 - **Java 语言是简单的：**
 
@@ -50,8 +50,12 @@
 
   Java 语言的设计目标之一是适应于动态变化的环境。Java 程序需要的类能够动态地被载入到运行环境，也可以通过网络来载入所需要的类。这也有利于软件的升级。另外，Java 中的类有一个运行时刻的表示，能进行运行时刻的类型检查。
 
-### 【2】总结
+## 【2】总结
 
 **总结：一句话：java很好！**
 但是，并不是说学习了java，以后所有的东西都要用java开发了：某些领域其他语言有更出色的表现，比如，Objective C和后来的Swift在iOS设备上就有着无可取代的地位。浏览器中的处理几乎完全由JavaScript掌控。Windows程序通常都用C++或C#编写。Java在服务器端编程和跨平台客户端应用领域则很有优势。
 只能说，不同的语言之间，平分秋色！
+
+## 【3】参考资料
+
+- [B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)

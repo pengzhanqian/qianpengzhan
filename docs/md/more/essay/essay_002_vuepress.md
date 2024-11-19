@@ -1,9 +1,10 @@
-## 随笔 - vuepress2.x
-[[TOC]]
+# 随笔 - vuepress2.x
 
-### 一、Node.js 配置 (windows系统)
+[[toc]]
 
-#### 1. Node.js环境配置
+## 一、Node.js 配置 (windows系统)
+
+### 1. Node.js环境配置
 
 Node.js安装包自带了npm，但安装时不会自动给npm配置全局安装包路径的环境变量（不配的话运行js程序时可能会报找不到包的错误）。
 
@@ -21,7 +22,7 @@ Node.js安装包自带了npm，但安装时不会自动给npm配置全局安装�
 
 
 
-#### 2. npm配置
+### 2. npm配置
 
 > 文件夹创建完成之后，打开cmd窗口，输入以下命令。
 
@@ -37,26 +38,26 @@ npm config set cache "E:\Program Files\nodejs\node_cache"
 
 ![image-20240827102600606](../../../.vuepress/public/images/image-20240827102600606.png)
 
-#### 3. 配置环境变量
+### 3. 配置环境变量
 
 > 鼠标点击右键选择`属性`，在弹出的界面中依次选择`高级系统设置`、`高级`、`环境变量`打开环境变量设置界面。
 
 ![img](https://img-blog.csdnimg.cn/img_convert/a04cb403f001b2e56838942d5105fba3.png)
 
-#### 4. 相关配置
+### 4. 相关配置
 
 输入以下配置之后，点击`确定`按钮进行保存。
 
 **用户变量 path ：E:\Program Files\nodejs\node_global
  	   系统变量 NODE_PATH ：E:\Program Files\nodejs\node_global\node_modules**
 
-#### 5.配置镜像
+### 5.配置镜像
 
 ```shell
 npm config set registry https://registry.npmmirror.com
 ```
 
-### 二、彻底卸载nodejs
+## 二、彻底卸载nodejs
 
 1. **打开控制面板**：点击开始菜单，找到“控制面板”并点击打开。
 2. **选择程序和功能**：在控制面板中，选择“程序”或“程序和功能”。
@@ -69,15 +70,15 @@ npm config set registry https://registry.npmmirror.com
 5. **检查环境变量**：打开系统环境变量设置，检查并确保没有引用Nodejs或npm。
 6. **重新启动计算机**：完成上述步骤后，建议重新启动计算机以确保所有更改生效。
 
-### 三、使用npm安装pnpm以及配置
+## 三、使用npm安装pnpm以及配置
 
-#### 3.1 命令安装
+### 3.1 命令安装
 
 > 通过全局安装 pnpm
 >
 > npm install -g pnpm
 
-#### 3.2 仓库位置
+### 3.2 仓库位置
 
 | 文件夹名称                                       | 作用                                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
@@ -98,25 +99,25 @@ pnpm config set state-dir "E:\Program Files\pnpm_repo\.pnpm-state"
 pnpm config set store-dir "E:\Program Files\pnpm_repo\.pnpm-store“
 ```
 
-#### 3.4 配置镜像
+### 3.3 配置镜像
 
 ```shell
 pnpm config set registry https://registry.npmmirror.com
 ```
 
-#### 3.5 系统变量配置
+### 3.4 系统变量配置
 
 方便通过pnpm安装的bin文件可以全局运行，记得在path中添加下环境变量，位置指到`.pnpm-bin-dir`。
 
-### 四、搭建vuepress 2.0 项目
+## 四、搭建vuepress 2.0 项目
 
-#### 4.1 初始化
+### 4.1 初始化
 
 ``` shell
 pnpm init
 ```
 
-#### 4.2 将 VuePress 安装为本地依赖
+### 4.2 将 VuePress 安装为本地依赖
 
 ``` shell
 pnpm add -D vuepress@next @vuepress/client@next vue
@@ -125,7 +126,7 @@ pnpm add -D @vuepress/bundler-vite@next @vuepress/theme-default@next
 pnpm add -D sass-embedded
 ```
 
-#### 4.3 **在 package.json 中添加一些 scripts**
+### 4.3 **在 package.json 中添加一些 scripts** 
 
 在 package.json 中添加一些 scripts
 
@@ -138,7 +139,7 @@ pnpm add -D sass-embedded
 }
 ```
 
-#### 4.4 **将默认的临时目录和缓存目录添加到 .gitignore 文件中**
+### 4.4 **将默认的临时目录和缓存目录添加到 .gitignore 文件中** 
 
 ``` shell
 echo node_modules >> .gitignore
@@ -156,7 +157,7 @@ node_modules
 
 这样，项目上传到github的时候就会忽略文件夹中的node_modules目录和.temp、.cache文件。
 
-#### 4.5 **创建你的第一篇文档**
+### 4.5 **创建你的第一篇文档** 
 
 ```bash
 mkdir docs
@@ -193,15 +194,15 @@ export default defineUserConfig({
 
 
 
-#### 4.6 **在本地启动服务器来开发你的文档网站**
+### 4.6 **在本地启动服务器来开发你的文档网站** 
 
 ```bash
 pnpm docs:dev
 ```
 
-#### 4.7 补充优化
+### 4.7 补充优化 
 
-##### 4.7.1 全局查找
+#### 4.7.1 全局查找
 
 https://v2.vuepress.vuejs.org/zh/reference/plugin/docsearch.html
 
@@ -276,7 +277,6 @@ pnpm i -D vuepress-theme-sidebar
 pnpm i -D @vuepress/plugin-nprogress@next
 pnpm i -D @vuepress/plugin-photo-swipe@next
 pnpm i -D @vuepress/plugin-watermark@next
-pnpm i -D @vuepress/plugin-notice@next
 pnpm i -D @vuepress/plugin-medium-zoom@next
 pnpm i -D @vuepress/plugin-cache@next
 pnpm i -D @vuepress/plugin-register-components@next
@@ -287,7 +287,7 @@ pnpm i -D katex
 pnpm i -D @vuepress/plugin-markdown-hint@next
 ```
 
-#### 4.8 重新部署
+### 4.8 重新部署
 
 删除 node_modules lock.yaml 然后执行以下命令
 
@@ -296,6 +296,6 @@ pnpm i -D @vuepress/plugin-markdown-hint@next
 pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded
 
 # 2) 安装相关插件
-pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-notice@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next
+pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next
 ```
 

@@ -5,7 +5,6 @@ import { sitemapPlugin } from '@vuepress/plugin-sitemap'
 import { catalogPlugin } from '@vuepress/plugin-catalog'
 import { photoSwipePlugin } from '@vuepress/plugin-photo-swipe'
 import { watermarkPlugin } from '@vuepress/plugin-watermark'
-import { noticePlugin } from '@vuepress/plugin-notice'
 import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
 import { cachePlugin } from '@vuepress/plugin-cache'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
@@ -19,27 +18,27 @@ import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 export default defineUserConfig({
   base: '/qianpengzhan/',
   lang: 'zh-CN',
-  title: '知识海洋',
-  description: '知识海洋',
+  title: '学习笔记',
+  description: '记录本人技术学习的笔记和总结',
   bundler: viteBundler(),
   theme: defaultTheme({
     docsRepo: 'https://github.com/pengzhanqian/qianpengzhan',
     docsBranch: 'main',
     docsDir: 'docs',
     editLinkPattern: ':repo/edit/:branch/:path',
-    logo: '/logo.png',
+    logo: '/logo.gif',
     head: [
       // 设置 favor.ico，.vuepress/public 下
       [
         'link', { rel: 'icon', href: '/favicon.ico' }
-      ]
+      ],
     ],
     navbar: navbar,
-    sidebarDepth: 0,
+    //sidebarDepth: 0,
     sidebar: sidebar,
   }),
    // use plugins
-   plugins: [
+  plugins: [
     markdownHintPlugin({
       // 启用提示容器，默认启用
       hint: true,
@@ -61,23 +60,6 @@ export default defineUserConfig({
     }),
     mediumZoomPlugin({
       // 配置项
-    }),
-    noticePlugin({
-      config: [
-        {
-          path: '/',
-          title: 'Notice Title',
-          content: 'Notice Content',
-          actions: [
-            {
-              text: 'Primary Action',
-              link: 'https://theme-hope.vuejs.press/',
-              type: 'primary',
-            },
-            { text: 'Default Action' },
-          ],
-        }
-      ],
     }),
     watermarkPlugin({
       // options
