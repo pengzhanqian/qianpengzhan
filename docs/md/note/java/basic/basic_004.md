@@ -71,9 +71,10 @@
 ::: important 代码演示加法运算符
 
 ``` java
-// 代码演示加法运算符 +
-public class OperAdd {
-	public static void main(String[] args) {
+																									
+ // 代码演示加法运算符 +
+dex2;'public class OperAdd {
+        p;,	 NJM,blic static void main(String[] args) {
 		// 1) 表示正数
 		System.out.println(+3); // 结果为 3
 		// 2) 表示相加
@@ -231,14 +232,141 @@ public class OperDivise {
 编译执行下, 看结果是否和我们注释后的答案一致 `javac -encoding utf-8  OperDivise.java` `java OperDivise`
 
 ``` powershell
+E:\pri-workspace\java\operators>javac -encoding utf-8 OperDivise.java
 
+E:\pri-workspace\java\operators>java OperDivise
+7
+-10
+2
+
+E:\pri-workspace\java\operators>
 ```
 
 源码大家参考下，稍微看下即可，就不过多解释了
 
-
+ 	![image-20241119134026620](../../../../.vuepress/public/images/image-20241119134026620.png)
 
 :::
+
+### 【2.5】取余运算符 %
+
+1. 取余运算符 `%` 在Java中的作用?
+
+   1.  表示2个数值类型的操作数进行数学上的相除之后得到的余数
+
+   ::: warning 注意
+
+   29 / 7 = 4 ……1   这里的29叫做被除数 / 为除以 7为除数 = 等于,赋值  4为商  这里多出来的1 就是余数
+
+   :::
+
+2. 使用代码进行演示
+
+::: important  代码演示取余运算符
+
+``` java
+// 代码演示取余运算符  % 
+public class OperRemainder {
+	public static void main(String[] args) {
+		// 1) 表示2个数值类型的操作数进行数学上的相除得到的余数
+		System.out.println(57 % 8); // 结果为 1
+		System.out.println(56 % 8); // 结果为 0
+		System.out.println(57 % 8.0); // 结果为 1.0
+	}
+}
+```
+
+编译执行下, 看结果是否和我们注释后的答案一致 `javac -encoding utf-8  OperRemainder.java` `java OperRemainder`
+
+``` powershell
+E:\pri-workspace\java\operators>javac -encoding utf-8 OperRemainder.java
+
+E:\pri-workspace\java\operators>java OperRemainder
+1
+0
+1.0
+
+E:\pri-workspace\java\operators>
+```
+
+源码大家参考下，稍微看下即可，就不过多解释了
+
+![image-20241119134749637](../../../../.vuepress/public/images/image-20241119134749637.png)
+
+:::
+
+### 【2.6】自增运算符 ++
+
+1. 什么是自增运算符？
+
+::: info 自增运算符
+
+​	顾名思义，就是使用了该运算符，原变量自己增加1的操作
+
+:::
+
+2. 自增运算符的特点 
+   1. 前提： 设a为变量， `++` 为自增运算符
+   2. 无论是 a`++` 还是 `++`a，只要是自增运算符单独使用的时候， 都可以简单的理解为 a = a + 1，都是加1操作
+   3. 将`++`参与到运算中, 则看`++`在前还是在后，如果++在后：先运算，后加1   如果`++`在前，先加1，后运算
+3. 代码演示
+
+::: important 直接代码演示自增运算符 `++`
+
+``` java
+// 代码演示自增运算符  ++ 
+public class OperDoubleAdd {
+	public static void main(String[] args) {
+		int a = 5;
+		a++;//理解为：相当于  a=a+1 操作  
+		System.out.println(a);//6
+		
+		a = 5;
+		++a;//理解为：相当于  a=a+1 操作  
+		System.out.println(a); //6
+		
+		//总结：++单独使用的时候，无论放在前还是后，都是加1操作
+		
+		//将++参与到运算中：
+		//规则：看++在前还是在后，如果++在后：先运算，后加1   如果++在前，先加1，后运算
+		a = 5;
+		int m = a++ + 7;//先运算  m=a+7  再加1：  a = a+1 
+		System.out.println(m);//12
+		System.out.println(a);//6
+		
+		a = 5;
+		int n = ++a + 7;//先加1  a=a+1  再运算：  n = a+7 
+		System.out.println(n);//13
+		System.out.println(a);//6
+	}
+}
+```
+
+编译执行下, 看结果是否和我们注释后的答案一致 `javac -encoding utf-8  OperDoubleAdd.java` `java OperDoubleAdd`
+
+``` powershell
+E:\pri-workspace\java\operators>javac -encoding utf-8 OperDoubleAdd.java
+
+E:\pri-workspace\java\operators>java OperDoubleAdd
+6
+6
+12
+6
+13
+6
+
+E:\pri-workspace\java\operators>
+```
+
+源码大家参考下，稍微看下即可，就不过多解释了
+
+![image-20241119221248883](../../../../.vuepress/public/images/image-20241119221248883.png)
+
+:::
+
+### 【2.7】自减运算符–
+
+
 
 ## 【3】赋值运算符
 
