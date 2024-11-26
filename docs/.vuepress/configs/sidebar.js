@@ -52,7 +52,7 @@ export const sidebar =
                     collapsible: false
                 },
                 {
-                    text: 'JAVA基础知识 -  基础概念',
+                    text: 'JAVA基础知识 - 基础概念',
                     link: '/md/note/java/basic/basic_002.md',
                     collapsible: false
                 },
@@ -64,6 +64,11 @@ export const sidebar =
                 {
                     text: 'JAVA基础知识 - 运算符',
                     link: '/md/note/java/basic/basic_004.md',
+                    collapsible: false
+                },
+                {
+                    text: 'JAVA基础知识 - 流程控制',
+                    link: '/md/note/java/basic/basic_005.md',
                     collapsible: false
                 },
             ]
