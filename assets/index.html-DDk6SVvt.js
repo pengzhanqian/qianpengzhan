@@ -1,0 +1,1 @@
+import{_ as e,c as a,b as o,o as n,r}from"./app-CDD3teGd.js";const s={};function c(l,i){const t=r("Catalog");return n(),a("div",null,[o(t)])}const m=e(s,[["render",c],["__file","index.html.vue"]]),d=JSON.parse('{"path":"/md/note/java/first/","title":"First","lang":"zh-CN","frontmatter":{"title":"First"},"headers":[],"git":{},"filePathRelative":null}');export{m as comp,d as data};

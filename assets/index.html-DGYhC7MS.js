@@ -1,0 +1,1 @@
+import{_ as t,c as a,b as o,o as n,r as c}from"./app-CDD3teGd.js";const l={};function r(s,_){const e=c("Catalog");return n(),a("div",null,[o(e)])}const d=t(l,[["render",r],["__file","index.html.vue"]]),m=JSON.parse('{"path":"/md/","title":"Md","lang":"zh-CN","frontmatter":{"title":"Md"},"headers":[],"git":{},"filePathRelative":null}');export{d as comp,m as data};
