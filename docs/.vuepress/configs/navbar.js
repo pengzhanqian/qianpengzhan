@@ -16,7 +16,7 @@ export const navbar =
             },
             {
               text: 'JAVA基础知识',
-              link: '/md/java/basic/basic_001.md'
+              link: '/md/note/java/basic/basic_001.md'
             }
           ]
         },

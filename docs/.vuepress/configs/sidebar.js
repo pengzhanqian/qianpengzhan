@@ -89,9 +89,17 @@ export const sidebar =
     ],
     '/md/question/':[
         {
-            text: '常见问题1',
+            text: '常见问题',
             collapsible: true,
-            link: '/md/question/',
+            //link: '/md/question/',
+            collapsible: true,
+            children: [
+                {
+                    text: '【Intellj Idea】idea启动时报错java: Internal error in the mapping processor: java.lang.NullPointerException',
+                    link: '/md/question/question_001.md',
+                    collapsible: true
+                }
+            ]
         }
     ],
     '/md/more/': [
