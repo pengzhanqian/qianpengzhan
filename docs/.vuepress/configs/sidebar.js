@@ -72,6 +72,17 @@ export const sidebar =
                     collapsible: false
                 },
             ]
+        },
+        {
+            text: '深入理解JVM',
+            collapsible: true,
+            children: [
+                {
+                    text: '深入理解JVM - ',
+                    link: '/md/note/java/jvm/jvm_001.md',
+                    collapsible: false
+                }
+            ]
         }
     ],
     '/md/note/go/':[
