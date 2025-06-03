@@ -28,3 +28,5 @@ node_modules
 .vscode
 .vuepress/dist/*
 docs/.vuepress/dist/
+docs/md/.idea/
+docs/md/note/.idea/
