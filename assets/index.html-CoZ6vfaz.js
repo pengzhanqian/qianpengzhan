@@ -1,0 +1,1 @@
+import{_ as t,c as a,d as o,r as n,o as l}from"./app-CGcHY9dd.js";const r={};function c(s,i){const e=n("Catalog");return l(),a("div",null,[o(e)])}const m=t(r,[["render",c],["__file","index.html.vue"]]),d=JSON.parse('{"path":"/md/more/ali/","title":"Ali","lang":"zh-CN","frontmatter":{"title":"Ali"},"headers":[],"git":{},"filePathRelative":null}');export{m as comp,d as data};
