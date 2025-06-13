@@ -37,7 +37,13 @@ export const navbar =
     },
     {
       text: '常见问题',
-      link: '/md/question/'
+      link: '/md/question/',
+      children:[
+        {
+            text: '什么是全双工、半双工?',
+            link: '/md/question/question_002.md'
+        }
+      ]
     },
     {
       text: '更多',
