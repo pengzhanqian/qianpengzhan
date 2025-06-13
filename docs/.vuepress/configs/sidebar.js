@@ -108,7 +108,6 @@ export const sidebar =
         {
             text: '常见问题',
             collapsible: true,
-            collapsible: true,
             children: [
                 {
                     text: 'Intellj Idea 问题',
@@ -116,7 +115,7 @@ export const sidebar =
                     children:[
                         {
                             text: '【Intellj Idea】idea启动时报错java: Internal error in the mapping processor: java.lang.NullPointerException',
-                            link: '/md/question/question_idea_001.md',
+                            link: '/md/question/idea/question_idea_001.md',
                             collapsible: true
                         }
                     ]
@@ -127,7 +126,7 @@ export const sidebar =
                     children: [
                         {
                             text: '什么是全双工、半双工?',
-                            link: '/md/question/question_net_001.md',
+                            link: '/md/question/net/question_net_001.md',
                             collapsible: true
                         }
                     ]

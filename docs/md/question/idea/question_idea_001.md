@@ -14,6 +14,6 @@
 
 本地jvm增加配置：`-Djps.track.ap.dependencies=false`
 
-![image-20241203142501228](../../.vuepress/public/images/image-20241203142501228.png)
+![image-20241203142501228](../../../.vuepress/public/images/image-20241203142501228.png)
 
 :::
