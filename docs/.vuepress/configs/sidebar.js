@@ -91,9 +91,15 @@ export const sidebar =
             collapsible: true,
             children: [
                 {
-                    text: '初识GO',
-                    link: '/md/note/go/',
-                    collapsible: false
+                    text: 'GoLang 基础',
+                    link: '/md/note/go/basic/',
+                    collapsible: false,
+                    children: [
+                        {
+                            text: '第一章: 走进GoLang',
+                            link: '/md/note/go/basic/golang_001.md'
+                        }
+                    ]
                 }
             ]
         }
@@ -102,18 +108,29 @@ export const sidebar =
         {
             text: '常见问题',
             collapsible: true,
-            //link: '/md/question/',
             collapsible: true,
             children: [
                 {
-                    text: '【Intellj Idea】idea启动时报错java: Internal error in the mapping processor: java.lang.NullPointerException',
-                    link: '/md/question/question_001.md',
-                    collapsible: true
+                    text: 'Intellj Idea 问题',
+                    collapsible: true,
+                    children:[
+                        {
+                            text: '【Intellj Idea】idea启动时报错java: Internal error in the mapping processor: java.lang.NullPointerException',
+                            link: '/md/question/question_idea_001.md',
+                            collapsible: true
+                        }
+                    ]
                 },
                 {
-                    text: '什么是全双工、半双工?',
-                    link: '/md/question/question_002.md',
-                    collapsible: true
+                    text: 'Intellj Idea 问题',
+                    collapsible: true,
+                    children: [
+                        {
+                            text: '什么是全双工、半双工?',
+                            link: '/md/question/question_net_001.md',
+                            collapsible: true
+                        }
+                    ]
                 }
             ]
         }

@@ -28,8 +28,8 @@ export const navbar =
           text: '学习笔记 - GO',
           children: [
             {
-              text: '初识GO语言',
-              link: '/md/note/go/first/'
+              text: 'GoLang 基础',
+              link: '/md/note/go/basic/golang_001.md'
             }
           ]
         }
@@ -40,8 +40,12 @@ export const navbar =
       link: '/md/question/',
       children:[
         {
-            text: '什么是全双工、半双工?',
-            link: '/md/question/question_002.md'
+            text: 'intellj idea BUG',
+            link: '/md/question/idea/question_idea_001.md'
+        },
+        {
+            text: '网络相关知识',
+            link: '/md/question/net/question_net_001.md'
         }
       ]
     },
