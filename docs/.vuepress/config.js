@@ -34,7 +34,7 @@ export default defineUserConfig({
       ],
     ],
     navbar: navbar,
-    //sidebarDepth: 0,
+    //sidebarDepth: 3,
     sidebar: sidebar,
   }),
    // use plugins

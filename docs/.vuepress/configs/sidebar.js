@@ -49,27 +49,27 @@ export const sidebar =
                 {
                     text: 'JAVA基础知识 - 注释',
                     link: '/md/note/java/basic/basic_001.md',
-                    collapsible: false
+                    collapsible: true
                 },
                 {
                     text: 'JAVA基础知识 - 基础概念',
                     link: '/md/note/java/basic/basic_002.md',
-                    collapsible: false
+                    collapsible: true
                 },
                 {
                     text: 'JAVA基础知识 - 基本数据类型',
                     link: '/md/note/java/basic/basic_003.md',
-                    collapsible: false
+                    collapsible: true
                 },
                 {
                     text: 'JAVA基础知识 - 运算符',
                     link: '/md/note/java/basic/basic_004.md',
-                    collapsible: false
+                    collapsible: true
                 },
                 {
                     text: 'JAVA基础知识 - 流程控制',
                     link: '/md/note/java/basic/basic_005.md',
-                    collapsible: false
+                    collapsible: true
                 },
             ]
         },
@@ -80,26 +80,20 @@ export const sidebar =
                 {
                     text: '深入理解JVM - ',
                     link: '/md/note/java/jvm/jvm_001.md',
-                    collapsible: false
+                    collapsible: true
                 }
             ]
         }
     ],
     '/md/note/go/':[
         {
-            text: '初识GO',
+            text: 'GoLang 基础',
+            link: '/md/note/go/basic/',
             collapsible: true,
             children: [
                 {
-                    text: 'GoLang 基础',
-                    link: '/md/note/go/basic/',
-                    collapsible: false,
-                    children: [
-                        {
-                            text: '第一章: 走进GoLang',
-                            link: '/md/note/go/basic/golang_001.md'
-                        }
-                    ]
+                    text: '第一章: 走进GoLang',
+                    link: '/md/note/go/basic/golang_001.md'
                 }
             ]
         }
@@ -146,12 +140,12 @@ export const sidebar =
                         {
                             text: 'Ali CentOS 7 Minimal的镜像下载',
                             link: '/md/more/ali/ali_001.md',
-                            collapsible: false,
+                            collapsible: true,
                         },
                         {
                             text: 'Ali CentOS 7 Minimal 新手教程引导',
                             link: '/md/more/ali/ali_002.md',
-                            collapsible: false
+                            collapsible: true
                         }
                     ]
                 },
@@ -162,22 +156,22 @@ export const sidebar =
                         {
                             text: '随笔 - Linux命令',
                             link: '/md/more/essay/essay_001_linux_command.md',
-                            collapsible: false
+                            collapsible: true
                         },
                         {
                             text: '随笔 - vuepress2.x',
                             link: '/md/more/essay/essay_002_vuepress.md',
-                            collapsible: false
+                            collapsible: true
                         },
                         {
                             text: '随笔 - 常用DOS命令',
                             link: '/md/more/essay/essay_003_dos_command.md',
-                            collapsible: false
+                            collapsible: true
                         },
                         {
                             text: '随笔 - windows下安装NodePad++',
                             link: '/md/more/essay/essay_004_nodepad.md',
-                            collapsible: false
+                            collapsible: true
                         }
                     ]
                 },
@@ -188,21 +182,21 @@ export const sidebar =
                         {
                             text: 'Window OS系统下Markdown转word的设置',
                             link: '/md/more/real-operation/ro_001.md',
-                            collapsible: false
+                            collapsible: true
                         },
                         {
                             text: 'Windows系统下Vmware Workstation中安装及使用CentOS7系统超详细图文教程',
                             link: '/md/more/real-operation/ro_002.md',
-                            collapsible: false
+                            collapsible: true
                         },
                         {
                             text: 'Windows11系统下彻底卸载Vmware Workstation虚拟机超详细图文教程',
                             link: '/md/more/real-operation/ro_003.md',
-                            collapsible: false
+                            collapsible: true
                         }
                     ]
                 },
             ]
         },
     ]
-}  
+}
