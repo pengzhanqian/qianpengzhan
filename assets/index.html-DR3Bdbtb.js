@@ -1,0 +1,1 @@
+import{_ as t,c as a,d as o,r as n,o as s}from"./app-BOR0QVR-.js";const r={};function c(l,_){const e=n("Catalog");return s(),a("div",null,[o(e)])}const m=t(r,[["render",c],["__file","index.html.vue"]]),d=JSON.parse('{"path":"/md/more/essay/","title":"Essay","lang":"zh-CN","frontmatter":{"title":"Essay"},"headers":[],"git":{},"filePathRelative":null}');export{m as comp,d as data};
