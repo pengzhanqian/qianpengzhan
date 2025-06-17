@@ -32,6 +32,15 @@ export const navbar =
               link: '/md/note/go/basic/golang_001.md'
             }
           ]
+        },
+        {
+          text: '学习笔记 - 响应式编程',
+          children: [
+            {
+              text: '第一章: 走进响应式',
+              link: '/md/note/reactive/reactive_001.md'
+            }
+          ]
         }
       ]
     },

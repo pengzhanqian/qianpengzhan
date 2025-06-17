@@ -98,6 +98,18 @@ export const sidebar =
             ]
         }
     ],
+    '/md/note/reactive/':[
+        {
+            text: '响应式编程',
+            link: '/md/note/reactive/',
+            children: [
+                {
+                    text: '第一章: 走进响应式',
+                    link: '/md/note/reactive/reactive_001.md'
+                }
+            ]
+        }
+    ],
     '/md/question/':[
         {
             text: '常见问题',
