@@ -1,0 +1,1 @@
+import{_ as t,c as n,d as o,r as a,o as c}from"./app-BztdNnDG.js";const l={};function r(s,_){const e=a("Catalog");return c(),n("div",null,[o(e)])}const m=t(l,[["render",r],["__file","index.html.vue"]]),d=JSON.parse('{"path":"/md/question/net/","title":"Net","lang":"zh-CN","frontmatter":{"title":"Net"},"headers":[],"git":{},"filePathRelative":null}');export{m as comp,d as data};
