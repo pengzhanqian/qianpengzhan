@@ -104,7 +104,7 @@ export const sidebar =
             link: '/md/note/reactive/',
             children: [
                 {
-                    text: '第一章: 走进响应式',
+                    text: '第一章: 走进响应式编程',
                     link: '/md/note/reactive/reactive_001.md'
                 }
             ]
