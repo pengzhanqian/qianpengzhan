@@ -1,0 +1,1 @@
+import{_ as e,c as a,d as o,r as n,o as c}from"./app-DpxfF-pv.js";const r={};function l(s,_){const t=n("Catalog");return c(),a("div",null,[o(t)])}const m=e(r,[["render",l]]),p=JSON.parse('{"path":"/md/note/java/","title":"Java","lang":"zh-CN","frontmatter":{"title":"Java"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

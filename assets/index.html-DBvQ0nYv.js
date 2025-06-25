@@ -1,0 +1,1 @@
+import{_ as e,c as o,d as a,r as n,o as l}from"./app-DpxfF-pv.js";const c={};function r(s,i){const t=n("Catalog");return l(),o("div",null,[a(t)])}const m=e(c,[["render",r]]),p=JSON.parse('{"path":"/md/more/ali/","title":"Ali","lang":"zh-CN","frontmatter":{"title":"Ali"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

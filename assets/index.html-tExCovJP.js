@@ -1,0 +1,1 @@
+import{_ as e,c as a,d as o,r as n,o as c}from"./app-DpxfF-pv.js";const s={};function r(l,i){const t=n("Catalog");return c(),a("div",null,[o(t)])}const m=e(s,[["render",r]]),p=JSON.parse('{"path":"/md/note/go/basic/","title":"Basic","lang":"zh-CN","frontmatter":{"title":"Basic"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

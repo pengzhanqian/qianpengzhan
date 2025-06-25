@@ -1,0 +1,1 @@
+import{_ as t,c as a,d as o,r as n,o as c}from"./app-DpxfF-pv.js";const r={};function l(s,i){const e=n("Catalog");return c(),a("div",null,[o(e)])}const m=t(r,[["render",l]]),p=JSON.parse('{"path":"/md/note/reactive/","title":"Reactive","lang":"zh-CN","frontmatter":{"title":"Reactive"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

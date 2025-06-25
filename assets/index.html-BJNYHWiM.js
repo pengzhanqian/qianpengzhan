@@ -1,0 +1,1 @@
+import{_ as e,c as o,d as a,r as n,o as c}from"./app-DpxfF-pv.js";const r={};function l(s,_){const t=n("Catalog");return c(),o("div",null,[a(t)])}const m=e(r,[["render",l]]),p=JSON.parse('{"path":"/md/note/go/","title":"Go","lang":"zh-CN","frontmatter":{"title":"Go"},"git":{},"filePathRelative":null}');export{m as comp,p as data};
