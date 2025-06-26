@@ -102,10 +102,17 @@ export const sidebar =
         {
             text: '响应式编程',
             link: '/md/note/reactive/',
+            collapsible: true,
             children: [
                 {
                     text: '第一章: 走进响应式编程',
-                    link: '/md/note/reactive/reactive_001.md'
+                    link: '/md/note/reactive/reactive_001.md',
+                    collapsible: true
+                },
+                {
+                    text: '第二章: 前置基础学习',
+                    link: '/md/note/reactive/reactive_002.md',
+                    collapsible: true
                 }
             ]
         }
