@@ -30,3 +30,4 @@ node_modules
 docs/.vuepress/dist/
 docs/md/.idea/
 docs/md/note/.idea/
+dist/
