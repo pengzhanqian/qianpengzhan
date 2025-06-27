@@ -283,6 +283,11 @@ pnpm i -D @vuepress/plugin-markdown-math@next
 pnpm i -D mathjax-full
 pnpm i -D katex
 pnpm i -D @vuepress/plugin-markdown-hint@next
+pnpm add -D @vuepress/plugin-markdown-chart@next
+pnpm add -D chart.js
+pnpm add -D echarts
+pnpm add -D flowchart.ts
+pnpm add -D markmap-lib markmap-toolbar markmap-view
 ```
 
 ### 4.8 重新部署
@@ -291,7 +296,7 @@ pnpm i -D @vuepress/plugin-markdown-hint@next
 
 ``` shell
 # 1) 安装打包工具和主题
-pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded
+pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded @vuepress/plugin-markdown-chart@next chart.js echarts flowchart.ts markmap-lib markmap-toolbar markmap-view
 
 # 2) 安装相关插件
 pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next

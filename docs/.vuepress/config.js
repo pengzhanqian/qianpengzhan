@@ -14,9 +14,11 @@ import { sidebar } from './configs/sidebar.js'
 import { navbar } from './configs/navbar.js'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
+import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
+  dest: './dist',
   lang: 'zh-CN',
   title: '学习笔记',
   description: '记录本人技术学习的笔记和总结',
@@ -34,11 +36,24 @@ export default defineUserConfig({
       ],
     ],
     navbar: navbar,
-    //sidebarDepth: 3,
     sidebar: sidebar,
   }),
    // use plugins
   plugins: [
+    markdownChartPlugin({
+      // 启用 Chart.js
+      chartjs: true,
+      // 启用 ECharts
+      echarts: true,
+      // 启用 Flowchart.js
+      flowchart: true,
+      // 启用 Markmap
+      markmap: true,
+      // 启用 Mermaid
+      mermaid: true,
+      // 启用 PlantUML
+      plantuml: true,
+    }),
     markdownHintPlugin({
       // 启用提示容器，默认启用
       hint: true,

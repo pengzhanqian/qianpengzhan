@@ -116,7 +116,7 @@
 
 ### 1.4  **基于 Spring Boot 的响应式微服务架构**‌
 
-![image-20250626134543421](../../../../../../../../github/qianpengzhan/docs/.vuepress/public/images/image-20250626134543421.png)
+![image-20250626134543421](../../../.vuepress/public/images/image-20250626134543421.png)
 
 > 从图中我们可以看到，我们以前使用的`SpringMVC`架构，即右边的`Servlet Stack`,`Servlet 堆栈`，它是**阻塞IO架构** ,`One-Request-Per-Thread`模型。
 
