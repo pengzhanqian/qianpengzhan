@@ -220,6 +220,20 @@ interface ValidFunctionalInterface {
 | 静态方法（static）  | ✅        | `static void check()`    |
 | Object类公共方法    | ✅        | `boolean equals(Object)` |
 
+### 3.3 为什么需要函数式接口?
+
+> - **为了支持Lambda表达式** ：Lambda 的本质就是函数式表达式的实例。
+
+``` java 
+public class FunctionalInterfaceLearn {
+    public static void main(String[] args) {
+        // 函数式接口的实例就是 lambda 表达式
+        ValidFunctionalInterface v1 = name -> System.out.println("Hello " + name);
+        v1.printName("Peety");
+    }
+}
+```
+
 
 
 ## 【X】参考资料
