@@ -6,7 +6,7 @@
 
 ## 【1】前置基础学习图
 
-![image-20250626144450437](../../../.vuepress/public/images/image-20250626144450437.png)
+![image-20250630102311514](../../../.vuepress/public/images/image-20250630102311514.png)
 
 ## 【2】 Lambda 表达式
 
@@ -233,6 +233,377 @@ public class FunctionalInterfaceLearn {
     }
 }
 ```
+
+### 3.4 函数式接口的注意事项
+
+1. ‌<b>`Object` 类的方法不算抽象方法</b>：
+
+   ```java
+   @FunctionalInterface
+   interface ValidInterface {
+       void execute();
+       String toString();  // Object 的方法，不计入抽象方法
+       boolean equals(Object obj);  // 同样不计入
+   }
+   ```
+
+2. ‌**默认方法不破坏函数式接口**‌：
+
+   ```java
+   @FunctionalInterface
+   interface Calculator {
+       int calculate(int a, int b);  // 抽象方法
+       
+       default void log() {  // 默认方法，允许存在
+           System.out.println("Calculating...");
+       }
+   }
+   ```
+
+### 3.5 Lambda 表达式的简单使用
+
+#### 3.5.1 替代匿名内部类
+
+``` java
+package com.learn.stream.api.lambda;
+
+/**
+ * Lambda 使用场景
+ *
+ * @author qianpengzhan
+ * @since 2025/6/30 9:53
+ */
+public class LambdaUseScene {
+
+    public static void main(String[] args) {
+        // 1. 替代匿名实现类
+        // 传统runnable 匿名类处理
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("run1");
+            }
+        };
+        r1.run();
+
+        // lambda表达式
+        Runnable r2 = () -> System.out.println("run2");
+        r2.run();
+    }
+}
+```
+
+#### 3.5.2 集合操作 (使用Stream API)
+
+::: important Stream  API 有哪些接口?
+
+在 `java.util.function` 包中提供了常用函数式接口： **(后续详细学习)** 
+
+| 接口             | 抽象方法            | 作用         | Lambda 示例                       |
+| ---------------- | ------------------- | ------------ | --------------------------------- |
+| `Supplier<T>`    | `T get()`           | 无参返回结果 | `() -> "Hello"`                   |
+| `Consumer<T>`    | `void accept(T t)`  | 消费一个参数 | `s -> System.out.println(s)`      |
+| `Function<T, R>` | `R apply(T t)`      | 转换参数类型 | `s -> s.length()`                 |
+| `Predicate<T>`   | `boolean test(T t)` | 条件判断     | `s -> s.isEmpty()`                |
+| `Runnable`       | `void run()`        | 无参无返回值 | `() -> System.out.println("Run")` |
+
+:::
+
+``` java
+package com.learn.stream.api.lambda;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Lambda 使用场景
+ *
+ * @author qianpengzhan
+ * @since 2025/6/30 9:53
+ */
+public class LambdaUseScene {
+
+    public static void main(String[] args) {
+        // ... 省略1
+
+        // 2. 操作集合
+        // 以前我们都是直接 for询环遍历集合
+        List<String> list1 = Arrays.asList("a", "b", "c");
+        for (String s : list1) {
+            System.out.println(s);
+        }
+        // 现在使用lambda 表达式
+        list1.forEach(System.out::println);					// Consumer 函数式接口
+        list1.stream()
+                .filter(s -> s.startsWith("a"))      		// Predicate 函数式接口
+                .map(String::toUpperCase)                   // Function 函数式接口
+                .forEach(System.out::println);              // Consumer 函数式接口
+    }
+}
+
+```
+
+### 3.6 Lambda表达式和函数式接口总结
+
+> 函数式接口的核心是 ‌<b>“一个抽象方法”</b>，它是 Java 函数式编程的基石。通过 Lambda 表达式和方法引用，可以简洁地实现接口，使代码更紧凑、可读性更强，尤其适用于回调、事件处理和集合操作等场景。
+
+## 【4】Function 函数式接口
+
+### 4.1 概念
+
+> - 引子
+>
+>   Function 是 Java8 引入的核心函数式接口之一，属于顶层函数式接口，位于 `java.util.function` 包中, 主要用于表示 <b>"接受1个参数并返回一个结果参数"</b> 的函数式操作。
+
+::: info Function 函数式接口的基本概念
+
+> Function 接口是一个泛型接口, 通过源码，可以看到其定义如下:
+>
+> ```java
+> package java.util.function;
+> import java.util.Objects;
+> @FunctionalInterface
+> public interface Function<T, R> {
+>     /**
+>      * 输入1个参数, 返回1个结果参数
+>      */
+>     R apply(T t);
+>     default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+>         Objects.requireNonNull(before);
+>         return (V v) -> apply(before.apply(v));
+>     }
+>     default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+>         Objects.requireNonNull(after);
+>         return (T t) -> after.apply(apply(t));
+>     }
+>     static <T> Function<T, T> identity() {
+>         return t -> t;
+>     }
+> }
+> ```
+
+> 可以发现，它是一个函数式接口，包含一个抽象方法 `apply(T t)`，接受类型为 T 的参数，返回类型为 R 的结果‌，然后包含`compose`、`andThen`、`identity` 3个默认方法。
+
+:::
+
+### 4.2 主要方法介绍
+
+> <b>apply(T t)</b> ：核心方法，应用函数到给定参数
+>
+> <b>compose(Function before)</b>‌：先执行 before 函数，再执行当前函数
+>
+> <b>andThen(Function after)</b>‌：先执行当前函数，再执行 after 函数
+>
+> <b>identity()</b>：静态方法，返回一个总是返回其输入参数的函数
+
+### 4.3 核心特性
+
+> <b>类型转换</b>：Function 的核心作用是将一种数据类型<b>转换</b>为另一种数据类型‌
+>
+> ‌<b>Lambda 支持</b>：可以通过 Lambda 表达式简洁地实现 Function 接口
+>
+> ‌<b>方法引用</b>：支持通过方法引用来创建 Function 实例
+>
+> ‌<b>链式操作</b>：提供 `andThen` 和 `compose` 方法支持函数组合
+
+### 4.4 基础用法
+
+> - 类型转换
+> - 进制转换
+
+``` java
+package com.learn.stream.api.function;
+
+import java.util.function.Function;
+
+/**
+ * Function 函数式接口 学习和详细用法
+ *
+ * @author qianpengzhan
+ * @since 2025/6/30 10:29
+ */
+public class FunctionLearn {
+    public static void main(String[] args) {
+        // Function最最核心的特性就是参数T转换为参数R
+        // 那么它的第一个应用就是类型转换
+        // 1. 字符串类型转为整型  lambda 表达式替代匿名实现类 去实例化 Function
+        Function<String, Integer> f1 = s -> Integer.parseInt(s);
+        System.out.println(f1.apply("123"));
+        // 其简化写法 :: 即调用某个类的某个方法 下面就是 调用Integer这个类的parseInt方法 作为Function的实例化对象
+        Function<String, Integer> f2 = Integer::parseInt;
+        System.out.println(f2.apply("123"));
+
+        // 2.进制转换 意思就是 f2 字符串先转为整型 然后整型再转为16进制字符串
+        Function<String, String> f3 = f2.andThen(Integer::toHexString);
+        System.out.println(f3.apply("123"));
+    }
+}
+
+// 执行后的结果:
+123
+123
+7b  ----> 123的16进制
+```
+
+### 4.5 复杂用法 
+
+> Function的 复杂用户其实就是  和 Stream API 相结合使用 ，这里简单写一个例子，后面学习 Stream API 的用法时可以详细介绍。
+
+``` java
+package com.learn.stream.api.function;
+
+import java.util.List;
+import java.util.function.Function;
+
+/**
+ * Function 函数式接口 学习和详细用法
+ *
+ * @author qianpengzhan
+ * @since 2025/6/30 10:29
+ */
+public class FunctionLearn {
+    public static void main(String[] args) {
+        // Function最最核心的特性就是参数T转换为参数R
+        // 。。。。
+
+        // 3.和Stream API 相结合使用
+        var names = List.of("Tom", "Petty", "Jerry", "James");
+        List<String> list = names.stream()
+                .map(String::toUpperCase)  // 这里就是使用 Function<String,String> f = String::toUpperCase  字符串转大写
+                .toList();
+        System.out.println(list);
+    }
+}
+// 执行结果： [TOM, PETTY, JERRY, JAMES]
+```
+
+### 4.5 Function 类使用的注意事项
+
+> 1. ‌**空值处理**‌：Function不自动处理null，需要显式检查
+> 2. ‌**异常处理**‌：apply方法抛出的异常需要捕获或声明
+> 3. ‌**性能考虑**‌：复杂函数可能影响性能，特别是链式调用时
+> 4. ‌**线程安全**‌：无状态的Function实例是线程安全的
+>
+> Function接口是Java函数式编程的重要基础，合理使用可以大幅简化代码并提高可读性‌
+
+### 4.6 Java内置 Function
+
+> 查询 `java.util.function` 包, 我们可以发现有很多的接口，如下图：
+
+![image-20250630131439194](../../../.vuepress/public/images/image-20250630131439194.png)
+
+![image-20250630131452531](../../../.vuepress/public/images/image-20250630131452531.png)
+
+> 以上的接口，我们可以按照入参和出参进行分类。
+
+#### 4.6.1 无入参无出参
+
+> 这种只有1个 Runnable  r = () -> {};
+
+``` java
+// 1. 无入参 无出参 调用 run()  运行方法  我们把他称之为 普通函数
+Runnable runnable = () -> {
+    System.out.println("this is 无入参 无出参的 函数式接口, 即 普通函数式接口");
+};
+runnable.run();
+```
+
+> 我们把这种称之为 **"普通函数"** 
+
+#### 4.6.2 无入参有出参
+
+``` java
+// 2. 有入参 无出参  使用 Consumer 调用 accept() 接收 我们把它称之为 消费者函数
+BiConsumer<String, String> biConsumer = (str, str2) -> {
+    System.out.println("您的姓名: " + str + ", \r\n 您的性别: " + str2);
+};
+biConsumer.accept("张三", "男");
+```
+
+> 我们把这种称之为 **"消费者函数"** 
+
+#### 4.6.3 有入参无出参
+
+``` java
+// 3.无入参  有出参 使用 Supplier 调用 get() 获取 我们把它称之为 提供者函数
+Supplier<Integer> supplier = () -> {
+    return 1;
+};
+Integer i = supplier.get();
+System.out.println(i);
+```
+
+我们把这种称之为 **"提供(生产)者函数"**  
+
+####  4.6.4 有入参有出参
+
+``` java
+// 4.有入参 有出参 使用 Function 调用 apply() 应用 我们把它称之为 多功能函数
+ToDoubleBiFunction<Double, Double> toDoubleBiFunction = Double::sum;
+System.out.println(toDoubleBiFunction.applyAsDouble(1D, 2D));
+```
+
+我们把这种称之为 **"多功能函数"**  
+
+#### 4.6.5 条件判断
+
+```java
+// 5.条件判断 就是输入1个值  判断这个值 在这个函数中是否为true
+Predicate<Integer> predicate = x -> x > 3;
+System.out.println(predicate.test(1));  // false
+```
+
+> 我们把这种称之为 **"流程控制函数"**  
+
+#### 4.6.6 源码
+
+```java
+package com.learn.stream.api.function;
+
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
+
+/**
+ * Java 内置 function 学习
+ *
+ * @author qianpengzhan
+ * @since 2025/6/30 13:18
+ */
+public class InnerFunctionLearn {
+    public static void main(String[] args) {
+        // 1. 无入参 无出参 调用 run()  运行方法  我们把他称之为 普通函数
+        Runnable runnable = () -> {
+            System.out.println("this is 无入参 无出参的 函数式接口, 即 普通函数式接口");
+        };
+        runnable.run();
+
+        // 2. 有入参 无出参  使用 Consumer 调用 accept() 接收 我们把它称之为 消费者函数
+        BiConsumer<String, String> biConsumer = (str, str2) -> {
+            System.out.println("您的姓名: " + str + ", \r\n 您的性别: " + str2);
+        };
+        biConsumer.accept("张三", "男");
+
+        // 3.无入参  有出参 使用 Supplier 调用 get() 获取 我们把它称之为 提供者函数
+        Supplier<Integer> supplier = () -> {
+            return 1;
+        };
+        Integer i = supplier.get();
+        System.out.println(i);
+
+        // 4.有入参 有出参 使用 Function 调用 apply() 应用 我们把它称之为 多功能函数
+        ToDoubleBiFunction<Double, Double> toDoubleBiFunction = Double::sum;
+        System.out.println(toDoubleBiFunction.applyAsDouble(1D, 2D));
+
+        // 5.条件判断 就是输入1个值  判断这个值 在这个函数中是否为true
+        Predicate<Integer> predicate = x -> x > 3;
+        System.out.println(predicate.test(1));  // false
+    }
+}
+```
+
+## 【5】Stream API 
 
 
 
