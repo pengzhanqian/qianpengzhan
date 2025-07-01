@@ -113,6 +113,11 @@ export const sidebar =
                     text: '第二章: 前置基础学习',
                     link: '/md/note/reactive/reactive_002.md',
                     collapsible: true
+                },
+                {
+                    text: '第三章: Reactive Stream 规范和 Reactor框架',
+                    link: '/md/note/reactive/reactive_003.md',
+                    collapsible: true
                 }
             ]
         }

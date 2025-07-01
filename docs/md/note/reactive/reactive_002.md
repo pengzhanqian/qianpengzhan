@@ -347,7 +347,7 @@ public class LambdaUseScene {
 
 > 函数式接口的核心是 ‌<b>“一个抽象方法”</b>，它是 Java 函数式编程的基石。通过 Lambda 表达式和方法引用，可以简洁地实现接口，使代码更紧凑、可读性更强，尤其适用于回调、事件处理和集合操作等场景。
 
-## 【4】Function 函数式接口
+## 【4】Function 接口
 
 ### 4.1 概念
 
@@ -605,9 +605,200 @@ public class InnerFunctionLearn {
 
 ## 【5】Stream API 
 
+### 5.1 定义
+
+::: info 什么是Stream?
+
+> Stream 是 Java8 引入的<b>声明式数据流处理器</b>， 基于函数式编程，支持对集合、数组、i/O 等数据源的链式操作，不存粗数据而是通过流水线计算生成结果。
+
+:::
+
+### 5.2 核心特性
+
+| **特性**‌     | ‌**说明**‌                                                     |
+| ------------ | ------------------------------------------------------------ |
+| ‌**惰性求值**‌ | 中间操作（如 `filter`）延迟执行，终端操作（如 `collect`）触发计算‌。 |
+| ‌**并行处理**‌ | `parallelStream()` 利用 `ForkJoinPool` 实现多核加速‌。        |
+| ‌**不可复用**‌ | 流只能被消费一次，终端操作后自动关闭‌。                       |
+
+### 5.3 核心 Stream API 接口 
+
+#### 5.3.1. 创建流
+
+> **顺序流**‌：`stream()`
+>  ▸ 单线程顺序处理数据。
+>
+> ‌**并行流**‌：`parallelStream()`
+>  ▸ 自动拆分任务，利用多核加速（底层使用Fork/Join框架）。‌
+
+| ‌**方法**‌      | ‌**示例**‌                             | ‌**场景**‌                       |
+| ------------- | ------------------------------------ | ------------------------------ |
+| 集合创建      | `list.stream()`                      | 集合数据处理‌13                 |
+| 数组创建      | `Arrays.stream(new int[]{1,2,3})`    | 数组转换‌23                     |
+| 文件 I/O 创建 | `Files.lines(Paths.get("data.txt"))` | 大文件流式处理（需关闭资源）‌13 |
+| 生成器创建    | `Stream.iterate(0, n -> n+1)`        | 无限序列（需 `limit` 截断）‌23  |
+
+#### ‌5.3.2. 中间操作（Intermediate Operations）
+
+> **无状态操作**‌：`filter()`（过滤）、`map()`（转换）、`flatMap()`（扁平化）、`peek()`（调试输出）
+>  ▸ 每个元素独立处理，不依赖其他元素。‌
+>
+> ‌**有状态操作**‌：`distinct()`（去重）、`sorted()`（排序）、`limit()`/`skip()`（截取）
+>  ▸ 需缓存或比较元素状态。‌
+
+| ‌**操作**‌            | ‌**作用**‌               | ‌**示例**‌                               |
+| ------------------- | ---------------------- | -------------------------------------- |
+| `filter(Predicate)` | 条件过滤               | `.filter(s -> s.length() > 3)`         |
+| `map(Function)`     | 元素转换               | `.map(String::toUpperCase)`            |
+| `flatMap(Function)` | 扁平化嵌套流           | `.flatMap(list -> list.stream())`      |
+| `distinct()`        | 去重                   | `.distinct()`                          |
+| `sorted()`          | 排序（可自定义比较器） | `.sorted(Comparator.reverseOrder())`‌12 |
+
+#### 5.3‌.3. 终端操作（Terminal Operations）
+
+> **非短路操作**‌：`collect()`（聚合）、`forEach()`（遍历）、`count()`（计数）、`toArray()`（转数组）
+>  ▸ 处理所有元素。‌
+>
+> ‌**短路操作**‌：`anyMatch()`/`allMatch()`（条件匹配）、`findFirst()`/`findAny()`（查找）
+>  ▸ 遇到满足条件元素即终止。‌
+
+| ‌**操作**‌              | ‌**作用**‌                 | ‌**示例**‌                                |
+| --------------------- | ------------------------ | --------------------------------------- |
+| `collect(Collector)`  | 聚合结果（如转List/Map） | `.collect(Collectors.toList())`         |
+| `forEach(Consumer)`   | 遍历消费                 | `.forEach(System.out::println)`         |
+| `reduce()`            | 归约计算（如求和）       | `.reduce(0, (a, b) -> a + b)`           |
+| `anyMatch(Predicate)` | 短路匹配（存在即返回）   | `.anyMatch(s -> s.contains("error"))`‌24 |
+
+### 5.4 Stream API的操作图解
+
+```mermaid
+flowchart LR
+    A[数据源] --> B[Spliterator]
+    B --> C[中间操作链]
+    C --> D[终端操作]
+    D --> E[结果]
+
+    subgraph 操作链节点
+        C1(Head: 数据源) --> C2(StatelessOp: filter/map)
+        C2 --> C3(StatefulOp: sorted/distinct)
+        C3 --> C4(...)
+    end
+
+```
 
 
-## 【X】参考资料
+
+```mermaid
+flowchart LR
+    A[数据源] --> B[创建流]
+    B --> C[中间操作链]
+    C --> D[终端操作]
+    D --> E[结果]
+
+    subgraph 中间操作
+        C1(filter) --> C2(map) --> C3(sorted) --> C4(...)
+    end
+```
+
+### 5.5 基础用法
+
+#### 5.5.1 场景1： 集合的过滤和转换
+
+``` java
+package com.learn.stream.api;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * 学习Stream API
+ *
+ * @author qianpengzhan
+ * @since 2025/7/1 13:11
+ */
+public class StreamApiLearn {
+    public static void main(String[] args) {
+        // 场景1: 集合的过滤和转换
+        // 人名集合如下：
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+        // 现在需要找出人名长度大于4的并转换为大写输出
+        List<String> result = names.stream()
+                .filter(name -> name.length() > 4)  // 过滤长度>4
+                .map(String::toUpperCase) // 转换为大写
+                .toList();// 收集为list
+        System.out.println(result);
+        // [ALICE, CHARLIE, DAVID]
+    }
+}
+```
+
+#### 5.5.2 数值归约计算
+
+```java
+package com.learn.stream.api;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
+/**
+ * 学习Stream API
+ *
+ * @author qianpengzhan
+ * @since 2025/7/1 13:11
+ */
+public class StreamApiLearn {
+    public static void main(String[] args) {
+        // 场景二： 数值归约计算
+        IntStream range = IntStream.range(1, 11);  //生成1~10
+        int sum = range.reduce(0, Integer::sum);// 累计求和
+        System.out.println(sum);
+        //  55
+    }
+}
+```
+
+### 5.6 复杂进阶用法
+
+> - 分组和分区玩法
+> - 并行流用法
+
+```java
+package com.learn.stream.api;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+/**
+ * 学习Stream API
+ *
+ * @author qianpengzhan
+ * @since 2025/7/1 13:11
+ */
+public class StreamApiLearn {
+    public static void main(String[] args) throws IOException {
+        // 场景1: 分组和分区收集
+        Map<Integer, List<String>> collect = names.stream()
+                .collect(Collectors.groupingBy(String::length));
+        System.out.println(collect);
+        // {3=[Bob], 5=[Alice, David], 7=[Charlie]}
+
+        // 场景2: 并行流
+        long count = Files.lines(Paths.get("largefile.log"))
+                .parallel()                 // 启用并行
+                .filter(line -> line.contains("ERROR"))
+                .count();
+    }
+}
+```
+
+## 【6】参考资料
 
 - [SpringBoot3响应式编程精讲](https://www.bilibili.com/video/BV1gsYEeLEuM?spm_id_from=333.788.videopod.episodes&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)
 
