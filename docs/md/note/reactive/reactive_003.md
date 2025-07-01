@@ -1,4 +1,4 @@
-# 第三章: Reactive Stream 规范和 Reactor框架
+# 第三章: Reactive Stream 规范
 
 
 
@@ -8,7 +8,7 @@
 
 ## 【1】本章学习图解
 
-![image-20250701143722446](../../../.vuepress/public/images/image-20250701143722446.png)
+![image-20250701151854474](../../../.vuepress/public/images/image-20250701151854474.png)
 
 ## 【2】Reactive Stream 规范
 
