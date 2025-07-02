@@ -126,7 +126,7 @@
 
 ## 【2】 响应式编程学习路线图
 
-![响应式编程学习](../../../../../../../7.all-umls/png-images/响应式编程学习.png)
+![reactive-programming-learn](../../../.vuepress/public/images/reactive-programming-learn.png)
 
 ## 【3】参考资料
 
