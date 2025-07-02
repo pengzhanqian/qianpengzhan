@@ -118,6 +118,11 @@ export const sidebar =
                     text: '第三章: Reactive Streams 规范',
                     link: '/md/note/reactive/reactive_003.md',
                     collapsible: true
+                },
+                {
+                    text: '第四章: Reactor 框架',
+                    link: '/md/note/reactive/reactive_004.md',
+                    collapsible: true
                 }
             ]
         }
