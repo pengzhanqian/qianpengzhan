@@ -45,26 +45,34 @@
 
 ``` xml
   <!--    引入project reactor 的jar     -->
-    <dependency>
-        <groupId>io.projectreactor</groupId>
-        <artifactId>reactor-bom</artifactId>
-        <version>2024.0.7</version>
-        <type>pom</type>
-        <scope>import</scope>
-    </dependency>
+<dependencyManagement> 
+    <dependencies>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-bom</artifactId>
+            <version>2024.0.6</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
 @tab 再在子pom.xml中引入使用的jar
 
 ```xml
+<dependencies>
     <dependency>
         <groupId>io.projectreactor</groupId>
-        <artifactId>reactor-core</artifactId>
+        <artifactId>reactor-core</artifactId> 
+        
     </dependency>
     <dependency>
         <groupId>io.projectreactor</groupId>
-        <artifactId>reactor-test</artifactId>
+        <artifactId>reactor-test</artifactId> 
+        <scope>test</scope>
     </dependency>
+</dependencies>
 ```
 
 :::
