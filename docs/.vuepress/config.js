@@ -18,6 +18,7 @@ import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
+  dest: './vuepress/dist',
   lang: 'zh-CN',
   title: '学习笔记',
   description: '记录本人技术学习的笔记和总结',
