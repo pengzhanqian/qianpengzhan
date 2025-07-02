@@ -115,7 +115,7 @@ export const sidebar =
                     collapsible: true
                 },
                 {
-                    text: '第三章: Reactive Stream 规范',
+                    text: '第三章: Reactive Streams 规范',
                     link: '/md/note/reactive/reactive_003.md',
                     collapsible: true
                 }
