@@ -59,6 +59,11 @@
 >
 > - ‌**I/O 与计算分离**‌：通过 `publishOn` 切换消费者线程，`subscribeOn` 控制生产者线程，避免阻塞‌56。
 > - ‌**事件循环模型**‌：基于 Netty 等框架，单线程处理多连接，提升高并发吞吐量（如 WebFlux 在 Netty 的实践）‌
+>
+> **3.正压和背压** 
+>
+> - 正压：生产者给消费者压力
+> - 背压：生产者给缓存区压力，消费者根据自己的能力慢慢
 
 :::
 
@@ -248,8 +253,12 @@ Subscriber -->|处理完成后 request m| Subscription
   - <b>实现即时响应（Responsive）</b>
   - <b>回弹性（Resilient）</b>
   - <b>消息驱动（Message-Driven）‌</b>
+    - 反应式系统依赖异步的消息传递
 
 ### 3. 主流框架之`Reactor`（Spring 生态首选）
+
+- <b>我们主要学习这个框架</b>
+
 - <b>核心类型</b>：`Mono`（0/1元素流）、`Flux`（0-N元素流）。
 - <b>关键特性</b>：
    - 深度集成 Spring 生态（如 `WebFlux`、`Spring Data Reactive`）。
@@ -329,7 +338,336 @@ Subscriber -->|处理完成后 request m| Subscription
 ## 【12】Reactive Strems 学习代码
 
 ``` java
+package com.learn.reactive.stream.flow;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Flow;
+import java.util.concurrent.SubmissionPublisher;
+
+/**
+ * @author qianpengzhan
+ * @since 2025/7/2 11:08
+ */
+public class ReactiveStreamLearn {
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("主线程开始...");
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+        // 1.定义1个发布者 发布数据流
+//        Flow.Publisher<String> publisher = new Flow.Publisher<String>() {
+//            public Flow.Subscriber<? super String> subscriber;
+//
+//            // 订阅者订阅发布者的接口 需要保存下订阅者
+//            @Override
+//            public void subscribe(Flow.Subscriber<? super String> subscriber) {
+//                this.subscriber = subscriber;
+//            }
+//        };
+
+        // jvm底层已经对整个发布订阅关系做好了 异步 + 缓存区处理 + 虚拟线程消费 =  响应式系统
+
+        // 我们直接使用内置的发布者
+        SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
+
+        // 2.定义1个订阅者 订阅者感兴趣发布者的数据 接收数据
+        Flow.Subscriber<String> subscriber = new Flow.Subscriber<>() {
+            private Flow.Subscription subscription;
+
+            // subscription 订阅关系  订阅凭证
+            @Override
+            public void onSubscribe(Flow.Subscription subscription) {
+                System.out.println(Thread.currentThread() + ", 订阅开始了" + ", timestamp: " + System.currentTimeMillis());
+                this.subscription = subscription;
+
+                // 水龙头在消费者这边控制 现在就是给我1滴水  意思我这边消费1个数据
+                subscription.request(100);
+            }
+
+            @Override
+            public void onNext(String item) {
+                System.out.println(Thread.currentThread() + ", 接收到数据: " + item + ", timestamp: " + System.currentTimeMillis());
+                // 拿到1个 就再要1个
+                if (item.equals("publish-7")) {
+                    throw new RuntimeException("故意报错,到7就不相干了");
+                } else {
+                    subscription.request(100);
+                }
+                // 计数-1
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println(Thread.currentThread() + ", 接收错误信号, " + throwable.getMessage() + ", timestamp: " + System.currentTimeMillis());
+                // 异常计数也-1
+                long count = countDownLatch.getCount();
+                for (int i = 0; i < count; i++) {
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println(Thread.currentThread() + ", 接收完毕" + ", timestamp: " + System.currentTimeMillis());
+            }
+        };
+
+        // 3.绑定发布订阅关系
+        publisher.subscribe(subscriber);
+
+        // 4.测试
+        // 然后我们遍历发布0~10
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Thread.currentThread() + ", 发布者的线程" + ", timestamp: " + System.currentTimeMillis());
+            // 发布10条数据
+            if (i == 9) {
+                //publisher.closeExceptionally(new RuntimeException("故意报错,打印出来,结束"));
+                publisher.submit("publish-" + i);
+            } else {
+                publisher.submit("publish-" + i);
+                // 发布者发布的数据都存在发布者的buffer中，是一个array
+            }
+        }
+
+        //5. 发布者关闭通道
+        countDownLatch.await(); // 阻塞到所有数据被消费
+        publisher.close();
+        System.out.println("主线程结束..");
+    }
+}
+执行后：
+Connected to the target VM, address: '127.0.0.1:53243', transport: 'socket'
+主线程开始...
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 订阅开始了, timestamp: 1751439414466
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414466
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[main,5,main], 发布者的线程, timestamp: 1751439414479
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-0, timestamp: 1751439414479
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-1, timestamp: 1751439414485
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-2, timestamp: 1751439414485
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-3, timestamp: 1751439414486
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-4, timestamp: 1751439414486
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-5, timestamp: 1751439414486
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-6, timestamp: 1751439414486
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收到数据: publish-7, timestamp: 1751439414486
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 接收错误信号, 故意报错,到7就不相干了, timestamp: 1751439414486
+主线程结束..
+Disconnected from the target VM, address: '127.0.0.1:53243', transport: 'socket'
+```
+
+``` java
+package com.learn.reactive.stream.flow;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Flow;
+import java.util.concurrent.SubmissionPublisher;
+
+
+/**
+ * @author qianpengzhan
+ * @since 2025/7/2 15:04
+ */
+public class ReactiveStreamLearn02 {
+
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("主线程开始...");
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+        //1 定义1个发布者
+        SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
+
+        //2 定义1个订阅者
+        Flow.Subscriber<String> subscriber = new Flow.Subscriber<>() {
+            private Flow.Subscription subscription;
+
+            // subscription 订阅关系  订阅凭证
+            @Override
+            public void onSubscribe(Flow.Subscription subscription) {
+                System.out.println(Thread.currentThread() + ", 订阅开始了" + ", timestamp: " + System.currentTimeMillis());
+                this.subscription = subscription;
+
+                // 水龙头在消费者这边控制 现在就是给我1滴水  意思我这边消费1个数据
+                // 订阅者慢慢消费
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                subscription.request(1);
+            }
+
+            @Override
+            public void onNext(String item) {
+                System.out.println(Thread.currentThread() + ", 消费者接收到数据: " + item + ", timestamp: " + System.currentTimeMillis());
+                // 拿到1个 就再要1个
+                if (item.equals("publish-7")) {
+                    throw new RuntimeException("故意报错,到7就不相干了");
+                } else {
+                    // 订阅者慢慢消费
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    subscription.request(1);
+                }
+                // 计数-1
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println(Thread.currentThread() + ", 消费者接收错误信号, " + throwable.getMessage() + ", timestamp: " + System.currentTimeMillis());
+                // 异常计数也-1
+                long count = countDownLatch.getCount();
+                for (int i = 0; i < count; i++) {
+                    countDownLatch.countDown();
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println(Thread.currentThread() + ", 消费者接收完毕" + ", timestamp: " + System.currentTimeMillis());
+            }
+        };
+
+        //3 定义1个中间处理器  给每个元素添加1个 哈哈哈 后缀
+        MyProcessor processor1 = new MyProcessor();
+        MyProcessor processor2 = new MyProcessor();
+        MyProcessor processor3 = new MyProcessor();
+
+        //4 绑定三者关系
+        processor3.subscribe(subscriber);
+        processor2.subscribe(processor3);
+        processor1.subscribe(processor2);
+        publisher.subscribe(processor1);
+
+        //5 发布者发布数据
+        for (int i = 0; i < 10; i++) {
+            publisher.submit("publish-" + i);
+        }
+
+        //6 阻塞到完成 关闭流
+        countDownLatch.await();
+        publisher.close();
+    }
+
+    // 定义1个流中间操作器
+    static class MyProcessor extends SubmissionPublisher<String> implements Flow.Subscriber<String> {
+        public Flow.Subscription subscription;
+
+        @Override
+        public void onSubscribe(Flow.Subscription subscription) {
+            System.out.println(Thread.currentThread() + ", processer订阅发布者" + ", timestamp: " + System.currentTimeMillis());
+            this.subscription = subscription;
+            subscription.request(1);
+        }
+
+        @Override  // 数据到达 触发回调
+        public void onNext(String item) {
+            System.out.println(Thread.currentThread() + ", processer 拿到数据: " + item + ", timestamp: " + System.currentTimeMillis());
+            // 在加工
+            item += ": 哈哈哈";
+            System.out.println(Thread.currentThread() + ", processor 再加工后的数据：" + item + ", timestamp: " + System.currentTimeMillis());
+            // 再发布出去
+            submit(item);
+            // 再拿1个数据
+            subscription.request(1);
+        }
+
+        @Override
+        public void onError(Throwable throwable) {
+
+        }
+
+        @Override
+        public void onComplete() {
+            System.out.println(Thread.currentThread() + ", processor  完成了" + ", timestamp: " + System.currentTimeMillis());
+        }
+    }
+}
+Connected to the target VM, address: '127.0.0.1:55656', transport: 'socket'
+主线程开始...
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 订阅开始了, timestamp: 1751441255902
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer订阅发布者, timestamp: 1751441255902
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer订阅发布者, timestamp: 1751441255902
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer订阅发布者, timestamp: 1751441255902
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-0, timestamp: 1751441255917
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-0: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-0: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-1, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-0: 哈哈哈: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-1: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-2, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-1: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-0: 哈哈哈: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-1: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-2: 哈哈哈, timestamp: 1751441255922
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-0: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-1: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-3, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-1: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-2: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-3: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-2: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-4, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-3: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-4: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-3: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-2: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-5, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-4: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-5: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-2: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-6, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-4: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-6: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-3: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-7, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-5: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-7: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-3: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-8, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-5: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-4: 哈哈哈: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-6: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-8: 哈哈哈, timestamp: 1751441255923
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-6: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-4: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processer 拿到数据: publish-9, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-7: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-5: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-4,5,main], processor 再加工后的数据：publish-9: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-5: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-7: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-6: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-6: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-8: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-7: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-8: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-7: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processer 拿到数据: publish-9: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-8: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-2,5,main], processor 再加工后的数据：publish-9: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-8: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processer 拿到数据: publish-9: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-3,5,main], processor 再加工后的数据：publish-9: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441255924
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-0: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441256930
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-1: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441257935
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-2: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441258943
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-3: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441259951
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-4: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441260966
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-5: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441261980
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-6: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441262992
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-7: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441264001
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-8: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441265013
+Thread[ForkJoinPool.commonPool-worker-1,5,main], 消费者接收到数据: publish-9: 哈哈哈: 哈哈哈: 哈哈哈, timestamp: 1751441266026
+Disconnected from the target VM, address: '127.0.0.1:55656', transport: 'socket'
 ```
 
 ## 【13】总结
@@ -344,7 +682,11 @@ Subscriber -->|处理完成后 request m| Subscription
 > - ‌**复杂度**‌：异步回调逻辑需谨慎设计，避免嵌套地狱‌。
 > - ‌**调试困难**‌：异步链路追踪与错误处理需依赖专用工具（如Reactor Debug Agent）‌。
 
+### 13.1 响应式编程总结
 
+> - 底层：基于数据缓存队列 + 消息驱动模型 + 异步回调机制
+> - 编码： 流式编程 + 链式调用 + 声明式API
+> - 效果： 优雅全异步 + 消息实时处理 + 高吞吐量 + 占用少量资源
 
 ## 【14】参考资料
 

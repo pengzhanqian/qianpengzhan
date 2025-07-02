@@ -15,6 +15,9 @@ import { navbar } from './configs/navbar.js'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
+import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab'
+import { prismjsPlugin } from '@vuepress/plugin-prismjs'
+
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
@@ -40,6 +43,20 @@ export default defineUserConfig({
   }),
    // use plugins
   plugins: [
+    prismjsPlugin({
+      // 配置项
+      theme: 'vsc-dark-plus',//'material-light',//'ateliersulphurpool-light',
+      languages: ['java','xml','sql','css','javascript','vue','html','json'],
+      lineNumbers: true,
+      showLineNumbers: true,
+      highlightLines: true
+    }),
+    markdownTabPlugin({
+      // 启用代码选项卡
+      codeTabs: true,
+      // 启用选项卡
+      tabs: true,
+    }),
     markdownChartPlugin({
       // 启用 Chart.js
       chartjs: true,
@@ -88,7 +105,6 @@ export default defineUserConfig({
     }),
     sitemapPlugin({
       // 选项
-      hostname: ''
     }),
     // 作为最后一个插件使用
     cachePlugin({

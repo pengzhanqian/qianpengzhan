@@ -8,9 +8,74 @@
 
 ![image-20250702104406929](../../../.vuepress/public/images/image-20250702104406929.png)
 
-## 【2】
+## 【2】Project Reactor 官网
 
+> 英文官网地址:  [https://projectreactor.io/](https://projectreactor.io/)
 
+> 以往：
+
+::: tabs
+
+@tab:active  **高并发三宝**
+
+- **异步**
+- **缓存**
+- **队列排好**
+
+@tab **高可用三宝**
+
+- **分片**
+- **复制**
+- **选领导**
+
+@tab **非阻塞的原理**
+
+- **缓冲区**
+- **回调**
+
+:::
+
+> 现在，1个框架就全搞定了。 这就是 `Project Reactor` 框架
+
+## 【3】引入相关jar
+
+::: tabs
+
+@tab:active 引入父pom的jar
+
+``` xml
+  <!--    引入project reactor 的jar     -->
+    <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-bom</artifactId>
+        <version>2024.0.7</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+```
+
+@tab 再在子pom.xml中引入使用的jar
+
+```xml
+    <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-test</artifactId>
+    </dependency>
+```
+
+:::
+
+## 【4】核心组件 Mono 和 Flux 
+
+> 万物皆数据，数据分2种，1种是**单个或者没有**，另一种是**多个**
+
+### 4.1 Mono
+
+### 4.2 Flux
 
 ## 【X】参考资料
 
