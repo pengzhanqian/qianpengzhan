@@ -1,0 +1,1 @@
+import{_ as e,c as o,d as n,r as a,o as c}from"./app-CWS75OiI.js";const r={};function l(s,_){const t=a("Catalog");return c(),o("div",null,[n(t)])}const m=e(r,[["render",l]]),p=JSON.parse('{"path":"/md/question/net/","title":"Net","lang":"zh-CN","frontmatter":{"title":"Net"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

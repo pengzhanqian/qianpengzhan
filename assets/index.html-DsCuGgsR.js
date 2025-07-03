@@ -1,0 +1,1 @@
+import{_ as e,c as a,d as o,r as n,o as c}from"./app-CWS75OiI.js";const r={};function l(s,m){const t=n("Catalog");return c(),a("div",null,[o(t)])}const i=e(r,[["render",l]]),p=JSON.parse('{"path":"/md/note/java/jvm/","title":"Jvm","lang":"zh-CN","frontmatter":{"title":"Jvm"},"git":{},"filePathRelative":null}');export{i as comp,p as data};
