@@ -855,7 +855,7 @@ public class ReactorSubscribeCustomSubscriberLearn {
 
 ## 【8】请求重塑
 
-> ![image-20250707151939678](../../../../src/.vuepress/public/images/image-20250707151939678.png)
+> ![image-20250707151939678](../../../.vuepress/public/images/image-20250707151939678.png)
 
 > When implementing backpressure in Reactor, the way consumer pressure is propagated back to the source is by sending a `request` to the upstream operator. The sum of current requests is sometimes referenced to as the current “demand”, or “pending request”. Demand is capped at `Long.MAX_VALUE`, representing an unbounded request (meaning “produce as fast as you can” — basically disabling backpressure).
 
