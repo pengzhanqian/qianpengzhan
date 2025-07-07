@@ -16,7 +16,7 @@ Node.js安装包自带了npm，但安装时不会自动给npm配置全局安装�
    PS C:\Users\87337>
    ```
 
-2. 在该目录中新增 ** node_global 和 node_cache **文件夹
+2. 在该目录中新增 **node_global 和 node_cache **文件夹
 
 ![image-20240827102148794](../../../.vuepress/public/images/image-20240827102148794.png)
 
@@ -271,7 +271,7 @@ export default {
 pnpm i -D vuepress-theme-sidebar
 ```
 
-```
+```shell
 pnpm i -D @vuepress/plugin-nprogress@next
 pnpm i -D @vuepress/plugin-photo-swipe@next
 pnpm i -D @vuepress/plugin-watermark@next
@@ -303,5 +303,67 @@ pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next 
 
 # 2) 安装相关插件
 pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next @vuepress/plugin-markdown-tab@next @vuepress/plugin-prismjs@next
+```
+
+## 五、构建hope主题
+
+``` shell
+mkdir blog
+pnpm create vuepress-theme-hope blog
+然后选择如下:
+✔ Select a language to display / 选择显示语言 简体中文
+✔ 选择包管理器 pnpm
+✔ 你想要使用哪个打包器？ vite
+生成 package.json...
+✔ 设置应用名称 blog
+✔ 设置应用描述 blog
+✔ 设置应用版本号 2.0.0
+✔ 设置协议 MIT
+生成 tsconfig.json...
+✔ 你想要创建什么类型的项目？ docs
+✔ 项目需要用到多语言么? No
+生成模板...
+✔ 是否初始化 Git 仓库? No
+安装依赖...
+这可能需要数分钟，请耐心等待.
+我们无法正确输出子进程的进度条，所以进程可能会看似未响应
+Packages: +384
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 443, reused 384, downloaded 0, added 384, done
+
+devDependencies:
++ @vuepress/bundler-vite 2.0.0-rc.23
++ sass-embedded 1.89.2
++ vue 3.5.17
++ vuepress 2.0.0-rc.23
++ vuepress-theme-hope 2.0.0-rc.93
+
+Done in 3.6s
+模板已成功生成!
+✔ 是否想要现在启动 Demo 查看? Yes
+启动开发服务器...
+启动成功后，请在浏览器输入给出的开发服务器地址(默认为 'localhost:8080')
+```
+
+然后去浏览器界面查看：
+
+![image-20250703205704073](../../../.vuepress/public/images/image-20250703205704073.png)
+
+然后修改下导航栏和侧边栏
+
+添加插件 
+
+```shell
+pnpm add -D @vuepress/plugin-pwa@2.0.0-rc.109
+pnpm add -D chart.js
+pnpm add -D echarts
+pnpm add -D flowchart.ts
+pnpm add -D markmap-lib markmap-toolbar markmap-view
+pnpm add -D mermaid
+pnpm add -D mathjax-full
+pnpm add -D katex
+pnpm add -D markdown-it-attrs
+pnpm add -D artplayer@latest
+pnpm add -D @vuepress/plugin-watermark@2.0.0-rc.109
 ```
 
