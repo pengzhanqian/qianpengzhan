@@ -39,7 +39,7 @@
 
 ## 【3】Reactor 响应式编程模型
 
-![image-20250704164310639](../../../../src/.vuepress/public/images/image-20250704164310639.png)
+![image-20250704164310639](../../../.vuepress/public/images/image-20250704164310639.png)
 
 ```mermaid
 graph LR
@@ -106,11 +106,11 @@ end
 
 ### 5.1 Flux 
 
-> ![image-20250704164948153](../../../../src/.vuepress/public/images/image-20250704164948153.png)
+> ![image-20250704164948153](../../../.vuepress/public/images/image-20250704164948153.png)
 
 > 官网弹珠图:
 >
-> ![image-20250707101946627](../../../../src/.vuepress/public/images/image-20250707101946627.png)
+> ![image-20250707101946627](../../../.vuepress/public/images/image-20250707101946627.png)
 
 > With this large scope of possible signals, `Flux` is the general-purpose reactive type. Note that all events, even terminating ones, are optional: no `onNext` event but an `onComplete` event represents an *empty* finite sequence, but remove the `onComplete` and you have an *infinite* empty sequence (not particularly useful, except for tests around cancellation). Similarly, infinite sequences are not necessarily empty. For example, `Flux.interval(Duration)` produces a `Flux<Long>` that is infinite and emits regular ticks from a clock.
 >
@@ -118,9 +118,9 @@ end
 
 ### 5.2 Mono
 
-> ![image-20250707102340032](../../../../src/.vuepress/public/images/image-20250707102340032.png)
+> ![image-20250707102340032](../../../.vuepress/public/images/image-20250707102340032.png)
 
-> ![image-20250707102403220](../../../../src/.vuepress/public/images/image-20250707102403220.png)
+> ![image-20250707102403220](../../../.vuepress/public/images/image-20250707102403220.png)
 
 > A `Mono<T>` is a specialized `Publisher<T>` that emits at most one item *via* the `onNext` signal then terminates with an `onComplete` signal (successful `Mono`, with or without value), or only emits a single `onError` signal (failed `Mono`).
 >
