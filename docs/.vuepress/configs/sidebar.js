@@ -123,6 +123,11 @@ export const sidebar =
                     text: '第四章: Reactor 框架',
                     link: '/md/note/reactive/reactive_004.md',
                     collapsible: true
+                },
+                {
+                    text: '第五章: Spring WebFlux',
+                    link: '/md/note/reactive/reactive_005.md',
+                    collapsible: true
                 }
             ]
         }
