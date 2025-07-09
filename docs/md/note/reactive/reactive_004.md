@@ -2609,7 +2609,7 @@ public class ParallelFluxTest {
 
 ```
 
-## 【X】参考资料
+## 【18】参考资料
 
 - [SpringBoot3响应式编程精讲](https://www.bilibili.com/video/BV1gsYEeLEuM?spm_id_from=333.788.videopod.episodes&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)
 - [Project Reactor官网](https://projectreactor.io/docs/core/release/reference/coreFeatures/simple-ways-to-create-a-flux-or-mono-and-subscribe-to-it.html)
