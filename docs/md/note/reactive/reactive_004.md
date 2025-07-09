@@ -2112,9 +2112,9 @@ Flux.just("foo", "bar")
 > 这块就比较简单，就是我们常说的**重试机制**
 >
 > - 超时
->   - ![image-20250709102621664](../../../../../../4.blog-workspace/blog/docs/.vuepress/public/images/image-20250709102621664.png)
+>   - ![image-20250709102621664](../../../.vuepress/public/images/image-20250709102621664.png)
 > - 重试
->   - ![image-20250709102659706](../../../../../../4.blog-workspace/blog/docs/.vuepress/public/images/image-20250709102659706.png)
+>   - ![image-20250709102659706](../../../.vuepress/public/images/image-20250709102659706.png)
 
 ```java
 package com.learn.reactive.stream.flow;
