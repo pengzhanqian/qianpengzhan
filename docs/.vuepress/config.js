@@ -17,7 +17,7 @@ import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab'
 import { prismjsPlugin } from '@vuepress/plugin-prismjs'
-
+import { commentPlugin } from '@vuepress/plugin-comment'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
@@ -43,6 +43,15 @@ export default defineUserConfig({
   }),
    // use plugins
   plugins: [
+    commentPlugin({
+      // provider: 'Waline', // Artalk | Giscus | Waline | Twikoo
+      // 服务商配置
+      provider: "Giscus",
+      repo: "pengzhanqian/giscus",
+      repoId: "R_kgDOPGh8SA",
+      category: "Announcements",
+      categoryId: "DIC_kwDOPGh8SM4Cscfx",
+    }),
     prismjsPlugin({
       // 配置项
       theme: 'vsc-dark-plus',//'material-light',//'ateliersulphurpool-light',

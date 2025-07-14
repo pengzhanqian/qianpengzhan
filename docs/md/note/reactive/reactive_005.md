@@ -622,6 +622,151 @@ private <R> Mono<R> createNotFoundError() {
 }
 ```
 
+## 【7】Spring WebFlux 核心之 全局异常处理
+
+> 以前，我们`SpringMVC`的全局异常处理如下: 我们会使用`@ResponseBoy` `@ControllerAdvice` 2个注解， 合起来就是1个注解`@RestControllerAdvice`,
+>
+> 那么，`SpringWebFlux`则使用同样的注解即可，然后和以前一样，拦截具体的错误注解，进行返回`Mono` 或者 `Flux`即可。代码如下：
+
+> 项目中创建1个包`com.xxx.xxx.exception`, 然后在这个包下创建1个类`GlobalExceptionHandler`
+
+```java
+package com.learn.spring.webflux.demo.exception;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+import java.net.URI;
+
+/**
+ * // 全局异常处理器
+ *
+ * @author qianpengzhan
+ * @since 2025/7/14 9:37
+ */
+@Slf4j
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+
+    /**
+     * 计算异常处理器
+     */
+    @ExceptionHandler(ArithmeticException.class)
+    public Mono<String> arithmeticException(ArithmeticException e, ServerWebExchange exchange) {
+        return Mono.defer(() -> {
+            URI uri = exchange.getRequest().getURI();
+            log.error("uri: {}, ArithmeticException:{}", uri, e.getMessage());
+            return Mono.just("计算异常: " + e.getMessage());
+        });
+    }
+}
+```
+
+> 然后在`controller`包下创建1个测试类`ExceptionTestController`,如下:
+
+```java
+package com.learn.spring.webflux.demo.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
+
+/**
+ * @author qianpengzhan
+ * @since 2025/7/14 10:18
+ */
+@RestController
+public class ExceptionTestController {
+
+
+    @GetMapping(value = "/test-arithmetic-exception")
+    public Mono<String> testArithmeticException() {
+        return Mono.just(0)
+                .map(i -> 10 / i)
+                .map(String::valueOf);
+    }
+}
+```
+
+>  启动服务：
+>
+> ![image-20250714103647770](../../../.vuepress/public/images/image-20250714103647770.png)
+>
+> 访问请求地址:
+>
+> ![image-20250714103710747](../../../.vuepress/public/images/image-20250714103710747.png)
+>
+> 查看日志：
+>
+> 2025-07-14T10:34:43.595+08:00 ERROR 15336 --- [ctor-http-nio-2] c.l.s.w.d.e.GlobalExceptionHandler       : uri: http://localhost:9000/test-arithmetic-exception, ArithmeticException:/ by zero
+
+> 至此，我们一个简单的全局异常就OK，那么剩下的我们常用的异常按照这个格式，仿照写出来即可。
+
+## 【8】Spring WebFlux 核心之 方法传参
+
+[这里可以参照官网](https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-methods/arguments.html)
+
+> 以前`SpringMVC`的时候`Controller`的方法中的可以使用的很多参数我们`SrpingWebFlux`可以继续沿用，但是也有很多无法使用了，具体参考如下官网表格。
+
+| Controller method argument                         | Description                                                  |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| `ServerWebExchange`                                | 访问完整的ServerWebExchange-HTTP请求和响应、请求和会话属性、checkNotModified方法等的容器。 |
+| `ServerHttpRequest`, `ServerHttpResponse`          | 访问HTTP请求或响应。                                         |
+| `WebSession`                                       | 访问会话。除非添加属性，否则这不会强制开始新会话。支持反应式类型。 |
+| `java.security.Principal`                          | 当前经过身份验证的用户-如果已知，可能是特定的主体实现类。支持反应式类型。 |
+| `org.springframework.http.HttpMethod`              | 请求的HTTP方法。                                             |
+| `java.util.Locale`                                 | 国际化。<br />当前请求区域设置，由可用的最具体的LocaleResolver确定-实际上，配置的LocaleResolver/LocaleContextResolver。 |
+| `java.util.TimeZone` + `java.time.ZoneId`          | 时区<br />与当前请求相关联的时区，由LocaleContextResolver确定。 |
+| `@PathVariable`                                    | 路径变量                                                     |
+| `@MatrixVariable`                                  | 矩阵变量                                                     |
+| `@RequestParam`                                    | 请求参数                                                     |
+| `@RequestHeader`                                   | 请求头参数                                                   |
+| `@CookieValue`                                     | 获取Cookie参数                                               |
+| `@RequestBody`                                     | 获取请求体参数 Body内容 Post 文件上传                        |
+| `HttpEntity<B>`                                    | 封装后的请求体对象                                           |
+| `@RequestPart`                                     | 文件上传使用的数据`multipart/form-data`                      |
+| `java.util.Map` or `org.springframework.ui.Model`  | `Map`, `ModelMap`                                            |
+| `@ModelAttribute`                                  | 对象属性                                                     |
+| `Errors` or `BindingResult`                        | 数据校验 错误封装                                            |
+| `SessionStatus` + class-level `@SessionAttributes` | 用于标记表单处理完成，这会触发清理通过类级`@SessionAttributes`注释声明的会话属性。有关更多详细信息，请参阅`@SessionAttributes`。 |
+| `UriComponentsBuilder`                             | 用于准备相对于当前请求的主机、端口、方案和上下文路径的URL。请参阅URI链接。 |
+| `@SessionAttribute`                                | 用于访问任何会话属性-与作为类级`@SessionAttribute`声明的结果存储在会话中的模型属性相反。有关更多详细信息，请参阅`@SessionAttribute`。 |
+| `@RequestAttribute`                                | 转发请求的请求域数据<br />用于访问请求属性。有关更多详细信息，请参阅`@RequestAttribute`。 |
+| Any other argument                                 | 如果方法参数参数与上述任何参数都不匹配，则默认将其解析为@RequestParam（如果它是简单类型，由BeanUtils#isSimpleProperty确定），否则解析为`@ModelAttribute`<br />所有得参数都可以作为参数:<br />1. 基本类型，等于标注`@RequesParam`<br />2.对象类型，等于标注`@ModelAttribute` |
+
+## 【9】Spring WebFlux 核心之 返回值
+
+> 这里的`SSE`和`websocket`的区别
+>
+> - `SSE`: 属于**单工** , 请求过去后，等待服务端源源不断的数据
+> - `Websocket`: 属于**双工** ，双方建立连接，可以任意交互。
+
+[这里可以参照官网](https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-methods/return-types.html)
+
+| Controller method return value                               | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `@ResponseBody`                                              | 返回值通过`HttpMessageWriter`实例编码并写入响应。请参阅`@ResponseseBody`。<br />其实就是把响应数据写出去，如果是对象，可以自动转为`Json` |
+| `HttpEntity<B>`, `ResponseEntity<B>`                         | 返回值指定完整的响应，包括HTTP标头，正文通过`HttpMessageWriter`实例编码并写入响应。请参阅响应实体。 |
+| `HttpHeaders`                                                | 用于返回带有标头但没有正文的响应。                           |
+| `ErrorResponse`, `ProblemDetail`                             | 快速错误响应                                                 |
+| `String`                                                     | 要通过`ViewResolver`实例解析并与隐式模型一起使用的视图名称——通过命令对象和`@ModelAtual`方法确定。处理程序方法还可以通过声明模型参数（如前所述）以编程方式丰富模型。 |
+| `View`                                                       | 用于与隐式模型一起呈现的视图实例——通过命令对象和`@Model`属性方法确定。处理程序方法还可以通过声明模型参数（如前所述）以编程方式丰富模型。<br />直接返回视图 |
+| `java.util.Map`, `org.springframework.ui.Model`              | 要添加到隐式模型的属性，视图名称根据请求路径隐式确定。       |
+| `@ModelAttribute`                                            | 要添加到模型的属性，视图名称根据请求路径隐式确定。           |
+| `Rendering`                                                  | 用于模型和视图渲染场景的API。                                |
+| `FragmentsRendering`, `Flux<Fragment>`, `Collection<Fragment>` | 用于渲染一个或多个片段，每个片段都有自己的视图和模型。有关详细信息，请参阅超文本标记语言片段。 |
+| `void`                                                       | 无返回值                                                     |
+| `Flux<ServerSentEvent>`, `Observable<ServerSentEvent>`, or other reactive type | 发送服务器发送的事件。当只需要写入数据时，可以省略ServerSentEvent包装器（但是，必须通过生成属性在映射中请求或声明text/event-stream）。 |
+| Other return values                                          | 如果返回值以任何其他方式仍未解析，则将其视为模型属性，除非它是由BeanUtils#isSimpleProperty确定的简单类型，在这种情况下它仍未解析。 |
+
+## 【10】
+
+
+
 ## 【X】参考资料
 
 - [SpringBoot3响应式编程精讲](https://www.bilibili.com/video/BV1gsYEeLEuM?spm_id_from=333.788.videopod.episodes&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)

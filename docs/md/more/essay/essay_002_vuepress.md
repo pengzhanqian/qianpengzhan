@@ -291,6 +291,7 @@ pnpm add -D markmap-lib markmap-toolbar markmap-view
 pnpm add -D mermaid
 pnpm i -D @vuepress/plugin-markdown-tab@next
 pnpm i -D @vuepress/plugin-prismjs@next
+pnpm i -D @vuepress/plugin-comment@next
 ```
 
 ### 4.8 重新部署
@@ -302,7 +303,7 @@ pnpm i -D @vuepress/plugin-prismjs@next
 pnpm add -D vuepress@next @vuepress/client@next vue @vuepress/bundler-vite@next     @vuepress/theme-default@next sass-embedded @vuepress/plugin-markdown-chart@next chart.js echarts flowchart.ts markmap-lib markmap-toolbar markmap-view mermaid
 
 # 2) 安装相关插件
-pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next @vuepress/plugin-markdown-tab@next @vuepress/plugin-prismjs@next
+pnpm i -D @vuepress/plugin-sitemap@next @vuepress/plugin-catalog@next  @vuepress/plugin-nprogress@next @vuepress/plugin-photo-swipe@next @vuepress/plugin-watermark@next @vuepress/plugin-medium-zoom@next @vuepress/plugin-cache@next @vuepress/plugin-register-components@next @vuepress/plugin-markdown-math@next mathjax-full katex @vuepress/plugin-markdown-hint@next @vuepress/plugin-markdown-tab@next @vuepress/plugin-prismjs@next @vuepress/plugin-comment@next
 ```
 
 ## 五、构建hope主题
