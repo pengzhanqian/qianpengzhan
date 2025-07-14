@@ -17,7 +17,6 @@ import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab'
 import { prismjsPlugin } from '@vuepress/plugin-prismjs'
-import { commentPlugin } from '@vuepress/plugin-comment'
 
 export default defineUserConfig({
   base: '/qianpengzhan/',
