@@ -763,11 +763,350 @@ public class ExceptionTestController {
 | `Flux<ServerSentEvent>`, `Observable<ServerSentEvent>`, or other reactive type | 发送服务器发送的事件。当只需要写入数据时，可以省略ServerSentEvent包装器（但是，必须通过生成属性在映射中请求或声明text/event-stream）。 |
 | Other return values                                          | 如果返回值以任何其他方式仍未解析，则将其视为模型属性，除非它是由BeanUtils#isSimpleProperty确定的简单类型，在这种情况下它仍未解析。 |
 
-## 【10】
+## 【10】Spring WebFlux 核心之 文件上传
+
+> `Spring WebFlux` 多了数据流文件上传的新写法，同时兼容`SpringMVC`的旧写法
+
+>  旧写法:
+
+```java
+class MyForm {
+
+	private String name;
+
+	private FilePart file;
+
+	// ...
+
+}
+
+@Controller
+public class FileUploadController {
+
+	@PostMapping("/form")
+	public String handleFormUpload(MyForm form, BindingResult errors) {
+		// ...
+	}
+
+}
+```
+
+> 增加的新写法:
+
+```java
+@PostMapping("/")
+public String handle(@RequestPart("meta-data") Part metadata, 
+		@RequestPart("file-data") FilePart file) { 
+	// ...
+    // 这里的filePart 是异步非阻塞的 并且底层使用了零拷贝技术 性能高
+}
+```
+
+## 【11】Spring WebFlux 核心之 Flux自定义配置
+
+> 容器中注入`WevFluxConfigurer`这个类型的组件即可，然后重新底层的逻辑。
+
+![image-20250714163206529](../../../.vuepress/public/images/image-20250714163206529.png)
+
+```java
+package com.learn.spring.webflux.demo.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.http.codec.ServerCodecConfigurer;
+import org.springframework.validation.MessageCodesResolver;
+import org.springframework.validation.Validator;
+import org.springframework.web.reactive.accept.RequestedContentTypeResolverBuilder;
+import org.springframework.web.reactive.config.*;
+import org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer;
+import org.springframework.web.reactive.socket.server.WebSocketService;
+
+/**
+ * @author qianpengzhan
+ * @since 2025/7/14 16:31
+ */
+@Configuration
+public class MyWebFluxConfig implements WebFluxConfigurer {
+
+    //想要修改哪个就改为自定义的逻辑即可。
+    //同时我们这里可以增加自定义的Filter
+
+    @Override
+    public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
+        WebFluxConfigurer.super.configureHttpMessageCodecs(configurer);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        WebFluxConfigurer.super.addFormatters(registry);
+    }
+
+    @Override
+    public Validator getValidator() {
+        return WebFluxConfigurer.super.getValidator();
+    }
+
+    @Override
+    public MessageCodesResolver getMessageCodesResolver() {
+        return WebFluxConfigurer.super.getMessageCodesResolver();
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        WebFluxConfigurer.super.addCorsMappings(registry);
+    }
+
+    @Override
+    public void configureBlockingExecution(BlockingExecutionConfigurer configurer) {
+        WebFluxConfigurer.super.configureBlockingExecution(configurer);
+    }
+
+    @Override
+    public void configureContentTypeResolver(RequestedContentTypeResolverBuilder builder) {
+        WebFluxConfigurer.super.configureContentTypeResolver(builder);
+    }
+
+    @Override
+    public void configurePathMatching(PathMatchConfigurer configurer) {
+        WebFluxConfigurer.super.configurePathMatching(configurer);
+    }
+
+    @Override
+    public void configureArgumentResolvers(ArgumentResolverConfigurer configurer) {
+        WebFluxConfigurer.super.configureArgumentResolvers(configurer);
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        WebFluxConfigurer.super.configureViewResolvers(registry);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        WebFluxConfigurer.super.addResourceHandlers(registry);
+    }
+
+    @Override
+    public WebSocketService getWebSocketService() {
+        return WebFluxConfigurer.super.getWebSocketService();
+    }
+}
+
+```
+
+## 【12】Spring WebFlux 核心之自定义Filter
+
+> 很简单，自定义一个类实现`org.springframework.web.server.WebFilter`，然后编写好自己的过滤逻辑，加上注解`@Component`注册到容器中即可。
+
+```java
+package com.learn.spring.webflux.demo.filters;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
+import reactor.core.publisher.Mono;
+
+/**
+ * @author qianpengzhan
+ * @since 2025/7/14 16:37
+ */
+@Component
+public class MyFilter implements WebFilter {
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        // 注意这里的操作都是异步非阻塞的，使用流的API才有效
+        return chain.filter(exchange);
+    }
+}
+```
+
+## 【13】Spring WebFlux 单个请求的执行流程
+
+> 根据Spring WebFlux的执行流程，确定流程图的主要节点，这些节点包括：
+>
+> - ‌**浏览器请求**‌：用户通过浏览器发起HTTP请求。
+> - ‌**DispatcherHandler**‌：Spring WebFlux的核心组件，负责接收和分发请求。
+> - ‌**上下文处理**‌：使用Reactive上下文传递数据。
+> - ‌**过滤器处理**‌：WebFilter对请求和响应进行预处理和后处理。
+> - ‌**HandlerMapping**‌：确定请求应该由哪个处理器处理。
+> - ‌**HandlerAdapter**‌：调用处理器执行实际业务逻辑。
+> - ‌**AOP处理**‌：在处理器执行前后进行切面处理。
+> - ‌**处理器（Handler）执行**‌：执行实际的业务逻辑。
+> - ‌**结果处理**‌：处理器返回结果，由HandlerResultHandler处理并生成最终响应。
+> - ‌**响应返回给浏览器**‌：最终的响应通过HTTP协议返回给浏览器。
+
+```mermaid
+flowchart TD
+A([浏览器])
+B([DispatcherHandler 中央处理器])
+C([RequestContext 上下文])
+D([WebFilter 过滤器 前置处理器])
+E([WebFilter 过滤器 后置处理器])
+F([HandlerMapping 请求映射处理器])
+G([HandlerAdapt 请求的实际业务适配处理器])
+H([AOP 前置处理器])
+I([AOP 后置处理器])
+J([Controller,Handler 实际业务执行])
+K([结果处理,响应,返回给浏览器])
+
+A --> B
+B --> C
+C --> D
+D --> F
+F --> G
+G --> H
+H --> J
+J --> I 
+I --> E 
+E --> K 
+K --> A
+```
+
+## 【14】Spring WebFlux 核心之 RouterFunction
+
+> `Spring WebFlux`包含`WebFlux. fn`，这是一个轻量级泛函编程模型，其中函数用于路由和处理请求，合约旨在实现不变性。它是基于注释的编程模型的替代方案，但在其他方面运行在相同的`Reactive Core`基础上。
+
+> `Spring WebFlux` 的 `RouterFunction` 是函数式编程模型的核心组件，用于定义请求路由规则并关联对应的处理器逻辑。以下是其核心机制与使用方法的系统解析：
+
+### 14.1 核心接口和协作关系
+
+> 在`Spring WebFlux` 的 `RouterFunction` 中，`HTTP`请求由`HandlerFunction`处理：该函数接受`ServerRequest`并返回延迟的`ServerResponse`（即`Mono<ServerResponse>`）。请求和响应对象都有不可变的契约，提供对`HTTP`请求和响应的`JDK 8`友好访问。`HandlerFunction`相当于基于注释的编程模型中的`@RequestMap`方法的主体。
+
+> 传入的请求被路由到带有`RouterFunction`的处理函数：一个接受`ServerRequest`并返回延迟的`HandlerFunction`（即`Mono<HandlerFunction>`）的函数。当路由器函数匹配时，将返回一个处理函数；否则为空的Mono。`RouterFunction`等价于`@RequestMap`注释，但主要区别在于路由器函数不仅提供数据，还提供行为。
+
+#### 14.1.1`RouterFunction`‌
+>  通过 `RequestPredicate` 匹配请求路径、方法、头等条件，并返回关联的 `HandlerFunction`（匹配成功）或 `Optional.empty()`（匹配失败）。本质是函数式接口：`ServerRequest → Optional<HandlerFunction>`‌。
+
+#### 14.1.2 `HandlerFunction`
+> 处理业务逻辑，接收 `ServerRequest` 并返回 `ServerResponse`（封装为 `Mono<ServerResponse>` 或 `Flux<ServerResponse>`）‌
+
+### 14.2 路由构建方式
+
+#### 14.2.1 链式 API（推荐）
+ 支持模块化组合路由规则，嵌套路由（`nest()`）和条件组合：
+
+```java
+PersonRepository repository = ...
+PersonHandler handler = new PersonHandler(repository);
+
+RouterFunction<ServerResponse> route = route() 
+	.GET("/person/{id}", accept(APPLICATION_JSON), handler::getPerson)
+	.GET("/person", accept(APPLICATION_JSON), handler::listPeople)
+	.POST("/person", handler::createPerson)
+	.build();
 
 
+public class PersonHandler {
 
-## 【X】参考资料
+	// ...
+
+	public Mono<ServerResponse> listPeople(ServerRequest request) {
+		// ...
+	}
+
+	public Mono<ServerResponse> createPerson(ServerRequest request) {
+		// ...
+	}
+
+	public Mono<ServerResponse> getPerson(ServerRequest request) {
+		// ...
+	}
+}
+```
+
+#### 14.2.2 静态方法
+
+ 直接通过 `RouterFunctions.route(RequestPredicate, HandlerFunction)` 创建简单路由‌。
+
+### 14.3 请求谓词（RequestPredicate）
+
+用于扩展路由匹配条件，支持路径、请求头、参数等验证‌26：
+
+```java
+RouterFunction<ServerResponse> route = RouterFunctions.route()
+    .GET("/user/{id}", 
+         RequestPredicates.queryParam("name", value -> true), // 必须包含name参数
+         handler::getUserById)
+    .build();
+```
+
+常用谓词包括：
+
+- `RequestPredicates.path(String path)`：路径匹配
+- `RequestPredicates.accept(MediaType)`：内容类型验证
+- `RequestPredicates.and()`/`or()`：逻辑组合‌。
+
+### 14.4 执行流程
+
+1. **请求分发**‌
+    `DispatcherHandler` 遍历所有 `RouterFunction`，调用其 `route()` 方法匹配请求‌
+2. **处理器调用**‌
+    匹配成功后，通过 `HandlerAdapter` 执行 `HandlerFunction` 并生成响应‌。
+3. **响应式流水线**‌
+    全程非阻塞，依赖 Reactor 的 `Mono`/`Flux` 实现背压管理‌。
+
+### 14.5 优于@Controller进行处理
+
+> 若存在`RouterFunction` 和 `@Controller` 的时候，`RouterFunction`的优先级更高。
+
+### 14.6 注册
+
+> 需要放入`WebFluxConfigurer`中进行注册到容器中才能生效。
+
+```java
+@Configuration
+public class WebConfig implements WebFluxConfigurer {
+
+	@Bean
+	public RouterFunction<?> routerFunctionA() {
+		// ...
+	}
+
+	@Bean
+	public RouterFunction<?> routerFunctionB() {
+		// ...
+	}
+
+	// ...
+
+	@Override
+	public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
+		// configure message conversion...
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		// configure CORS...
+	}
+
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		// configure view resolution for HTML rendering...
+	}
+}
+```
+
+### 14.7 错误处理
+
+需通过 `WebFilter` 或 `HandlerFilterFunction` 捕获异常，无法直接使用 `@ControllerAdvice`‌69：
+
+```java
+@Bean
+WebFilter globalExceptionFilter() {
+    return (exchange, chain) -> chain.filter(exchange)
+        .onErrorResume(MyException.class, e -> {
+            exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
+            return exchange.getResponse().setComplete();
+        });
+}
+```
+
+------
+
+通过以上机制，`RouterFunction` 实现了高效灵活的路由分发，是构建响应式 Web 应用的核心支柱之一‌。
+
+## 【15】参考资料
 
 - [SpringBoot3响应式编程精讲](https://www.bilibili.com/video/BV1gsYEeLEuM?spm_id_from=333.788.videopod.episodes&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)
 - [官方SpringBoot3.5.3-SpringWebFlux指导](https://docs.spring.io/spring-boot/reference/web/reactive.html)
