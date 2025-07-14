@@ -31,6 +31,11 @@ export default defineUserConfig({
     docsDir: 'docs',
     editLinkPattern: ':repo/edit/:branch/:path',
     logo: '/logo.gif',
+    editLinkText: '编辑当前',
+    lastUpdatedText: '上次更新',
+    contributorsText: '贡献者',
+    prev: '上一页',
+    next: '下一页',
     head: [
       // 设置 favor.ico，.vuepress/public 下
       [
@@ -43,13 +48,15 @@ export default defineUserConfig({
    // use plugins
   plugins: [
     commentPlugin({
-      // provider: 'Waline', // Artalk | Giscus | Waline | Twikoo
-      // 服务商配置
-      provider: "Giscus",
-      repo: "pengzhanqian/giscus",
-      repoId: "R_kgDOPGh8SA",
-      category: "Announcements",
-      categoryId: "DIC_kwDOPGh8SM4Cscfx",
+      provider: 'Giscus',
+      // 仓库
+      repo: 'pengzhanqian/giscus-qianpengzhan',
+      // 仓库 ID
+      repoId: 'R_kgDOPMGgjw',
+      // 分类
+      category: 'Announcements',
+      // 分类 ID
+      categoryId: 'DIC_kwDOPMGgj84Cs64w'
     }),
     prismjsPlugin({
       // 配置项
@@ -86,9 +93,6 @@ export default defineUserConfig({
       alert: true,
     }),
     markdownMathPlugin({
-      // 选项
-    }),
-    commentPlugin({
       // 选项
     }),
     componentsPlugin({
