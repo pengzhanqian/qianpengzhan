@@ -133,6 +133,11 @@ export const sidebar =
                     text: '第六章: Spring Data R2DBC  异步查询数据库',
                     link: '/md/note/reactive/reactive_006.md',
                     collapsible: true
+                },
+                {
+                    text: '第七章: Spring Reactive Security 认证鉴权',
+                    link: '/md/note/reactive/reactive_006.md',
+                    collapsible: true
                 }
             ]
         }
