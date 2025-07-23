@@ -5,6 +5,10 @@ export const navbar =
       link: '/'
     },
     {
+    text: '面试',
+    link: '/md/note/interview/',
+    },
+    {
       text: '学习笔记',
       children:[
         {
