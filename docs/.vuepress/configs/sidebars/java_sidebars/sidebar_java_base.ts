@@ -27,5 +27,15 @@ export const javaBasicSidebar = {
                 link: '/md/note/java/basic/basic_005.md',
                 collapsible: true
             },
+            {
+                text: 'JAVA基础知识 - 方法的定义/调用/重载',
+                link: '/md/note/java/basic/basic_006.md',
+                collapsible: true
+            },
+            {
+                text: 'JAVA基础知识 - 数组',
+                link: '/md/note/java/basic/basic_007.md',
+                collapsible: true
+            }
         ]
     }
