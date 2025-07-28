@@ -1,9 +1,9 @@
 ---
-title: ��Ӧʽ���
+title: 响应式编程
 index: false
 icon: book
 category:
-  - ѧϰ�ʼ�
+  - 学习笔记
 ---
 
 <Catalog />
