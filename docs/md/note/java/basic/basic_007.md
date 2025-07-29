@@ -551,7 +551,7 @@ public class ArraysQuery {
 >         //找到要删除的元素对应的索引即可：
 >         int index = -1;
 >         for (int i = 0; i < arr.length; i++) {
->             if (arr[i] == 1200) {
+>             if (arr[i] == 3) {
 >                 index = i;
 >                 break;
 >             }
@@ -576,8 +576,226 @@ public class ArraysQuery {
 > }
 > ```
 >
-> 
+> 编译：` javac -encoding utf-8 .\ArrayDel02.java`
+>
+> 运行：`java ArrayDel02`
+>
+> 结果：![image-20250729165326825](../../../../.vuepress/public/images/image-20250729165326825.png)
 
-## 【X】参考资料
+## 【6】Arrays 工具类
+
+```java
+import java.util.Arrays;
+
+public class ArraysUtil {
+    public static void main(String[] args) {
+        //给定一个数组：
+        int[] arr = {1, 3, 7, 2, 4, 8};
+        //toString:对数组进行遍历查看的，返回的是一个字符串，这个字符串比较好看
+        System.out.println(Arrays.toString(arr));
+
+        //binarySearch:二分法查找：找出指定数组中的指定元素对应的索引：
+        //这个方法的使用前提：一定要查看的是一个有序的数组：
+        //sort：排序 -->升序
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.binarySearch(arr, 4));
+
+        int[] arr2 = {1, 3, 7, 2, 4, 8};
+        //copyOf:完成数组的复制：
+        int[] newArr = Arrays.copyOf(arr2, 4);
+        System.out.println(Arrays.toString(newArr));
+
+        //copyOfRange:区间复制：
+        int[] newArr2 = Arrays.copyOfRange(arr2, 1, 4);//[1,4)-->1,2,3位置
+        System.out.println(Arrays.toString(newArr2));
+
+        //equals:比较两个数组的值是否一样：
+        int[] arr3 = {1, 3, 7, 2, 4, 8};
+        int[] arr4 = {1, 3, 7, 2, 4, 8};
+        System.out.println(Arrays.equals(arr3, arr4));//true
+        System.out.println(arr3 == arr4);//false ==比较左右两侧的值是否相等，比较的是左右的地址值，返回结果一定是false
+
+        //fill：数组的填充：
+        int[] arr5 = {1, 3, 7, 2, 4, 8};
+        Arrays.fill(arr5, 10);
+        System.out.println(Arrays.toString(arr5));
+    }
+}
+```
+
+> 编译：`javac -encoding utf-8 .\ArraysUtil.java`
+>
+> 运行：`java ArraysUtil`
+>
+> 结果：
+>
+> ![image-20250729165846099](../../../../.vuepress/public/images/image-20250729165846099.png)
+
+## 【7】数组的复制
+
+> 数组的复制，我们使用`System`类的 `arraycopy`方法。具体如下：
+>
+> ![image-20250729170039424](../../../../.vuepress/public/images/image-20250729170039424.png)
+>
+> ![image-20250729170123938](../../../../.vuepress/public/images/image-20250729170123938.png)
+
+![image-20250729170103460](../../../../.vuepress/public/images/image-20250729170103460.png)
+
+
+
+![image-20250729170137554](../../../../.vuepress/public/images/image-20250729170137554.png)
+
+> 代码示例如下：
+>
+> ```java
+> import java.util.Arrays;
+> 
+> public class ArrayCopy {
+>     public static void main(String[] args) {
+>         //给一个源数组：
+>         int[] srcArr = {11, 22, 33, 44, 55, 66, 77, 88};
+>         //给一个目标数组：
+>         int[] destArr = new int[10];
+> 
+>         //复制：
+>         System.arraycopy(srcArr, 1, destArr, 3, 3);
+>         //遍历查看目标数组：
+>         System.out.println(Arrays.toString(destArr));
+>     }
+> }
+> ```
+>
+> 编译：` javac -encoding utf-8 .\ArrayCopy.java `
+>
+> 运行：`java ArrayCopy`
+>
+> 结果：![image-20250729170523102](../../../../.vuepress/public/images/image-20250729170523102.png)
+
+## 【8】二维数组
+
+### 8.1 引入
+
+![image-20250729173049807](../../../../.vuepress/public/images/image-20250729173049807.png)
+
+### 8.2 代码示例
+
+```java
+//定义一个二维数组：
+int[][] arr = new int[3][];//本质上定义了一个一维数组，长度为3
+
+int[] a1 = {1,2,3};
+arr[0] = a1;
+
+arr[1] = new int[]{4,5,6,7};
+
+arr[2] = new int[]{9,10};
+```
+
+> 对应内存:
+
+![image-20250729173156172](../../../../.vuepress/public/images/image-20250729173156172.png)
+
+### 8.3 二维数组的遍历
+
+```java
+public class ArraySecondLevel {
+    public static void main(String[] args) {
+        //定义一个二维数组：
+        int[][] arr = new int[3][];//本质上定义了一个一维数组，长度为3
+
+        int[] a1 = {1, 2, 3};
+        arr[0] = a1;
+
+        arr[1] = new int[]{4, 5, 6, 7};
+
+        arr[2] = new int[]{9, 10};
+
+        //读取6这个元素：
+        //System.out.println(arr[1][2]);
+
+        //对二维数组遍历：
+        //方式1：外层普通for循环+内层普通for循环：
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+        //方式2：外层普通for循环+内层增强for循环：
+        for (int i = 0; i < arr.length; i++) {
+            for (int num : arr[i]) {
+                System.out.print(num + "\t");
+            }
+            System.out.println();
+        }
+
+        //方式3：外层增强for循环+内层增强for循环：
+        for (int[] a : arr) {
+            for (int num : a) {
+                System.out.print(num + "\t");
+            }
+            System.out.println();
+        }
+
+        //方式4：外层增强for循环+内层普通for循环：
+        for (int[] a : arr) {
+            for (int i = 0; i < a.length; i++) {
+                System.out.print(a[i] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+> 编译：`javac -encoding utf-8 .\ArraySecondLevel.java`
+>
+> 运行：`java ArraySecondLevel`
+>
+> 结果：![image-20250729173440471](../../../../.vuepress/public/images/image-20250729173440471.png)
+
+### 8.4 二维数组的初始化
+
+> 数组的初始化方式总共有三种：<b>静态初始化</b>、<b>动态初始化</b>、<b>默认初始化</b>。
+
+- <b>静态初始化</b>
+
+> 除了用`new`关键字来产生数组以外，还可以直接在定义数组的同时就为数组元素分配空间并赋值。
+> ```java
+> int[][] arr = {{1,2},{4,5,6},{4,5,6,7,8,9,9}};
+> int[][] arr =new int[][] {{1,2},{4,5,6},{4,5,6,7,8,9,9}};
+> ```
+
+- <b>动态初始化</b>
+
+> 数组定义与为数组元素分配空间并赋值的操作分开进行。
+>
+> ```java
+> public class Array2Init {
+>     public static void main(String[] args) {
+>         int[][] arr = new int[3][2];
+>         //本质上：
+>         //定义一维数组，长度为3，每个数组“格子”中，有一个默认的长度为2的数组：
+> 
+>         arr[1] = new int[]{1, 2, 3, 4};
+> 
+>         //数组遍历：
+>         for (int[] a : arr) {
+>             for (int num : a) {
+>                 System.out.print(num + "\t");
+>             }
+>             System.out.println();
+>         }
+>     }
+> }
+> ```
+
+- <b>默认初始化</b>
+
+> 数组是引用类型，它的元素相当于类的实例变量，因此数组一经分配空间，其中的每个元素也被按照实例变量同样的方式被隐式初始化。
+
+## 【9】参考资料
 
 - [B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)
