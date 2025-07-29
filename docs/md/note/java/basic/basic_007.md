@@ -349,9 +349,234 @@ public class ArraysQuery {
 
 ![image-20250729114206730](../../../../.vuepress/public/images/image-20250729114206730.png)
 
+> 代码示例：
+>
+> ```java
+> public class ArraysAdd {
+>     public static void main(String[] args) {
+>         //功能：给定一个数组,在数组下标为2的位置上添加一个元素91
 > 
+>         //1.给定一个数组：
+>         int[] arr = {12, 34, 56, 7, 3, 10, 55, 66, 77, 88, 999, 89};
+>         //           0  1   2 3 4 5
+>         //2.输出增加元素前的数组：
+>         System.out.print("增加元素前的数组：");
+>         for (int i = 0; i < arr.length; i++) {
+>             if (i != arr.length - 1) {
+>                 System.out.print(arr[i] + ",");
+>             } else {//i==arr.length-1 最后一个元素不用加,
+>                 System.out.print(arr[i]);
+>             }
+>         }
+> 
+>         //3.增加元素
+>                 /*
+>                 arr[5] = arr[4];
+>                 arr[4] = arr[3];
+>                 arr[3] = arr[2];
+>                 */
+>         int index = 1;//在这个指定位置添加 元素
+>         for (int i = arr.length - 1; i >= (index + 1); i--) {
+>             arr[i] = arr[i - 1];
+>         }
+>         arr[index] = 666;
+> 
+> 
+>         //4.输出增加元素后的数组：
+>         System.out.print("\n增加元素后的数组：");
+>         for (int i = 0; i < arr.length; i++) {
+>             if (i != arr.length - 1) {
+>                 System.out.print(arr[i] + ",");
+>             } else {//i==arr.length-1 最后一个元素不用加,
+>                 System.out.print(arr[i]);
+>             }
+>         }
+>     }
+> }
+> ```
+>
+> 编译：`javac -encoding utf-8 .\ArraysAdd.java`
+>
+> 运行：` java ArraysAdd`
+>
+> 结果：
+>
+> 增加元素前的数组：12,34,56,7,3,10,55,66,77,88,999,89
+>
+> 增加元素后的数组：12,666,34,56,7,3,10,55,66,77,88,999
+
+> 将添加功能提取为1个独立的方法如下:
+>
+> ```java
+> import java.util.Scanner;
+> 
+> public class ArrayAdd {
+>     public static void main(String[] args) {
+>         //功能：给定一个数组,在数组下标为2的位置上添加一个元素91
+> 
+>         //1.给定一个数组：
+>         int[] arr = {12, 34, 56, 7, 3, 10, 55, 66, 77, 88, 999, 89};
+>         //           0  1   2 3 4 5
+>         //2.输出增加元素前的数组：
+>         /*
+>         System.out.print("增加元素前的数组：");
+>         for(int i=0;i<arr.length;i++){
+>                 if(i!=arr.length-1){
+>                         System.out.print(arr[i]+",");
+>                 }else{//i==arr.length-1 最后一个元素不用加,
+>                         System.out.print(arr[i]);
+>                 }
+>         }
+>         */
+> 
+>         //从键盘接收数据：
+>         Scanner sc = new Scanner(System.in);
+>         System.out.println("请录入你要添加元素的指定下标：");
+>         int index = sc.nextInt();
+>         System.out.println("请录入你要添加的元素：");
+>         int ele = sc.nextInt();
+> 
+>         //3.增加元素
+>         //调用方法：
+>         insertEle(arr, index, ele);
+> 
+> 
+>         //4.输出增加元素后的数组：
+>         System.out.print("\n增加元素后的数组：");
+>         for (int i = 0; i < arr.length; i++) {
+>             if (i != arr.length - 1) {
+>                 System.out.print(arr[i] + ",");
+>             } else {//i==arr.length-1 最后一个元素不用加,
+>                 System.out.print(arr[i]);
+>             }
+>         }
+> 
+>     }
+> 
+> 
+>     /*
+>     提取一个添加元素的方法：
+>     在数组的指定位置上添加一个指定的元素。
+>     在哪个数组的哪个位置添加哪个元素！
+>     不确定因素：形参：哪个数组，哪个位置，哪个元素
+>     返回值：无
+>     */
+>     public static void insertEle(int[] arr, int index, int ele) {
+>         for (int i = arr.length - 1; i >= (index + 1); i--) {
+>             arr[i] = arr[i - 1];
+>         }
+>         arr[index] = ele;
+>     }
+> }
+> ```
+>
+> 编译：`javac -encoding utf-8 .\ArrayAdd.java`
+>
+> 运行：` java ArrayAdd`
+>
+> 结果：
+>
+> 请录入你要添加元素的指定下标：
+>
+> 0
+>
+> 请录入你要添加的元素：
+>
+> 20
+>
+> 增加元素后的数组：20,12,34,56,7,3,10,55,66,77,88,999
 
 ### 5.4 删除元素问题
+
+#### 5.4.1 删除指定位置上的元素
+
+![image-20250729155811392](../../../../.vuepress/public/images/image-20250729155811392.png)
+
+> 代码示例：
+>
+> ```java
+> import java.util.Arrays;
+> public class ArrayDel01 {
+>     public static void main(String[] args) {
+>         //功能：给定一个数组,删除下标为2元素
+> 
+>         //1.给定一个数组：
+>         int[] arr = {12, 34, 56, 7, 3, 10, 34, 45, 56, 7, 666};
+>         //           0  1   2 3 4 5
+>         //2.输出删除前的数组：
+>         System.out.println("删除元素前的数组：" + Arrays.toString(arr));
+> 
+>         //3.删除
+>                 /*
+>                 arr[2] = arr[3];
+>                 arr[3] = arr[4];
+>                 arr[4] = arr[5];
+>                 */
+>         int index = 0;
+>         for (int i = index; i <= arr.length - 2; i++) {
+>             arr[i] = arr[i + 1];
+>         }
+>         arr[arr.length - 1] = 0;
+> 
+>         //4.输出删除后的数组：
+>         System.out.println("删除元素后的数组：" + Arrays.toString(arr));
+>     }
+> }
+> ```
+>
+> 编译：`javac -encoding utf-8 .\ArrayDel01.java`
+>
+> 运行:   `java ArrayDel01`
+>
+> 结果：
+>
+> ![image-20250729160916986](../../../../.vuepress/public/images/image-20250729160916986.png)
+
+#### 5.4.2 删除指定元素
+
+> ```java
+> import java.util.Arrays;
+> 
+> public class ArrayDel02 {
+>     public static void main(String[] args) {
+>         //功能：给定一个数组,删除元素3：
+> 
+>         //1.给定一个数组：
+>         int[] arr = {12, 34, 56, 7, 3, 10, 34, 45, 56, 7, 666};
+> 
+>         //2.输出删除前的数组：
+>         System.out.println("删除元素前的数组：" + Arrays.toString(arr));
+> 
+> 
+>         //找到要删除的元素对应的索引即可：
+>         int index = -1;
+>         for (int i = 0; i < arr.length; i++) {
+>             if (arr[i] == 1200) {
+>                 index = i;
+>                 break;
+>             }
+>         }
+> 
+>         //3.删除
+> 
+>         if (index != -1) {
+>             for (int i = index; i <= arr.length - 2; i++) {
+>                 arr[i] = arr[i + 1];
+>             }
+>             arr[arr.length - 1] = 0;
+>         } else {//index==-1
+>             System.out.println("根本没有你要删除的元素！");
+>         }
+> 
+> 
+>         //4.输出删除后的数组：
+>         System.out.println("删除元素后的数组：" + Arrays.toString(arr));
+> 
+>     }
+> }
+> ```
+>
+> 
 
 ## 【X】参考资料
 
