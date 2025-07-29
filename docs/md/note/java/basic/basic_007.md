@@ -216,9 +216,140 @@ public class ArrayStudy01 {
 
 ### 5.1 最值问题
 
+> <b>Q </b>：实现一个功能：给定一个数组int[] arr = {12,3,7,4,8,125,9,45}; ，求出数组中最大的数。
+>
+> - 思路
+>   - ![image-20250729094000124](../../../../.vuepress/public/images/image-20250729094000124.png)
+>
+> <b>A</b>  
+>
+> ```java
+> public class ArrayMax {
+>     public static void main(String[] args) {
+>         //实现一个功能：给定一个数组int[] arr = {12,3,7,4,8,125,9,45}; ，求出数组中最大的数。
+>         //1.给定一个数组
+>         int[] arr = {12, 3, 7, 4, 8, 125, 9, 45, 666, 36};
+> 
+>         //2.求出数组中的最大值：
+>         //先找一个数上擂台，假定认为这个数最大：
+>         int maxNum = arr[0];
+>         for (int i = 0; i < arr.length; i++) {
+>             if (arr[i] > maxNum) {
+>                 maxNum = arr[i];
+>             }
+>         }
+>         System.out.println("当前数组中最大的数为：" + maxNum);
+>     }
+> }
+> ```
+>
+> 编译： `javac -encoding utf-8 .\ArrayMax.java`
+>
+> 运行： `java ArrayMax`
+>
+> 结果： 当前数组中最大的数为：666
+
+> 将求最大值的方法提取出来：
+
+```java
+public class ArrayMax {
+    public static void main(String[] args) {
+        //实现一个功能：给定一个数组int[] arr = {12,3,7,4,8,125,9,45}; ，求出数组中最大的数。
+        //1.给定一个数组
+        int[] arr = {12, 3, 7, 4, 8, 725, 9, 45, 666, 36};
+
+        //2.求出数组中的最大值：
+        //调用方法：
+        int num = getMaxNum(arr);
+        System.out.println("当前数组中最大的数为：" + num);
+    }
+
+    /*
+    想提取一个方法：求数组中的最大值
+    求哪个数组中的最大值 ---》不确定因素：哪个数组 (形参)---》返回值：最大值
+    */
+    public static int getMaxNum(int[] arr) {
+        //先找一个数上擂台，假定认为这个数最大：
+        int maxNum = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > maxNum) {
+                maxNum = arr[i];
+            }
+        }
+        return maxNum;
+
+    }
+}
+```
+
+> 编译： `javac -encoding utf-8 .\ArrayMax.java`
+>
+> 运行： `java ArrayMax`
+>
+> 结果： 当前数组中最大的数为：666
+>
+> 内存分析图：
+>
+> <b>重点</b>： 
+>
+> - <b>方法的实参传递给形参的时候一定要注意：一切都是值传递：</b>
+>   - <b>如果是基本数据类型，那么传递的就是字面值</b>
+>   - <b>如果是引用数据类型，那么传递的就是地址值</b>
+>
+> - ![image-20250729104130864](../../../../.vuepress/public/images/image-20250729104130864.png)
+>   - 2个方法 `main` 和 `getMaxNum`,即创建2个栈帧。
+>   - 创建1个数组是会在堆中创建1块内存结构存储数据和地址
+
 ### 5.2 查询问题
 
+#### 5.2.1 根据索引查询指定位置的元素
+
+```java
+public class ArraysQuery {
+    public static void main(String[] args) {
+        //查询指定位置的元素
+        //给定一个数组：
+        int[] arr = {12, 34, 56, 7, 3, 10};
+        //查找索引为2的位置上对应的元素是什么？
+        System.out.println(arr[2]);
+        // 上面代码体现了数组的一个优点：
+        //在按照位置查询的时候，直接一步到位，效率非常高
+    }
+}
+```
+
+#### 5.2.2 根据元素查询该元素的索引
+
+```java
+public class ArraysQuery {
+    public static void main(String[] args) {
+        //查询指定元素的位置--》找出元素对应的索引
+        //给定一个数组：
+        int[] arr1 = {12, 34, 56, 7, 3, 56, 888};
+        //             0   1   2  3  4   5   6
+
+        //功能：查询元素888对应的索引：
+        int index = -1; //这个初始值只要不是数组的索引即可
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] == 888) {
+                index = i;//只要找到了元素，那么index就变成为i
+                break;//只要找到这个元素，循环就停止
+            }
+        }
+        if (index != -1) {
+            System.out.println("元素对应的索引：" + index);
+        } else {//index==-1
+            System.out.println("查无次数！");
+        }
+    }
+}
+```
+
 ### 5.3 添加元素问题
+
+![image-20250729114206730](../../../../.vuepress/public/images/image-20250729114206730.png)
+
+> 
 
 ### 5.4 删除元素问题
 
