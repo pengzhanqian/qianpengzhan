@@ -1605,7 +1605,280 @@ public class Object {
 
 ##### 3.2.10.2 `Object`类中的`toString`方法
 
+> - 官网描述:
+>
+> ![image-20250801160942443](../../../../.vuepress/public/images/image-20250801160942443.png)
+>
+> - 原理：
+>
+> ![image-20250801161002742](../../../../.vuepress/public/images/image-20250801161002742.png)
+>
+> - 重写`ToString()`
+>
+>   - `toString`的作用就是对对象进行“自我介绍”，一般子类对父类提供的`toString`都不满意，都要进行重写。
+>
+>   - ```java
+>      @Override
+>         public String toString() {
+>             return "Student{" +
+>                     "name='" + name + '\'' +
+>                     ", age=" + age +
+>                     ", height=" + height +
+>                     '}';
+>         }
+>     ```
+
+##### 3.2.10.3 `Object`类中的`equals()`方法
+
+```java
+public class Phone {//手机类：
+    //属性：
+    private String brand;//品牌型号
+    private double price;//价格
+    private int year ;//出产年份
+    //方法：
+    public String getBrand() {
+        return brand;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public int getYear() {
+        return year;
+    }
+    public void setYear(int year) {
+        this.year = year;
+    }
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "brand='" + brand + '\'' +
+                ", price=" + price +
+                ", year=" + year +
+                '}';
+    }
+    //构造器：
+    public Phone() {
+    }
+    public Phone(String brand, double price, int year) {
+        this.brand = brand;
+        this.price = price;
+        this.year = year;
+    }
+    //对equals方法进行重写：
+    public boolean equals(Object obj) {//Object obj = new Phone();
+        //将obj转为Phone类型：
+        Phone other = (Phone)obj;//向下转型，为了获取子类中特有的内容
+        if(this.getBrand()==other.getBrand()&&this.getPrice()==other.getPrice()&&this.getYear()==other.getYear()){
+            return true;
+        }
+        return false;
+    }
+}
+public class Test {
+    //这是一个main方法，是程序的入口：
+    public static void main(String[] args) {
+        //创建Phone类的对象：
+        Phone p1 = new Phone("华为P40",2035.98,2020);
+        Phone p2 = new Phone("华为P40",2035.98,2020);
+        //比较两个对象：p1和p2对象：
+        //==的作用：比较左右两侧的值是否想的，要么相等，返回true,要么不相等,返回false
+        System.out.println(p1==p2);//-->>>对于引用数据类型来说，比较的是地址值。--->一定返回的是false
+        //Object类提供了一个方法 equals方法 ：作用：比较对象具体内容是否相等。
+        boolean flag = p1.equals(p2);//点进源码发现：底层依旧比较的是==，比较的还是地址值。
+        System.out.println(flag);
+    }
+}
+```
+
+> **equals作用**
+>
+> - 这个方法提供了对对象的内容是否相等 的一个比较方式，对象的内容指的就是属性。
+>   父类Object提供的equals就是在比较==地址，没有实际的意义，我们一般不会直接使用父类提供的方法，而是在子类中对这个方法进行重写。
+>
+> **Instanceof**
+>
+> - 判断某个对象是否是其的实例
+>
+> - <img src="../../../../.vuepress/public/images/image-20250801161628009.png" alt="image-20250801161628009" style="zoom:67%;" />
+> - ![image-20250801161747903](../../../../.vuepress/public/images/image-20250801161747903.png)
+> - ![image-20250801161803164](../../../../.vuepress/public/images/image-20250801161803164.png)
+
+#### 3.2.11 类和类之间的关系
+
+> 1. 继承关系
+>
+> 继承指的是一个类（称为子类、子接口）继承另外的一个类（称为父类、父接口）的功能，并可以增加它自己的新功能的能力。在Java中继承关系通过关键字extends明确标识，在设计时一般没有争议性。在UML类图设计中，继承用一条带空心三角箭头的实线表示，从子类指向父类，或者子接口指向父接口。
+>
+> ![image-20250801162040314](../../../../.vuepress/public/images/image-20250801162040314.png)
+
+> 2. 实现关系
+>
+> 实现指的是一个class类实现interface接口（可以是多个）的功能，实现是类与接口之间最常见的关系。在Java中此类关系通过关键字implements明确标识，在设计时一般没有争议性。在UML类图设计中，实现用一条带空心三角箭头的虚线表示，从类指向实现的接口。
+>
+> ![image-20250801162108950](../../../../.vuepress/public/images/image-20250801162108950.png)
+
+> 3. 依赖关系
+>
+> 简单的理解，依赖就是一个类A使用到了另一个类B，而这种使用关系是具有偶然性的、临时性的、非常弱的，但是类B的变化会影响到类A。比如某人要过河，需要借用一条船，此时人与船之间的关系就是依赖。表现在代码层面，让类B作为参数被类A在某个method方法中使用。在UML类图设计中，依赖关系用由类A指向类B的带箭头虚线表示。
+>
+> ![image-20250801162135757](../../../../.vuepress/public/images/image-20250801162135757.png)
+
+> 4. 关联关系
+>
+> 关联体现的是两个类之间语义级别的一种强依赖关系，比如我和我的朋友，这种关系比依赖更强、不存在依赖关系的偶然性、关系也不是临时性的，一般是长期性的，而且双方的关系一般是平等的。关联可以是单向、双向的。表现在代码层面，为被关联类B以类的属性形式出现在关联类A中，也可能是关联类A引用了一个类型为被关联类B的全局变量。在UML类图设计中，关联关系用由关联类A指向被关联类B的带箭头实线表示，在关联的两端可以标注关联双方的角色和多重性标记。
+>
+> ![image-20250801162204369](../../../../.vuepress/public/images/image-20250801162204369.png)
+
+> 5. 聚合关系
+>
+> 聚合是关联关系的一种特例，它体现的是整体与部分的关系，即has-a的关系。此时整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享。比如计算机与CPU、公司与员工的关系等，比如一个航母编队包括海空母舰、驱护舰艇、舰载飞机及核动力攻击潜艇等。表现在代码层面，和关联关系是一致的，只能从语义级别来区分。在UML类图设计中，聚合关系以空心菱形加实线箭头表示。
+>
+> ![image-20250801162234918](../../../../.vuepress/public/images/image-20250801162234918.png)
+
+> 6. 组合关系
+>
+> 组合也是关联关系的一种特例，它体现的是一种contains-a的关系，这种关系比聚合更强，也称为强聚合。它同样体现整体与部分间的关系，但此时整体与部分是不可分的，整体的生命周期结束也就意味着部分的生命周期结束，比如人和人的大脑。表现在代码层面，和关联关系是一致的，只能从语义级别来区分。在UML类图设计中，组合关系以实心菱形加实线箭头表示。
+>
+> ![image-20250801162313290](../../../../.vuepress/public/images/image-20250801162313290.png)
+
+> 总结：
+>
+> 对于继承、实现这两种关系没多少疑问，它们体现的是一种类和类、或者类与接口间的纵向关系。其他的四种关系体现的是类和类、或者类与接口间的引用、横向关系，是比较难区分的，有很多事物间的关系要想准确定位是很难的。前面也提到，这四种关系都是语义级别的，所以从代码层面并不能完全区分各种关系，但总的来说，后几种关系所表现的强弱程度依次为：
+>
+> 组合>聚合>关联>依赖。
+
 ### 3.3 多态
+
+> - 【1】<b>多态</b>跟属性无关，多态指的是方法的<b>多态</b>，而不是属性的<b>多态</b>。
+> - 【2】案例代入：
+>
+> ```java
+> public class Animal {//父类：动物：
+>     public void shout(){
+>         System.out.println("我是小动物，我可以叫。。。");
+>     }
+> }
+> 
+> public class Cat extends Animal{
+>     //喊叫方法：
+>     public void shout(){
+>         System.out.println("我是小猫，可以喵喵叫");
+>     }
+>     public void scratch(){
+>         System.out.println("我是小猫，我可以挠人");
+>     }
+> }
+> 
+> public class Dog extends Animal{
+>     //喊叫：
+>     public void shout(){
+>         System.out.println("我是小狗，我可以汪汪叫");
+>     }
+>     public void guard(){
+>         System.out.println("我是小狗，我可以看家护院，保护我的小主人。。。");
+>     }
+> }
+> 
+> public class Pig extends Animal{
+>     public void shout(){
+>         System.out.println("我是小猪，我嗯嗯嗯的叫");
+>     }
+>     public void eat(){
+>         System.out.println("我是小猪，我爱吃东西。。");
+>     }
+>     
+> }
+> 
+> public class Girl {
+>     //跟猫玩耍：
+>     /*public void play(Cat cat){
+>         cat.shout();
+>     }*/
+>     //跟狗玩耍：
+>     /*public void play(Dog dog){
+>         dog.shout();
+>     }*/
+>     //跟小动物玩耍：
+>     public void play(Animal an){
+>         an.shout();
+>     }
+> }
+> 
+> public class Test {
+>     //这是一个main方法，是程序的入口：
+>     public static void main(String[] args) {
+>         //具体的猫：--》猫的对象
+>         //Cat c = new Cat();
+>         //具体的小女孩：--》女孩的对象
+>         Girl g = new Girl();
+>         //小女孩跟猫玩：
+>         //g.play(c);
+>         //具体的狗---》狗的对象：
+>         //Dog d = new Dog();
+>         //小女孩跟狗玩：
+>         //g.play(d);
+>         //具体的动物：--》动物的对象：
+>         //Cat c = new Cat();
+>         //Dog d = new Dog();
+>         Pig p = new Pig();
+>         Animal an = p;
+>         g.play(an);
+>     }
+> }
+> ```
+>
+> - 【3】总结：
+>
+>   - （1）先有父类，再有子类：--> 继承   先有子类，再抽取父类 ----> 泛化 
+>
+>   - （2）什么是<b>多态</b>：
+>
+>     - <b>多态</b>就是多种状态：同一个行为，不同的子类表现出来不同的形态。
+>     - <b>多态</b>指的就是同一个方法调用，然后由于对象不同会产生不同的行为。
+>
+>   - （3）<b>多态</b>的好处：
+>
+>     - 为了提高代码的扩展性，符合面向对象的设计原则：开闭原则。
+>     - 开闭原则：指的就是扩展是 开放的，修改是关闭的。
+>     - 注意：<b>多态</b>可以提高扩展性，但是扩展性没有达到最好，以后我们会学习反射
+>
+>   - （4）<b>多态</b>的要素：
+>
+>     - 一，继承：  ` Cat extends Animal  ,Pig extends Animal,   Dog extends Animal`
+>
+>     - 二，重写：子类对父类的方法shout()重写
+>
+>     - 三， 父类引用指向子类对象：
+>
+>       - ```java
+>         Pig p = new Pig();
+>         Animal an = p;
+>         //将上面的代码合为一句话：
+>         //Animal an = new Pig();
+>         //=左侧：编译期的类型
+>         //=右侧：运行期的类型
+>         
+>         Animal an = new Pig();
+>         g.play(an); 
+>         
+>         public void play(Animal an){
+>             //Animal an = an = new Pig();
+>             an.shout();
+>         }
+>         ```
+>
+>       - 上面的代码，也是<b>多态</b>的一种非常常见的应用场合：父类当方法的形参，然后传入的是具体的子类的对象，然后调用同一个方法，根据传入的子类的不同展现出来的效果也不同，构成了<b>多态</b>。
+>
+>       - 内存分析
+>
+>         - ![image-20250801164729569](../../../../.vuepress/public/images/image-20250801164729569.png)
 
 ## 【4】参考资料
 
