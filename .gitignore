@@ -32,3 +32,4 @@ docs/md/.idea/
 docs/md/note/.idea/
 dist/
 .idea
+*.lnk

@@ -106,8 +106,12 @@ export default defineUserConfig({
       // 配置项
     }),
     watermarkPlugin({
-      // options
-      watermarkText: '钱鹏展',
+      enabled: true,
+      watermarkOptions: {
+          content: '钱鹏展',
+          fontColor: '#666',
+          opacity: 0.3,
+      }
     }),
     photoSwipePlugin({
       // 选项
