@@ -28,7 +28,7 @@ export const javaBasicSidebar = {
                 collapsible: true
             },
             {
-                text: 'JAVA基础知识 - 方法的定义/调用/重载',
+                text: 'JAVA基础知识 - 方法',
                 link: '/md/note/java/basic/basic_006.md',
                 collapsible: true
             },
