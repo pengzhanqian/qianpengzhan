@@ -666,7 +666,7 @@ public class SimpleDateFormatTest {
 >
 >     ```java
 >     package com.learn.javabasic.oftenuse;
->     
+>       
 >     /**
 >      * @author qianpengzhan
 >      * @since 2025/8/5 15:01
@@ -685,7 +685,7 @@ public class SimpleDateFormatTest {
 >             System.out.println("取小的那个值：" + Math.min(3, 6));
 >         }
 >     }
->     
+>       
 >     ```
 >
 >     ![image-20250805150138854](../../../../.vuepress/public/images/image-20250805150138854.png)
@@ -695,9 +695,9 @@ public class SimpleDateFormatTest {
 >   - ```java
 >     package com.learn.javabasic.oftenuse;
 >     //静态导入：
->     
+>         
 >     import static java.lang.Math.*;
->     
+>         
 >     /**
 >      * @author qianpengzhan
 >      * @since 2025/8/5 15:01
@@ -716,7 +716,7 @@ public class SimpleDateFormatTest {
 >             System.out.println("取小的那个值：" + min(3, 6));
 >         }
 >     }
->     
+>         
 >     ```
 
 ## 【3】`Random`类
@@ -955,7 +955,7 @@ public class SimpleDateFormatTest {
 >
 >   - ```java
 >     package com.learn.javabasic.oftenuse;
->     
+>   
 >     /**
 >      * @author qianpengzhan
 >      * @since 2025/8/5 17:51
@@ -995,7 +995,107 @@ public class SimpleDateFormatTest {
 >     ```
 >
 > - 【6】`StringBuilder`常用方法
+>
+> ```java
+> package com.learn.javabasic.oftenuse;
+> 
+> /**
+>  * @author qianpengzhan
+>  * @since 2025/8/6 10:06
+>  */
+> public class StringBuilderTest2 {
+>     public static void main(String[] args) {
+>         StringBuilder sb = new StringBuilder("nihaojavawodeshijie");
+>         //增
+>         sb.append("这是梦想");
+>         System.out.println(sb);//nihaojavawodeshijie这是梦想
+>         //删
+>         sb.delete(3, 6);//删除位置在[3,6)上的字符
+>         System.out.println(sb);//nihavawodeshijie这是梦想
+>         sb.deleteCharAt(16);//删除位置在16上的字符
+>         System.out.println(sb);//nihavawodeshijie是梦想
+>         //改-->插入
+>         StringBuilder sb1 = new StringBuilder("$23445980947");
+>         sb1.insert(3, ",");//在下标为3的位置上插入 ,
+>         System.out.println(sb1);
+>         StringBuilder sb2 = new StringBuilder("$2你好吗5980947");
+>         //改-->替换
+>         sb2.replace(3, 5, "我好累");//在下标[3,5)位置上插入字符串
+>         System.out.println(sb2);
+>         sb.setCharAt(3, '!');
+>         System.out.println(sb);
+>         //查
+>         StringBuilder sb3 = new StringBuilder("asdfa");
+>         for (int i = 0; i < sb3.length(); i++) {
+>             System.out.print(sb3.charAt(i) + "\t");
+>         }
+>         System.out.println();
+>         //截取
+>         String str = sb3.substring(2, 4);//截取[2,4)返回的是一个新的String，对StringBuilder没有影响
+>         System.out.println(str);
+>         System.out.println(sb3);
+>     }
+> }
+> ```
+>
+> - 【7】`StringBUffer`常用方法
+>
+> ```java
+> package com.learn.javabasic.oftenuse;
+> 
+> /**
+>  * @author qianpengzhan
+>  * @since 2025/8/6 10:07
+>  */
+> public class StringBufferTest {
+>     public static void main(String[] args) {
+>         StringBuffer sb = new StringBuffer("nihaojavawodeshijie");
+>         //增
+>         sb.append("这是梦想");
+>         System.out.println(sb);//nihaojavawodeshijie这是梦想
+>         //删
+>         sb.delete(3, 6);//删除位置在[3,6)上的字符
+>         System.out.println(sb);//nihavawodeshijie这是梦想
+>         sb.deleteCharAt(16);//删除位置在16上的字符
+>         System.out.println(sb);//nihavawodeshijie是梦想
+>         //改-->插入
+>         StringBuilder sb1 = new StringBuilder("$23445980947");
+>         sb1.insert(3, ",");//在下标为3的位置上插入 ,
+>         System.out.println(sb1);
+>         StringBuilder sb2 = new StringBuilder("$2你好吗5980947");
+>         //改-->替换
+>         sb2.replace(3, 5, "我好累");//在下标[3,5)位置上插入字符串
+>         System.out.println(sb2);
+>         sb.setCharAt(3, '!');
+>         System.out.println(sb);
+>         //查
+>         StringBuilder sb3 = new StringBuilder("asdfa");
+>         for (int i = 0; i < sb3.length(); i++) {
+>             System.out.print(sb3.charAt(i) + "\t");
+>         }
+>         System.out.println();
+>         //截取
+>         String str = sb3.substring(2, 4);//截取[2,4)返回的是一个新的String，对StringBuilder没有影响
+>         System.out.println(str);
+>         System.out.println(sb3);
+>     }
+> }
+> 
+> ```
+>
+> - 【8】【面试题】`String`、`StringBuffer`、`StringBuilder`区别与联系
+>
+>   1. `String`类是不可变类，即一旦一个`String`对象被创建后，包含在这个对象中的字符序列是不可改变的，直至这个对象销毁
+>
+>   2. `StringBuffer`类则代表一个字符序列可变的字符串，可以通过`append`、`insert`、`reverse`、`setChartAt`、`setLength`等方法改变其内容。一旦生成了最终的字符串，调用toString方法将其转变为`String`
+>
+>   3. `JDK1.5`新增了一个`StringBuilder`类，与`StringBuffer`相似，构造方法和方法基本相同。不同是`StringBuffer`是线程安全的，而StringBuilder是线程不安全的，所以性能略高。通常情况下，创建一个内容可变的字符串，应该优先考虑使用
+>
+>   4. | 类              | 版本     | 效率   | 线程是否安全 |
+>      | --------------- | -------- | ------ | ------------ |
+>      | `StringBuilder` | `JDK1.5` | 效率高 | 线程不安全   |
+>      | `StringBuffer`  | `JDK1.0` | 效率低 | 线程安全     |
 
-## 【X】参考资料
+## 【6】参考资料
 
 - [B站免费的马士兵java初级教程](https://www.bilibili.com/video/BV1RK4y1g7A5/?spm_id_from=333.337.search-card.all.click&vd_source=65c7f6924d2d8ba5fa0d4c448818e08a)

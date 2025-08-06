@@ -52,5 +52,10 @@ export const javaBasicSidebar = {
                 link: '/md/note/java/basic/basic_010.md',
                 collapsible: true
             },
+            {
+                text: 'JAVA基础知识 - 集合',
+                link: '/md/note/java/basic/basic_011.md',
+                collapsible: true
+            },
         ]
     }
