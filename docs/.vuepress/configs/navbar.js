@@ -5,8 +5,12 @@ export const navbar =
       link: '/'
     },
     {
-    text: '面试',
-    link: '/md/note/interview/',
+      text: '面试',
+      link: '/md/interview/',
+    },
+    {
+      text: '算法',
+      link: '/md/algorithm/',
     },
     {
       text: '学习笔记',
