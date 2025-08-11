@@ -145,7 +145,64 @@
 
 ![image-20250806172650836](../../../../.vuepress/public/images/image-20250806172650836.png)
 
-## 【3】Collection
+## 【3】`Collection`
+
+### 3.1 `Collection` 接口的常用方法
+
+> 1. **首先看下`Collection`的接口源码**
+>
+> ```java
+> public interface Collection<E> extends Iterable<E> {
+>      int size();
+>      boolean isEmpty();
+>      boolean contains(Object o);
+>      Iterator<E> iterator();
+>      Object[] toArray();
+>      <T> T[] toArray(T[] a);
+>      default <T> T[] toArray(IntFunction<T[]> generator) {
+>          return toArray(generator.apply(0));
+>      }
+>      boolean add(E e);
+>      boolean remove(Object o);
+>      boolean containsAll(Collection<?> c);
+>      boolean addAll(Collection<? extends E> c);
+>      boolean removeAll(Collection<?> c);
+>      default boolean removeIf(Predicate<? super E> filter) {
+>          Objects.requireNonNull(filter);
+>          boolean removed = false;
+>          final Iterator<E> each = iterator();
+>          while (each.hasNext()) {
+>              if (filter.test(each.next())) {
+>                  each.remove();
+>                  removed = true;
+>              }
+>          }
+>          return removed;
+>      }
+>      boolean retainAll(Collection<?> c);
+>      void clear();
+>      boolean equals(Object o);
+>      int hashCode();
+>      @Override
+>      default Spliterator<E> spliterator() {
+>          return Spliterators.spliterator(this, 0);
+>      }
+>      default Stream<E> stream() {
+>          return StreamSupport.stream(spliterator(), false);
+>      }
+>      default Stream<E> parallelStream() {
+>          return StreamSupport.stream(spliterator(), true);
+>      }
+> }
+> ```
+>
+> 2. **常用方法梳理**
+>
+> - 添加元素到集合中：`boolean add(E e);`    
+> - 添加A集合到B集合中：`boolean addAll(Collection<? extends E> c);`
+> - 删除集合中的某个元素： `boolean remove(Object o);`
+>
+> 
 
 ## 【4】Map
 
