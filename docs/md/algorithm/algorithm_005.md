@@ -195,10 +195,208 @@
 ## 【6】代码示例
 
 > ```java
+> package com.learn.algorithm.business;
+> 
+> /**
+>  * 冒泡排序
+>  *
+>  * @author qianpengzhan
+>  * @since 2025/8/15 11:42
+>  */
+> public class BubbleSort {
+> 
+> 
+>     // 标准冒泡排序
+>     public static void standardBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // n 为 数组的长度
+>         int n = arr.length;
+>         // 外层 i ~ n-1 进行遍历
+>         for (int i = 0; i < n - 1; i++) {
+>             // 内层 j ~ n-1-i 进行遍历
+>             for (int j = 0; j < n - 1 - i; j++) {
+>                 // 比较相邻的2个元素 若前者大于后者，则交换
+>                 if (arr[j] > arr[j + 1]) {
+>                     // 交换相邻元素
+>                     int temp = arr[j];
+>                     arr[j] = arr[j + 1];
+>                     arr[j + 1] = temp;
+>                 }
+>             }
+>         }
+>     }
+> 
+>     // 提前终止优化的冒泡排序
+>     public static void optimizedBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // n 为 数组的长度
+>         int n = arr.length;
+>         // 添加提前终止标识
+>         boolean swapped;
+>         // 外层 i ~ n-1 进行遍历
+>         for (int i = 0; i < n - 1; i++) {
+>             // 默认是尚未排序好的
+>             swapped = false;
+>             // 内层 j ~ n-1-i 进行遍历
+>             for (int j = 0; j < n - 1 - i; j++) {
+>                 // 比较相邻的2个元素 若前者大于后者，则交换
+>                 if (arr[j] > arr[j + 1]) {
+>                     // 交换相邻元素
+>                     int temp = arr[j];
+>                     arr[j] = arr[j + 1];
+>                     arr[j + 1] = temp;
+>                     // 本轮交换过 则继续
+>                     swapped = true;
+>                 }
+>             }
+>             // 若是本轮没有交换 说明数组已经有序
+>             if (!swapped) {
+>                 break;
+>             }
+>         }
+>     }
+> }
+> 
 
 ## 【7】对数器
 
+> 以下是冒泡排序的对数器（验证器）`Java`代码实现，用于验证排序算法的正确性：
+>
+> ```java
+> package com.learn.algorithm.business;
 > 
+> import java.util.Arrays;
+> import java.util.Random;
+> 
+> /**
+>  * 冒泡排序
+>  *
+>  * @author qianpengzhan
+>  * @since 2025/8/15 11:42
+>  */
+> public class BubbleSort {
+> 
+> 
+>     // 标准冒泡排序
+>     // 待测试的冒泡排序实现
+>     public static void standardBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // n 为 数组的长度
+>         int n = arr.length;
+>         // 外层 i ~ n-1 进行遍历
+>         for (int i = 0; i < n - 1; i++) {
+>             // 内层 j ~ n-1-i 进行遍历
+>             for (int j = 0; j < n - 1 - i; j++) {
+>                 // 比较相邻的2个元素 若前者大于后者，则交换
+>                 if (arr[j] > arr[j + 1]) {
+>                     // 交换相邻元素
+>                     int temp = arr[j];
+>                     arr[j] = arr[j + 1];
+>                     arr[j + 1] = temp;
+>                 }
+>             }
+>         }
+>     }
+> 
+>     // 提前终止优化的冒泡排序
+>     public static void optimizedBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // n 为 数组的长度
+>         int n = arr.length;
+>         // 添加提前终止标识
+>         boolean swapped;
+>         // 外层 i ~ n-1 进行遍历
+>         for (int i = 0; i < n - 1; i++) {
+>             // 默认是尚未排序好的
+>             swapped = false;
+>             // 内层 j ~ n-1-i 进行遍历
+>             for (int j = 0; j < n - 1 - i; j++) {
+>                 // 比较相邻的2个元素 若前者大于后者，则交换
+>                 if (arr[j] > arr[j + 1]) {
+>                     // 交换相邻元素
+>                     int temp = arr[j];
+>                     arr[j] = arr[j + 1];
+>                     arr[j + 1] = temp;
+>                     // 本轮交换过 则继续
+>                     swapped = true;
+>                 }
+>             }
+>             // 若是本轮没有交换 说明数组已经有序
+>             if (!swapped) {
+>                 break;
+>             }
+>         }
+>     }
+> 
+>     // 绝对正确的对照排序方法
+>     public static void comparator(int[] arr) {
+>         Arrays.sort(arr);
+>     }
+> 
+>     // 生成随机测试数组
+>     public static int[] generateRandomArray(int maxSize, int maxValue) {
+>         Random random = new Random();
+>         int[] arr = new int[random.nextInt(maxSize + 1)];
+>         for (int i = 0; i < arr.length; i++) {
+>             arr[i] = random.nextInt(maxValue + 1) - random.nextInt(maxValue);
+>         }
+>         return arr;
+>     }
+> 
+>     // 复制数组
+>     public static int[] copyArray(int[] arr) {
+>         return arr == null ? null : Arrays.copyOf(arr, arr.length);
+>     }
+> 
+>     // 判断两个数组是否相同
+>     public static boolean isEqual(int[] arr1, int[] arr2) {
+>         return Arrays.equals(arr1, arr2);
+>     }
+> 
+>     // 对数器主测试方法
+>     public static void main(String[] args) {
+>         int testTime = 500000;
+>         int maxSize = 100;
+>         int maxValue = 100;
+>         boolean succeed = true;
+> 
+>         for (int i = 0; i < testTime; i++) {
+>             int[] arr1 = generateRandomArray(maxSize, maxValue);
+>             int[] arr2 = copyArray(arr1);
+> 
+>             //standardBubbleSort(arr1);
+>             optimizedBubbleSort(arr1);
+>             comparator(arr2);
+> 
+>             if (!isEqual(arr1, arr2)) {
+>                 succeed = false;
+>                 System.out.println("原始数组: " + Arrays.toString(arr2));
+>                 System.out.println("冒泡排序结果: " + Arrays.toString(arr1));
+>                 break;
+>             }
+>         }
+> 
+>         System.out.println(succeed ? "测试通过！" : "测试失败！");
+>     }
+> }
+> 
+> ```
+>
+> 1. 包含冒泡排序实现和绝对正确的对照方法`Arrays.sort()`
+> 2. 随机数组生成器可控制数组大小和数值范围
+> 3. 支持大规模随机测试（默认50万次）
+> 4. 自动比较排序结果并输出错误案例
+> 5. 提供数组复制和相等判断工具方法
+>
+> 使用方法：直接运行main方法即可自动验证冒泡排序的正确性，测试失败时会打印出错案例。
 
 ## 【8】参考资料
 

@@ -28,5 +28,15 @@ export const algorithmSidebar = [
         text: '算法 - 插入排序',
         link: '/md/algorithm/algorithm_006.md',
         collapsible: true
+    },
+    {
+        text: '算法 - 二分法',
+        link: '/md/algorithm/algorithm_007.md',
+        collapsible: true
+    },
+    {
+        text: '算法 - 异或运算',
+        link: '/md/algorithm/algorithm_008.md',
+        collapsible: true
     }
 ]
