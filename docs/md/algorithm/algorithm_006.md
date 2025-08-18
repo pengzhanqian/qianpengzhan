@@ -66,7 +66,7 @@ flowchart TD
 >     1. ‌从后向前比较：从有序区的最后一个元素（索引 `j=i-1`）开始向前遍历：
 >        - 若 `arr[j] > key`，则将 `arr[j]` 后移一位。
 >        - 否则终止比较（找到 `key` 的正确插入位置）。
->     2. ‌**插入 `key`**‌：将 `key` 放入 `arr[j+1]` 的位置
+>     2. ‌<b>插入 `key`</b>：将 `key` 放入 `arr[j+1]` 的位置
 > - ‌**动态扩展有序区**‌
 >   - 每轮插入后，有序区长度 `+1`，未排序区 `-1`。
 >   - 重复步骤2-3，直到所有元素有序。
@@ -79,7 +79,7 @@ flowchart TD
 
 > - ‌**操作次数**‌：只需遍历数组一次，每次比较仅需1次（无需移动元素）。
 > - ‌**公式**‌：比较次数 = n-1 次。
-> - ‌**结果**‌：时间复杂度为 ‌**O(n)**‌。
+> - ‌**结果**‌：时间复杂度为 ‌<b>`O(n)`</b>。
 >
 > ------
 
@@ -89,7 +89,7 @@ flowchart TD
 > - ‌**公式**‌：比较次数 = `1 + 2 + ... + (n-1) = n(n-1)/2` 次。
 > - ‌推导‌：
 >   - 等差数列求和公式：`S = (首项 + 末项) × 项数 / 2 = (1 + n-1) × (n-1) / 2`。
->   - 最高次项为 `n²/2`，忽略低阶项后为 ‌**O(n²)**‌。
+>   - 最高次项为 `n²/2`，忽略低阶项后为 ‌<b>`O(n²)`</b>。
 >
 > ------
 
@@ -97,14 +97,14 @@ flowchart TD
 
 > - ‌**操作次数**‌：每个元素平均需比较约有序区的一半长度（n/2 次）。
 > - ‌**公式**‌：总比较次数 ≈ n × n/2 = n²/2 次。
-> - ‌**结果**‌：时间复杂度仍为 ‌**O(n²)**‌。
+> - ‌**结果**‌：时间复杂度仍为 ‌<b>`O(n²)`</b>。
 >
 > ------
 
 ### 【4.4】空间复杂度
 
 > - ‌**额外空间**‌：仅需常数级临时变量（如 `key`、`j`）。
-> - ‌**结果**‌：空间复杂度为 ‌**O(1)**‌（原地排序）。
+> - ‌**结果**‌：空间复杂度为 ‌<b>`O(1)`</b>（原地排序）。
 >
 > ------
 
@@ -131,7 +131,7 @@ flowchart TD
 > 2. ‌**移动元素**‌：若 `key` 小于当前比较元素，则将比较元素后移一位（腾出插入位置）。
 > 3. ‌**插入终止**‌：当找到 `key` 应插入的位置（或到达有序区起点），将 `key` 放入该位置。
 >
-> ‌**关键点**‌：通过 ‌**“先移动再插入”**‌ 的方式逐步扩展有序区。
+> ‌**关键点**‌：通过 ‌<b>“先移动再插入”</b> 的方式逐步扩展有序区。
 >
 > ------
 
@@ -164,20 +164,51 @@ flowchart TD
 ## 【8】代码示例
 
 > ```java
->     // 标准插入排序实现
->     public static void insertionSort(int[] arr) {
+>  // 标准插入排序实现
+>  public static void insertionSort(int[] arr) {
 >         if (arr == null || arr.length < 2) return;
 >         // 遍历所有元素
->         for (int i = 1; i < arr.length; i++) {
->             int key = arr[i];
->             // 从最后开始比较
->             int j = i - 1;
->             while (j >= 0 && arr[j] > key) {
->                 arr[j + 1] = arr[j];
->                 j--;
+>         // 0 ~ 0 有序的
+>         // 0 ~ i 想做到有序
+>         for (int i = 1; i < arr.length; i++) {// 0 ~ i 做到有序
+> //            int key = arr[i];
+> //            // 从最后开始比较
+> //            int j = i - 1;
+> //            while (j >= 0 && arr[j] > key) {
+> //                arr[j + 1] = arr[j];
+> //                j--;
+> //            }
+> //            arr[j + 1] = key;
+>             for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+>                 swap(arr, j, j + 1);
 >             }
->             arr[j + 1] = key;
 >         }
+>  }
+> 
+>   /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[i] ^ arr[j]
+>      * 将两数差异位保存到 arr[i]（此时 arr[i] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与 arr[j] 异或，得到原始 arr[i] 并存入 arr[j]
+>      * <p>
+>      * ‌第三次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与新 arr[j] 异或，得到原始 arr[j] 并存入 arr[i]
+>      * <p>arr = [3,5], i=0, j=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param i
+>      * @param j
+>      */
+>     private static void swap(int[] arr, int i, int j) {
+>         arr[i] = arr[i] ^ arr[j];
+>         arr[j] = arr[i] ^ arr[j];
+>         arr[i] = arr[i] ^ arr[j];
 >     }
 > ```
 
@@ -202,16 +233,47 @@ flowchart TD
 >     public static void insertionSort(int[] arr) {
 >         if (arr == null || arr.length < 2) return;
 >         // 遍历所有元素
->         for (int i = 1; i < arr.length; i++) {
->             int key = arr[i];
->             // 从最后开始比较
->             int j = i - 1;
->             while (j >= 0 && arr[j] > key) {
->                 arr[j + 1] = arr[j];
->                 j--;
+>         // 0 ~ 0 有序的
+>         // 0 ~ i 想做到有序
+>         for (int i = 1; i < arr.length; i++) {// 0 ~ i 做到有序
+> //            int key = arr[i];
+> //            // 从最后开始比较
+> //            int j = i - 1;
+> //            while (j >= 0 && arr[j] > key) {
+> //                arr[j + 1] = arr[j];
+> //                j--;
+> //            }
+> //            arr[j + 1] = key;
+>             for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+>                 swap(arr, j, j + 1);
 >             }
->             arr[j + 1] = key;
 >         }
+>     }
+> 
+>     /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[i] ^ arr[j]
+>      * 将两数差异位保存到 arr[i]（此时 arr[i] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与 arr[j] 异或，得到原始 arr[i] 并存入 arr[j]
+>      * <p>
+>      * ‌第三次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与新 arr[j] 异或，得到原始 arr[j] 并存入 arr[i]
+>      * <p>arr = [3,5], i=0, j=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param i
+>      * @param j
+>      */
+>     private static void swap(int[] arr, int i, int j) {
+>         arr[i] = arr[i] ^ arr[j];
+>         arr[j] = arr[i] ^ arr[j];
+>         arr[i] = arr[i] ^ arr[j];
 >     }
 > 
 >     // 对数器：生成随机测试数组
@@ -259,7 +321,6 @@ flowchart TD
 >         System.out.println(succeed ? "所有测试通过！" : "存在错误案例！");
 >     }
 > }
-> 
 > ```
 >
 > 代码功能说明：

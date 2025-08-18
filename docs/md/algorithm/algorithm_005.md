@@ -107,16 +107,16 @@
 >
 > 其算法步骤如下:
 >
-> 1. **初始化阶段**‌
+> 1. <b>初始化阶段</b>
 >    - 获取数组长度`n`
 >    - 声明`swapped`标志位（初始值不影响）
-> 2. ‌**外层循环（控制轮次）**‌
+> 2. <b>外层循环（控制轮次）</b>
 >    - 每轮将当前最大值推到未排序部分的末尾
 >    - 共需最多`n-1`轮（`i`从`0`到`n-2`）
-> 3. ‌**内层循环（比较交换）**‌
+> 3. <b>内层循环（比较交换）</b>
 >    - 比较范围：`0`到`n-i-1`（每轮减少已排序部分）
 >    - 若`arr[j] > arr[j+1]`则交换，并标记`swapped=true`
-> 4. **提前终止检测**‌
+> 4. <b>提前终止检测</b>
 >    - 若某轮未发生交换（`!swapped`），说明数组已有序，直接退出
 >
 > ```java
@@ -178,9 +178,9 @@
 
 > 有2轮循环，每轮n次，最终需要n²次
 
-> **最优情况（已排序数组）**‌：`O(n)`（只需一轮检查）。
+> <b>最优情况（已排序数组）</b>：`O(n)`（只需一轮检查）。
 >
-> ‌**最坏情况（逆序数组）**‌：`O(n²)`（仍需完整轮次）
+> ‌<b>最坏情况（逆序数组）</b>：`O(n²)`（仍需完整轮次）
 
 ### 【4.6】（6）空间复杂度
 
@@ -204,6 +204,55 @@
 >  * @since 2025/8/15 11:42
 >  */
 > public class BubbleSort {
+>     
+> 	/**
+>      * 其他的可行的优秀的思路 冒泡排序
+>      *
+>      * @param arr
+>      */
+>     public static void otherBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // 0 ~ N-1
+>         // 0 ~ N-2
+>         // 0 ~ N-3
+>         // .. 遍历比较相邻元素 若前者比后者大 则交换
+>         // 0 ~ 1
+>         for (int e = arr.length - 1; e > 0; e--) { // 0 ~ e (e  = N-1,N-2,N-3,...,1)
+>             for (int i = 0; i < e; i++) {
+>                 if (arr[i] > arr[i + 1]) {
+>                     swap(arr, i, i + 1);
+>                 }
+>             }
+>         }
+>     }
+> 
+>     /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[i] ^ arr[j]
+>      * 将两数差异位保存到 arr[i]（此时 arr[i] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与 arr[j] 异或，得到原始 arr[i] 并存入 arr[j]
+>      * <p>
+>      * ‌第三次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与新 arr[j] 异或，得到原始 arr[j] 并存入 arr[i]
+>      * <p>arr = [3,5], i=0, j=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param i
+>      * @param j
+>      */
+>     private static void swap(int[] arr, int i, int j) {
+>         arr[i] = arr[i] ^ arr[j];
+>         arr[j] = arr[i] ^ arr[j];
+>         arr[i] = arr[i] ^ arr[j];
+>     }
 > 
 > 
 >     // 标准冒泡排序
@@ -279,6 +328,55 @@
 >  * @since 2025/8/15 11:42
 >  */
 > public class BubbleSort {
+> 
+>     /**
+>      * 其他的可行的优秀的思路 冒泡排序
+>      *
+>      * @param arr
+>      */
+>     public static void otherBubbleSort(int[] arr) {
+>         if (arr == null || arr.length < 2) {
+>             return;
+>         }
+>         // 0 ~ N-1
+>         // 0 ~ N-2
+>         // 0 ~ N-3
+>         // .. 遍历比较相邻元素 若前者比后者大 则交换
+>         // 0 ~ 1
+>         for (int e = arr.length - 1; e > 0; e--) { // 0 ~ e (e  = N-1,N-2,N-3,...,1)
+>             for (int i = 0; i < e; i++) {
+>                 if (arr[i] > arr[i + 1]) {
+>                     swap(arr, i, i + 1);
+>                 }
+>             }
+>         }
+>     }
+> 
+>     /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[i] ^ arr[j]
+>      * 将两数差异位保存到 arr[i]（此时 arr[i] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与 arr[j] 异或，得到原始 arr[i] 并存入 arr[j]
+>      * <p>
+>      * ‌第三次异或‌：arr[i] ^ arr[j]
+>      * 用临时值与新 arr[j] 异或，得到原始 arr[j] 并存入 arr[i]
+>      * <p>arr = [3,5], i=0, j=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param i
+>      * @param j
+>      */
+>     private static void swap(int[] arr, int i, int j) {
+>         arr[i] = arr[i] ^ arr[j];
+>         arr[j] = arr[i] ^ arr[j];
+>         arr[i] = arr[i] ^ arr[j];
+>     }
 > 
 > 
 >     // 标准冒泡排序
@@ -373,7 +471,8 @@
 >             int[] arr2 = copyArray(arr1);
 > 
 >             //standardBubbleSort(arr1);
->             optimizedBubbleSort(arr1);
+>             //optimizedBubbleSort(arr1);
+>             otherBubbleSort(arr1);
 >             comparator(arr2);
 > 
 >             if (!isEqual(arr1, arr2)) {
@@ -387,7 +486,6 @@
 >         System.out.println(succeed ? "测试通过！" : "测试失败！");
 >     }
 > }
-> 
 > ```
 >
 > 1. 包含冒泡排序实现和绝对正确的对照方法`Arrays.sort()`

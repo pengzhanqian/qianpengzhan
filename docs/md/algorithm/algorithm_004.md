@@ -134,6 +134,32 @@ graph TD
 >         arr[currIndex] = arr[minIndex];
 >         arr[minIndex] = temp;
 >     }
+>     
+>         /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 将两数差异位保存到 arr[currIndex]（此时 arr[currIndex] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 用临时值与 arr[minIndex] 异或，得到原始 arr[currIndex] 并存入 arr[minIndex]
+>      * <p>
+>      * ‌第三次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 用临时值与新 arr[minIndex] 异或，得到原始 arr[minIndex] 并存入 arr[currIndex]
+>      * <p>arr = [3,5], currIndex=0, minIndex=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param currIndex
+>      * @param minIndex
+>      */
+>     private static void optSwap(int[] arr, int currIndex, int minIndex) {
+>         arr[currIndex] = arr[currIndex] ^ arr[minIndex];
+>         arr[minIndex] = arr[currIndex] ^ arr[minIndex];
+>         arr[currIndex] = arr[currIndex] ^ arr[minIndex];
+>     }
 > }
 > 
 > ```
@@ -216,6 +242,32 @@ graph TD
 >         arr[minIndex] = temp;
 >     }
 > 
+>     /**
+>      * 异或交换原理
+>      * <p>
+>      * ‌第一次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 将两数差异位保存到 arr[currIndex]（此时 arr[currIndex] 变为临时值）
+>      * <p>
+>      * ‌第二次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 用临时值与 arr[minIndex] 异或，得到原始 arr[currIndex] 并存入 arr[minIndex]
+>      * <p>
+>      * ‌第三次异或‌：arr[currIndex] ^ arr[minIndex]
+>      * 用临时值与新 arr[minIndex] 异或，得到原始 arr[minIndex] 并存入 arr[currIndex]
+>      * <p>arr = [3,5], currIndex=0, minIndex=1：
+>      * arr[0] = 3 ^ 5 = 6  // [6,5]
+>      * arr[1] = 6 ^ 5 = 3  // [6,3]
+>      * arr[0] = 6 ^ 3 = 5  // [5,3] 完成交换
+>      *
+>      * @param arr
+>      * @param currIndex
+>      * @param minIndex
+>      */
+>     private static void optSwap(int[] arr, int currIndex, int minIndex) {
+>         arr[currIndex] = arr[currIndex] ^ arr[minIndex];
+>         arr[minIndex] = arr[currIndex] ^ arr[minIndex];
+>         arr[currIndex] = arr[currIndex] ^ arr[minIndex];
+>     }
+> 
 >     // 正确的排序方法（对数器基准）
 >     public static void comparator(int[] arr) {
 >         Arrays.sort(arr);
@@ -254,6 +306,7 @@ graph TD
 >         return true;
 >     }
 > }
+> 
 > 
 > ```
 
