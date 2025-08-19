@@ -38,5 +38,20 @@ export const algorithmSidebar = [
         text: '算法 - 异或运算',
         link: '/md/algorithm/algorithm_008.md',
         collapsible: true
+    },
+    {
+        text: '算法 - 链表结构',
+        link: '/md/algorithm/algorithm_009.md',
+        collapsible: true
+    },
+    {
+        text: '算法 - 栈结构',
+        link: '/md/algorithm/algorithm_010.md',
+        collapsible: true
+    },
+    {
+        text: '算法 - 队列结构',
+        link: '/md/algorithm/algorithm_011.md',
+        collapsible: true
     }
 ]

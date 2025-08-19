@@ -77,17 +77,358 @@
 
 > - 在一个有序数组中，找某个数是否存在
 
+```java
+package com.learn.algorithm.business;
+
+import java.util.Arrays;
+
+/**
+ * 在一个有序数组中，找某个数是否存在
+ *
+ * @author qianpengzhan
+ * @since 2025/8/18 15:29
+ */
+public class BinarySearchExists {
+
+    // 标准二分查找
+
+    /**
+     * @param arr    有序的数组
+     * @param target 具体的目标数 要找的数是几
+     * @return boolean
+     */
+    public static boolean exists(int[] arr, int target) {
+        if (arr == null || arr.length == 0) return false;
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            // 取最中间的下标的数据
+            int mid = left + ((right - left) >> 1);
+            if (arr[mid] == target) {
+                // 找到了 则打印下标 返回找到了true
+                System.out.println(mid);
+                return true;
+            } else if (arr[mid] < target) {
+                // 当前值比目标值小 则左侧范围扩大，向右找
+                left = mid + 1;
+            } else {
+                // 当前值比目标值大, 则右侧范围扩大，向左找
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    // 对数器验证方法
+    public static boolean verify(int[] arr, int target, boolean result) {
+        // 线性查找验证
+        for (int num : arr) {
+            if (num == target) return result;
+        }
+        return !result;
+    }
+
+    // 随机数组生成器
+    public static int[] generateRandomSortedArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) (Math.random() * maxSize) + 1];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * maxValue);
+        }
+        // 二分查找的前提： 有序
+        Arrays.sort(arr);
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int testTime = 100000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateRandomSortedArray(maxSize, maxValue);
+            int target = (int) (Math.random() * maxValue);
+            boolean result = exists(arr, target);
+            if (!verify(arr, target, result)) {
+                System.out.println("测试失败！");
+                System.out.println("数组: " + Arrays.toString(arr));
+                System.out.println("目标值: " + target);
+                System.out.println("查找结果: " + result);
+                succeed = false;
+                break;
+            }
+        }
+        System.out.println(succeed ? "所有测试通过！" : "存在测试失败！");
+    }
+}
+```
+
 ### 【5.2】案例二
 
 > - 在一个有序数组中，找>=某个数最左侧的位置
+
+```java
+package com.learn.algorithm.business;
+
+import java.util.Arrays;
+
+/**
+ * 在一个有序数组中，找>=某个数最左侧的位置
+ *
+ * @author qianpengzhan
+ * @since 2025/8/18 16:19
+ */
+public class BinaryNearLeft {
+
+    // 在一个有序数组arr中，找>=某个数value最左侧的位置
+    public static int nearestIndex(int[] arr, int value) {
+        if (arr == null || arr.length == 0) return -1;
+        int L = 0;
+        int R = arr.length - 1;
+        int index = -1; // 记录最左的下标 对号
+        while (L <= R) {
+            int mid = L + ((R - L) >> 1);
+            if (arr[mid] >= value) {
+                index = mid;
+                R = mid - 1;
+            } else {
+                L = mid + 1;
+            }
+        }
+        return index;
+    }
+
+    // 对数器验证方法
+    public static boolean verify(int[] arr, int target, int index) {
+        if (index == -1) {
+            for (int num : arr) {
+                if (num >= target) return false;
+            }
+            return true;
+        }
+
+        // 检查找到的位置确实>=target
+        if (arr[index] < target) return false;
+
+        // 检查这是最左侧的位置
+        if (index > 0 && arr[index - 1] >= target) return false;
+
+        return true;
+    }
+
+    public static int[] generateRandomSortedArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) (Math.random() * maxSize) + 1];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+        }
+        Arrays.sort(arr);
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateRandomSortedArray(maxSize, maxValue);
+            int target = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+            int index = nearestIndex(arr, target);
+            if (!verify(arr, target, index)) {
+                succeed = false;
+                System.out.println("测试失败！");
+                System.out.println("数组: " + Arrays.toString(arr));
+                System.out.println("目标值: " + target);
+                System.out.println("找到的位置: " + index);
+                break;
+            }
+        }
+        System.out.println(succeed ? "所有测试通过！" : "存在测试失败！");
+    }
+}
+
+```
 
 ### 【5.3】案例三
 
 > - 在一个有序数组中，找<=某个数最右侧的位置
 
+```java
+package com.learn.algorithm.business;
+
+import java.util.Arrays;
+
+/**
+ * 在一个有序数组arr中，找<=某个数value最右侧的位置
+ *
+ * @author qianpengzhan
+ * @since 2025/8/19 11:07
+ */
+public class BinaryNearRight {
+    // 在一个有序数组arr中，找<=某个数value最右侧的位置
+    public static int nearestIndex(int[] arr, int value) {
+        if (arr == null || arr.length == 0) return -1;
+        int L = 0;
+        int R = arr.length - 1;
+        int index = -1; // 记录最左的下标 对号
+        while (L <= R) {
+            int mid = L + ((R - L) >> 1);
+            if (arr[mid] <= value) {
+                index = mid;
+                L = mid + 1;
+            } else {
+                R = mid - 1;
+            }
+        }
+        return index;
+    }
+
+    // 对数器验证方法
+    public static boolean verify(int[] arr, int value, int index) {
+        if (index == -1) {
+            for (int num : arr) {
+                if (num <= value) return false;
+            }
+            return true;
+        }
+
+        // 检查找到的位置确实<=value
+        if (arr[index] > value) return false;
+
+        // 检查这是最右侧的位置
+        if (index < arr.length - 1 && arr[index + 1] <= value) return false;
+
+        return true;
+    }
+
+    public static int[] generateRandomSortedArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) (Math.random() * maxSize) + 1];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+        }
+        Arrays.sort(arr);
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateRandomSortedArray(maxSize, maxValue);
+            int target = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+            int index = nearestIndex(arr, target);
+            if (!verify(arr, target, index)) {
+                succeed = false;
+                System.out.println("测试失败！");
+                System.out.println("数组: " + Arrays.toString(arr));
+                System.out.println("目标值: " + target);
+                System.out.println("找到的位置: " + index);
+                break;
+            }
+        }
+        System.out.println(succeed ? "所有测试通过！" : "存在测试失败！");
+    }
+}
+
+```
+
 ### 【5.4】案例四
 
 > - 局部最小值问题
+
+```java
+package com.learn.algorithm.business;
+
+import java.util.Arrays;
+
+/**
+ * @author qianpengzhan
+ * @since 2025/8/19 11:15
+ */
+public class BinaryPartMin {
+    // 查找局部最小值
+    public static int findPartMinimum(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        if (arr.length == 1 || arr[0] < arr[1]) {
+            return 0;
+        }
+        if (arr[arr.length - 1] < arr[arr.length - 2]) {
+            return arr.length - 1;
+        }
+        int left = 1;
+        int right = arr.length - 2;
+        int mid = 0;
+        while (left < right) {
+            mid = (left + right) / 2;
+            if (arr[mid] > arr[mid - 1]) {
+                right = mid - 1;
+            } else if (arr[mid] > arr[mid + 1]) {
+                left = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return left;
+    }
+
+    // 验证得到的结果，是不是局部最小
+    public static boolean verify(int[] arr, int index) {
+        if (arr.length <= 1) {
+            return true;
+        }
+        if (index == 0) {
+            return arr[index] < arr[index + 1];
+        }
+        if (index == arr.length - 1) {
+            return arr[index] < arr[index - 1];
+        }
+        return arr[index] < arr[index - 1] && arr[index] < arr[index + 1];
+    }
+
+
+    // 为了测试
+    // 生成相邻不相等的数组
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) (Math.random() * maxSize) + 1];
+        arr[0] = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+        for (int i = 1; i < arr.length; i++) {
+            do {
+                arr[i] = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+            } while (arr[i] == arr[i - 1]);
+        }
+        return arr;
+    }
+
+
+    // 对数器测试
+    public static void main(String[] args) {
+        int testTime = 100000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateRandomArray(maxSize, maxValue);
+            int index = findPartMinimum(arr);
+
+            if (!verify(arr, index)) {
+                succeed = false;
+                System.out.println("测试失败！");
+                System.out.println("数组: " + Arrays.toString(arr));
+                System.out.println("找到的位置: " + index);
+                break;
+            }
+        }
+        System.out.println(succeed ? "所有测试通过！" : "存在测试失败！");
+    }
+}
+
+```
 
 ## 【6】参考资料
 
