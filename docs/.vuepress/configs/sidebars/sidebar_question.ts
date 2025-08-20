@@ -20,7 +20,7 @@ export const questionSidebar = [
                 ]
             },
             {
-                text: 'Intellj Idea 问题',
+                text: '网络问题',
                 collapsible: true,
                 children: [
                     {
