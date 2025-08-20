@@ -11,6 +11,11 @@ export const questionSidebar = [
                         text: '【Intellj Idea】idea启动时报错java: Internal error in the mapping processor: java.lang.NullPointerException',
                         link: '/md/question/idea/question_idea_001.md',
                         collapsible: true
+                    },
+                    {
+                        text: '【Intellj Idea】 配置Java method Live template',
+                        link: '/md/question/idea/question_idea_002.md',
+                        collapsible: true
                     }
                 ]
             },
