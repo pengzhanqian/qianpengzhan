@@ -143,8 +143,43 @@ public class XORTest {
 > 题目： 一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数？
 
 ```java
+// 一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数？
+// 这个问题会用到上面的提取出N的最右侧的1个1出来 得到的值的结论
+// 假设出现奇数次的两种数设为 a,b, 因为是两种数, 那么 a != b, 数组种的其他数均出现了偶数次.
+// 那么这个数组遍历进行异或最终的结果则为 xor = a ^ b ^ c ^ c ^ d ^ d ... = a ^ b  ,其他均为偶数次(自反性) = 0了
+// 因为 a != b 所以 xor = a ^ b 一定不等于 0 , 所以 xor的二进制数中的某一位(M)一定有1 也说明了 a  和 b 的 M位的数字一定不同
+// 要么 a的M位为1, b的M位为0; 要么 b的M位为1, a的M位为0;
+// 这样我们就可以把整个数组分为2类，1类是每个元素的二进制的M位为1, 1类是每个元素的二进制的M位为0
+// 这样我们只要提取出 xor 的最右侧的1 ，然后重新遍历1次数组, 继续每个异或, 就可以得到其中1个数 a / b 了
+int[] arrTwoOddNumber = {11, 13, 2, 2, 4, 4, 5, 5, 10, 10, 13, 13};
+twoOddNumber(arrTwoOddNumber);
 
-
+/**
+ * 一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数？
+ *
+ * @param arr 数组
+ * @author qianpengzhan
+ */
+private static void twoOddNumber(int[] arr) {
+    int xor = 0;
+    for (int i = 0; i < arr.length; i++) {
+        xor ^= arr[i];
+    }
+    // xor = a ^ b
+    // a != b ==>  xor != 0
+    // xor 的二进制数上必然有1个位置是1 提取出来
+    int rightOne = xor & (~xor + 1);
+    // 定义 xor' = a / b
+    int dXor = 0; // dXor = xor'
+    for (int i = 0; i < arr.length; i++) {
+        // 再次遍历 因为 xor 必有1个位置为1 则 rightOne 和 每个元素(相同位置是0) 异或 则 不等于0
+        if ((arr[i] & rightOne) != 0) {
+            dXor ^= arr[i];
+        }
+    }
+    System.out.println("a = " + dXor);
+    System.out.println("b = " + (dXor ^ xor));
+}
 ```
 
 ## 【7】参考资料
