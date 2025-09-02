@@ -16,7 +16,7 @@ Node.js安装包自带了npm，但安装时不会自动给npm配置全局安装�
    PS C:\Users\87337>
    ```
 
-2. 在该目录中新增 **node_global 和 node_cache **文件夹
+2. 在该目录中新增 <b>node_global 和 node_cache </b> 文件夹
 
 ![image-20240827102148794](../../../.vuepress/public/images/image-20240827102148794.png)
 
@@ -61,10 +61,10 @@ npm config set registry https://registry.npmmirror.com
 2. **选择程序和功能**：在控制面板中，选择“程序”或“程序和功能”。
 3. **卸载Node.js**：在程序列表中找到Node.js，并选择“卸载”。
 4. **手动删除相关文件夹**：卸载后，您还需要手动删除以下文件夹及其内容，以确保彻底清除：
-   - C:\Program Files (x86)\Nodejs
-   - C:\Program Files\Nodejs
-   - C:\Users{User}\AppData\Roaming\pm (或%appdata%\pm)
-   - C:\Users{User}\AppData\Roaming\pm-cache (或%appdata%\pm-cache)
+   - `C:\Program Files (x86)\Nodejs`
+   - `C:\Program Files\Nodejs`
+   - `C:\Users{User}\AppData\Roaming\pm (或%appdata%\pm)`
+   - `C:\Users{User}\AppData\Roaming\pm-cache (或%appdata%\pm-cache)`
 5. **检查环境变量**：打开系统环境变量设置，检查并确保没有引用Nodejs或npm。
 6. **重新启动计算机**：完成上述步骤后，建议重新启动计算机以确保所有更改生效。
 
@@ -95,6 +95,16 @@ pnpm config set cache-dir "E:\Program Files\pnpm_repo\.pnpm-cache"
 pnpm config set global-dir "E:\Program Files\pnpm_repo\.pnpm-global"
 pnpm config set state-dir "E:\Program Files\pnpm_repo\.pnpm-state"
 pnpm config set store-dir "E:\Program Files\pnpm_repo\.pnpm-store“
+```
+
+可能会遇到严格校验的问题，需要这样处理下
+
+```shell
+Set-ExecutionPolicy -Scope CurrentUser
+位于命令管道位置 1 的 cmdlet Set-ExecutionPolicy
+请为以下参数提供值:
+ExecutionPolicy: 
+然后输入： RemoteSigned  即可。
 ```
 
 ### 3.3 配置镜像
