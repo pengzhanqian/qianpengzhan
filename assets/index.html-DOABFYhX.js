@@ -1,0 +1,1 @@
+import{_ as t,c as a,a as o,r as n,o as r}from"./app-GRT9i7xS.js";const l={};function c(s,i){const e=n("Catalog");return r(),a("div",null,[o(e)])}const _=t(l,[["render",c]]),m=JSON.parse('{"path":"/md/more/real-operation/","title":"Real Operation","lang":"zh-CN","frontmatter":{"title":"Real Operation"},"git":{},"filePathRelative":null}');export{_ as comp,m as data};

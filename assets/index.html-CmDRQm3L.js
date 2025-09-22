@@ -1,0 +1,1 @@
+import{_ as e,c as a,a as o,r as n,o as l}from"./app-GRT9i7xS.js";const c={};function r(s,i){const t=n("Catalog");return l(),a("div",null,[o(t)])}const m=e(c,[["render",r]]),p=JSON.parse('{"path":"/md/note/java/detail/","title":"Detail","lang":"zh-CN","frontmatter":{"title":"Detail"},"git":{},"filePathRelative":null}');export{m as comp,p as data};

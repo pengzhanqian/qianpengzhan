@@ -1,0 +1,1 @@
+import{_ as t,c as a,a as o,r as n,o as s}from"./app-GRT9i7xS.js";const c={};function r(l,_){const e=n("Catalog");return s(),a("div",null,[o(e)])}const i=t(c,[["render",r]]),p=JSON.parse('{"path":"/md/more/essay/","title":"Essay","lang":"zh-CN","frontmatter":{"title":"Essay"},"git":{},"filePathRelative":null}');export{i as comp,p as data};
