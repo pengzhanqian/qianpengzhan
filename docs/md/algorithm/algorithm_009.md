@@ -186,6 +186,340 @@
 
 ### 【5.2】双向链表
 
+> - 代码示例
+>
+> ```java
+> package com.learn.algorithm.datastructure;
+> 
+> import java.util.NoSuchElementException;
+> 
+> /**
+>  * 双向链表
+>  * T 代表链表的数据域的元素
+>  *
+>  * @author qianpengzhan
+>  * @since 2025/8/25 15:36
+>  */
+> public class DoubleLinkedListStructureTest<T> {
+> 
+>     // 头部节点
+>     private Node<T> head;
+>     // 尾部节点
+>     private Node<T> tail;
+>     // 链表大小
+>     private int size;
+> 
+>     // 测试代码
+>     public static void main(String[] args) {
+>         DoubleLinkedListStructureTest<Integer> list = new DoubleLinkedListStructureTest<>();
+> 
+>         list.prepend(1);
+>         list.append(3);
+>         list.add(1, 2);
+> 
+>         System.out.println("链表内容:");
+>         list.display(); // 输出: null <- 1 <-> 2 <-> 3 -> null
+> 
+>         System.out.println("第二个元素: " + list.get(1)); // 输出: 2
+> 
+>         list.removeHead();
+>         list.removeTail();
+> 
+>         System.out.println("删除首尾后:");
+>         list.display(); // 输出: null <- 2 -> null
+>     }
+> 
+>     /**
+>      * 添加data元素到双向链表得头部
+>      * 头插法
+>      *
+>      * @param data 元素
+>      */
+>     public void prepend(T data) {
+>         /*
+>          * 头插法‌：
+>          *     创建新节点
+>          *     若没有头节点 则链表为空 则头节点=尾节点=新节点
+>          *     新节点的next指向原头节点
+>          *     原头节点的prev指向新节点
+>          *     更新头指针指向新节点
+>          */
+>         // 创建新节点
+>         Node<T> newNode = new Node<>(data);
+>         if (head == null) {
+>             // 若没有头节点 则链表为空 则头节点=尾节点=新节点
+>             head = tail = newNode;
+>         } else {
+>             // 新节点的next指向原头节点
+>             newNode.next = head;
+>             // 原头节点的prev指向新节点
+>             head.prev = newNode;
+>             // 更新头指针指向新节点
+>             head = newNode;
+>         }
+>         size++;
+>     }
+> 
+>     /**
+>      * 添加data元素到双向表的尾部
+>      * 尾插法
+>      *
+>      * @param data 元素
+>      */
+>     public void append(T data) {
+>         /*
+>          * 尾插法‌：
+>          *     创建新节点
+>          *     若没有头节点 则链表为空 则头节点=尾节点=新节点
+>          *     新节点的prev指向原尾节点
+>          *     原尾节点的next指向新节点
+>          *     更新尾指针指向新节点
+>          */
+>         // 创建新节点
+>         Node<T> newNode = new Node<>(data);
+>         if (head == null) {
+>             // 若没有头节点 则链表为空 则头节点=尾节点=新节点
+>             head = tail = newNode;
+>         } else {
+>             // 新节点的prev指向原尾节点
+>             newNode.prev = tail;
+>             // 原尾节点的next指向新节点
+>             tail.next = newNode;
+>             // 更新尾指针指向新节点
+>             tail = newNode;
+>         }
+>         size++;
+>     }
+> 
+>     /**
+>      * 在指定位置插入data元素
+>      *
+>      * @param index 指定位置
+>      * @param data  元素
+>      */
+>     public void add(int index, T data) {
+>         if (index < 0 || index > size) {
+>             throw new IndexOutOfBoundsException();
+>         }
+>         if (index == 0) {
+>             prepend(data);
+>         } else if (index == size) {
+>             append(data);
+>         } else {
+>             // 1 <-> 3 <-> null
+>             // 1
+>             Node<T> current = getNode(index);
+>             // 2
+>             Node<T> newNode = new Node<>(data);
+> 
+>             newNode.prev = current.prev;
+>             newNode.next = current;
+>             current.prev.next = newNode;
+>             current.prev = newNode;
+> 
+>             size++;
+>         }
+>     }
+> 
+>     /**
+>      * 删除头节点
+>      *
+>      * @return {@link T}
+>      * @author qianpengzhan
+>      */
+>     public T removeHead() {
+>         /*
+>          * 头删除‌：
+>          *     保存头节点的数据
+>          *     将头指针指向原头节点的next
+>          *     如果新头节点不为空，将其prev置为null
+>          *     否则将尾指针也置为null
+>          */
+>         if (head == null) {
+>             throw new NoSuchElementException();
+>         }
+>         // 保存头节点的数据
+>         T data = head.data;
+>         // 将头指针指向原头节点的next
+>         head = head.next;
+>         if (head == null) {
+>             // 否则将尾指针也置为null
+>             tail = null;
+>         } else {
+>             // 如果新头节点不为空，将其prev置为null
+>             head.prev = null;
+>         }
+>         size--;
+>         return data;
+>     }
+> 
+>     /**
+>      * 删除尾节点
+>      *
+>      * @return {@link T}
+>      * @author qianpengzhan
+>      */
+>     public T removeTail() {
+>         /*
+>          * 尾删除‌：
+>          *     保存尾节点的数据
+>          *     将尾指针指向原尾节点的prev
+>          *     如果新尾节点不为空，将其next置为null
+>          *     否则将头指针也置为null
+>          */
+>         if (tail == null) {
+>             throw new NoSuchElementException();
+>         }
+>         // 保存尾节点的数据
+>         T data = tail.data;
+>         // 将尾指针指向原尾节点的prev
+>         tail = tail.prev;
+>         if (tail != null) {
+>             // 如果新尾节点不为空，将其next置为null
+>             tail.next = null;
+>         } else {
+>             // 否则将头指针也置为null
+>             head = null;
+>         }
+>         size--;
+>         return data;
+>     }
+> 
+>     /**
+>      * 删除指定位置的节点
+>      *
+>      * @param index 指定位置
+>      * @return {@link T}
+>      * @author qianpengzhan
+>      */
+>     public T remove(int index) {
+>         if (index < 0 || index > size) {
+>             throw new NoSuchElementException();
+>         }
+>         if (index == 0) {
+>             return removeHead();
+>         } else if (index == size - 1) {
+>             return removeTail();
+>         } else {
+>             /*
+>              *中间删除‌：
+>              *     定位要删除的节点C及其前驱A和后继B
+>              *     将A的next指向B
+>              *     将B的prev指向A
+>              */
+>             // 要删除的节点C
+>             Node<T> cNode = getNode(index);
+>             // 节点C的前驱节点A
+>             Node<T> aNode = cNode.prev;
+>             // 节点C的后继节点B
+>             Node<T> bNode = cNode.next;
+>             // 将A的next指向B
+>             aNode.next = bNode;
+>             // 将B的prev指向A
+>             bNode.prev = aNode.prev;
+>             size--;
+>             return cNode.data;
+>         }
+>     }
+> 
+>     /**
+>      * 获取指定位置得节点
+>      *
+>      * @param index 指定位置
+>      * @return {@link Node}
+>      */
+>     public Node<T> getNode(int index) {
+>         if (index < 0 || index >= size) {
+>             throw new IndexOutOfBoundsException();
+>         }
+>         Node<T> currentNode;
+>         if (index < size / 2) {
+>             currentNode = head;
+>             // 从前往后遍历找到该位置为止
+>             for (int i = 0; i < index; i++) {
+>                 currentNode = currentNode.next;
+>             }
+>         } else {
+>             currentNode = tail;
+>             // 从后往前遍历找到该位置为止
+>             for (int i = size - 1; i > index; i--) {
+>                 currentNode = currentNode.prev;
+>             }
+>         }
+>         return currentNode;
+>     }
+> 
+>     /**
+>      * 获取指定位置数据
+>      *
+>      * @param index 指定位置
+>      * @return {@link T}
+>      * @author qianpengzhan
+>      */
+>     public T get(int index) {
+>         return getNode(index).data;
+>     }
+> 
+>     /**
+>      * 获取链表大小
+>      *
+>      * @return {@link int}
+>      * @author qianpengzhan
+>      */
+>     public int size() {
+>         return size;
+>     }
+> 
+>     /**
+>      * 判断是否为空
+>      *
+>      * @return {@link boolean}
+>      * @author qianpengzhan
+>      */
+>     public boolean isEmpty() {
+>         return size == 0;
+>     }
+> 
+>     /**
+>      * 打印链表
+>      *
+>      * @author qianpengzhan
+>      */
+>     public void display() {
+>         Node<T> current = head;
+>         while (current != null) {
+>             System.out.print(current.data + " <-> ");
+>             current = current.next;
+>         }
+>         System.out.println("null");
+>         /**
+>         链表内容:
+>             1 <-> 2 <-> 3 <-> null
+>             第二个元素: 2
+>             删除首尾后:
+>             2 <-> null
+>         */
+>     }
+> 
+>     // 双向链表的数据结构
+>     public static class Node<T> {
+>         // 数据域
+>         private T data;
+>         // 指针域  -  前驱指针
+>         private Node<T> prev;
+>         // 指针域 - 后继指针
+>         private Node<T> next;
+> 
+>         public Node(T data) {
+>             this.data = data;
+>             this.prev = null;
+>             this.next = null;
+>         }
+>     }
+> 
+> }
+> ```
+>
 > - 
 
 ## 【X】参考资料
