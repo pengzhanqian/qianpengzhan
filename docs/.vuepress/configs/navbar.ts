@@ -46,6 +46,15 @@ export const navbar =
           ]
         },
         {
+          text: '学习笔记 - Python',
+          children: [
+            {
+              text: 'Python 基础',
+              link: '/md/note/python/basic/python_001.md'
+            }
+          ]
+        },
+        {
           text: '学习笔记 - 响应式编程',
           children: [
             {

@@ -1,6 +1,7 @@
 import { interviewSidebar } from './sidebars/sidebar_interview.js'
 import { javaSidebar } from './sidebars/sidebar_java.js'
 import { goSidebar } from './sidebars/sidebar_go.js'
+import { pythonSidebar } from './sidebars/sidebar_python.ts'
 import { reactiveSidebar } from './sidebars/sidebar_reactive.js'
 import { questionSidebar } from './sidebars/sidebar_question.js'
 import { moreSidebar } from './sidebars/sidebar_more.js'
@@ -10,6 +11,7 @@ export const sidebar = {
     '/md/note/interview/': interviewSidebar,
     '/md/note/java/': javaSidebar,
     '/md/note/go/': goSidebar,
+    '/md/note/python/': pythonSidebar,
     '/md/note/reactive/': reactiveSidebar,
     '/md/question/': questionSidebar,
     '/md/more/': moreSidebar,
