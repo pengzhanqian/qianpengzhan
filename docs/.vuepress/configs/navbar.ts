@@ -46,10 +46,10 @@ export const navbar =
           ]
         },
         {
-          text: '学习笔记 - Python',
+          text: '学习笔记 - Python3',
           children: [
             {
-              text: 'Python 基础',
+              text: 'Python3 基础',
               link: '/md/note/python/basic/python_001.md'
             }
           ]
