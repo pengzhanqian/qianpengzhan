@@ -1,6 +1,6 @@
 # 第三章: Python3 基础语法
 
-[\[toc]] 
+[[toc]]
 
 > 说在前面的话，本文为个人学习[Python3 教程](https://www.runoob.com/python3/python3-tutorial.html)后进行总结的文章，本文主要用于<b>Python3基础知识</b>。
 
@@ -147,4 +147,307 @@ print(is_valid_identifier("π"))  # True
 |              | `yield`    | 从生成器函数返回值                     |
 
 ## 4. 注释
+
+### 4.1 单行注释
+
+> Python 中的单行注释以 `#` 开头
+
+实例如下:
+
+```python
+#!/usr/bin/python3 
+# -*- coding: utf-8 -*- 
+
+# 单行注释
+# 第一个注释 
+print(" this is a first comment.")
+```
+
+执行以上代码，输出结果为：
+
+![image-20260320095910976](./../../../../.vuepress/public/images/image-20260320095910976.png)
+
+### 4.2 多行注释
+
+> Python 中的多行注释可以使用 多个 `#`  或者 `'''` 和 `"""`  为开始和结尾
+>
+> <font style="color:red">注意：不可以嵌套，会报错</font>
+
+实例如下：
+
+```python
+#!/usr/bin/python3 
+# -*- coding: utf-8 -*- 
+
+# 多行注释
+
+# 第一种 多个#
+# 第一个注释
+# 第二个注释
+# 第X个注释...
+# ....
+
+# 第二种 '''   '''
+'''
+这是第二种多行注释
+....
+....
+'''
+
+# 第三种  """ """
+"""
+这是第三种多行注释
+....
+....
+"""
+
+print("hello, 这是多行注释")
+```
+
+执行以上代码，输出结果如下：
+
+![image-20260320101255020](./../../../../.vuepress/public/images/image-20260320101255020.png)
+
+## 5. 行与缩进
+
+> Python 最具特色的就是使用缩进来表示代码块,不需要使用大括号`{}`
+>
+> 缩进的空格数是可变的，但是同一个代码块的语句必须包含相同的缩进空格数。
+
+实例如下:
+
+```python
+#!/usr/bin/python3 
+# -*- coding: utf-8 -*- 
+if True:
+    print ("True")
+else:
+    print ("False")
+```
+
+以下代码最后一行语句缩进数的空格数不一致，会导致运行错误：
+
+```python
+#!/usr/bin/python3 
+# -*- coding: utf-8 -*- 
+if True:
+    print ("Answer")
+    print ("True")
+else:
+    print ("Answer")
+  print ("False")    # 缩进不一致，会导致运行错误
+```
+
+![image-20260320112736388](./../../../../.vuepress/public/images/image-20260320112736388.png)
+
+![image-20260320112753872](./../../../../.vuepress/public/images/image-20260320112753872.png)
+
+## 6、多行语句
+
+> Python 通常是一行写完一条语句，但如果语句很长，我们可以使用反斜杠 `\`来实现多行语句
+
+```py
+total = item_one + \
+        item_two + \
+        item_three
+```
+
+实例如下：
+
+```python
+#!/usr/bin/python3 
+# -*- coding: utf-8 -*- 
+item_one = 1
+item_two = 2
+item_three = 3
+total = item_one + \
+        item_two + \
+        item_three
+print(total) # 输出为 6
+```
+
+> 注意：
+>
+> - 在  `[]`, `{}`, 或 `()`中的多行语句，不需要使用反斜杠 `\`
+
+例如：
+
+```python
+total = ['item_one', 'item_two', 'item_three',
+        'item_four', 'item_five']
+```
+
+## 7.空行
+
+> 函数之间或类的方法之间用空行分隔，表示一段新的代码的开始。类和函数入口之间也用一行空行分隔，以突出函数入口的开始。
+>
+> 空行与代码缩进不同，空行并不是 Python 语法的一部分。书写时不插入空行，Python 解释器运行也不会出错。但是空行的作用在于分隔两段不同功能或含义的代码，便于日后代码的维护或重构。
+>
+> **记住：**空行也是程序代码的一部分。
+
+## 8.等待用户输入
+
+> `input(prompt)`  这个会在控制台等待用户输入
+
+执行下面的程序在按回车键前就会等待用户输入：
+
+```python
+#!/usr/bin/python3
+# -*- coding: utf8 -*-
+
+
+# 等待用户输入
+
+input("\n\n 按下enter 键后退出...")
+```
+
+以上代码中 ，\n\n 在结果输出前会输出两个新的空行。一旦用户按下 **enter** 键时，程序将退出。
+
+![image-20260320133020536](./../../../../.vuepress/public/images/image-20260320133020536.png)
+
+## 9.同一行显示多条语句
+
+> Python 可以在同一行中使用多条语句，语句之间使用分号 `;` 分割
+
+以下是一个简单的实例：
+
+```python
+#!/usr/bin/python3
+ 
+import sys; x = 'runoob'; sys.stdout.write(x + '\n')
+```
+
+使用脚本执行以上代码，输出结果为：
+
+```python
+runoob
+```
+
+使用交互式命令行执行，输出结果为：
+
+```python
+PS C:\Users\87337> python3
+Python 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import sys; x = 'runoob'; sys.stdout.write(x + "\n");
+runoob
+7
+>>>
+```
+
+此处的 7 表示字符数，**runoob** 有 6 个字符，**\n** 表示一个字符，加起来 **7** 个字符。
+
+```python
+>>> import sys
+>>> sys.stdout.write(" hi ")    # hi 前后各有 1 个空格
+ hi 4
+```
+
+## 10.多个语句构成代码组
+
+> 缩进相同的一组语句构成一个代码块，我们称之**代码组**。
+>
+> 像if、while、def和class这样的复合语句，首行以`关键字`开始，以冒号(` :` )结束，该行之后的一行或多行代码构成**代码组**。
+>
+> 我们将首行及后面的代码组称为一个**子句**(`clause`)。
+
+如下实例：
+
+```python
+if expression : 
+   suite 
+elif expression : 
+   suite 
+else : 
+   suite 
+```
+
+## 11.Print 输出
+
+> **print** 默认输出是换行的，如果要实现不换行需要在变量末尾加上 `end=""`：
+
+实例如下：
+
+```python
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+# print 默认换行
+
+x = 'a'
+y = 'b'
+print(x)
+print(y)
+
+# print变量末尾+ ,end=" " 则不换行
+
+print(" 下面 a,b 不换行")
+print(x, end = "")
+print(y, end = "")
+```
+
+执行后，结果如下：
+
+```python
+a
+b
+ 下面 a,b 不换行
+ab
+```
+
+## 12. import 与 from...import
+
+在 `python `用 `import `或者 `from...import` 来导入相应的模块。
+
+将整个模块(`somemodule`)导入，格式为： `import somemodule`
+
+从某个模块中导入某个函数,格式为： `from somemodule import somefunction`
+
+从某个模块中导入多个函数,格式为：` from somemodule import firstfunc, secondfunc, thirdfunc`
+
+将某个模块中的全部函数导入，格式为：` from somemodule import *`
+
+### 12.1 导入 `sys` 模块
+
+```python
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import sys 
+print('================Python import mode==========================') 
+print ('命令行参数为:') 
+for i in sys.argv:    
+    print (i) 
+    print ('\n python 路径为', sys.path)
+```
+
+### 12.2 导入 `sys`模块的 `argv`,`path` 成员
+
+```python
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+from sys import argv,path  #  导入特定的成员  
+print('================python from import===================================') 
+print('path:',path) # 因为已经导入path成员，所以此处引用时不需要加sys.path
+```
+
+## 13. 命令行参数
+
+很多程序可以执行一些操作来查看一些基本信息，Python可以使用-h参数查看各参数帮助信息：
+
+```
+$ python -h
+usage: python [option] ... [-c cmd | -m mod | file | -] [arg] ...
+Options and arguments (and corresponding environment variables):
+-c cmd : program passed in as string (terminates option list)
+-d     : debug output from parser (also PYTHONDEBUG=x)
+-E     : ignore environment variables (such as PYTHONPATH)
+-h     : print this help message and exit
+
+[ etc. ]
+```
+
+我们在使用脚本形式执行 Python 时，可以接收命令行输入的参数，具体使用可以参照 [Python 3 命令行参数](https://www.runoob.com/python3/python3-command-line-arguments.html)。
 

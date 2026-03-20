@@ -15,6 +15,10 @@ export const pythonSidebar = [
             {
                 text: '第三章: Python3 基础语法',
                 link: '/md/note/python/basic/python_003.md'
+            },
+            {
+                text: '第四章: Python3 基础数据类型',
+                link: '/md/note/python/basic/python_004.md'
             }
         ]
     }
