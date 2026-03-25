@@ -35,7 +35,11 @@ export const pythonSidebar = [
             {
                 text: '第八章: Python3 字符串类型(String)',
                 link: '/md/note/python/basic/python_008.md'
-            }
+            },
+            {
+                text: '第九章: Python3 列表(List)',
+                link: '/md/note/python/basic/python_009.md'
+            },
         ]
     }
 ]
