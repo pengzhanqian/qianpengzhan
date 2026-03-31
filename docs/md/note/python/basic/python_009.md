@@ -48,3 +48,28 @@ print(list2)
 
 ## 3. 访问列表中的值
 
+> 与字符串的索引一样，列表索引从 0 开始，第二个索引是 1，依此类推。
+>
+> 通过索引列表可以进行截取、组合等操作。
+>
+> ![img](./../../../../.vuepress/public/images/positive-indexes-1.png)
+
+实例1：
+
+```python
+#!/usr/bin/python3
+
+list = ['red', 'green', 'blue', 'yellow', 'white', 'black']
+print( list[0] )
+print( list[1] )
+print( list[2] )
+```
+
+之后结果如下：
+
+```python
+red
+green
+blue
+```
+
