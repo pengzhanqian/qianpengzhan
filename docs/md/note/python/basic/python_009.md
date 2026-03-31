@@ -73,3 +73,187 @@ green
 blue
 ```
 
+> 索引也可以从尾部开始，最后一个元素的索引为 -1，往前一位为 -2，以此类推。
+
+![image-20260331153233978](./../../../../.vuepress/public/images/image-20260331153233978.png)
+
+实例2：
+
+```python
+#!/usr/bin/python3
+
+list = ['red', 'green', 'blue', 'yellow', 'white', 'black']
+print( list[-1] )
+print( list[-2] )
+print( list[-3] )
+```
+
+执行后结果如下：
+
+```python
+black
+white
+yellow
+```
+
+> 使用下标索引来访问列表中的值，同样你也可以使用方括号 `[]` 的形式截取字符，截取包含开始索引到不包含结束索引区间的元素，如下所示：
+
+![image-20260331153922020](./../../../../.vuepress/public/images/image-20260331153922020.png)
+
+实例3：
+
+```python
+#!/usr/bin/python3
+
+nums = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+print(nums[0:4]
+```
+
+执行后结果如下：
+
+```python
+[10, 20, 30, 40]
+```
+
+> 使用负数索引值截取：
+
+实例4：
+
+```python
+#!/usr/bin/python3
+
+list = ['Google', 'Runoob', "Zhihu", "Taobao", "Wiki"]
+
+# 读取第二位
+print ("list[1]: ", list[1])
+# 从第二位开始（包含）截取到倒数第二位（不包含）
+print ("list[1:-2]: ", list[1:-2])
+```
+
+执行后的结果如下：
+
+```python
+list[1]:  Runoob
+list[1:-2]:  ['Runoob', 'Zhihu']
+```
+
+## 4. 更新列表list
+
+> 你可以对列表的数据项进行修改或更新，你也可以使用`append()` 方法来添加列表项，如下所示：
+
+```python
+#!/usr/bin/python3
+
+list = ['Google', 'Runoob', 1997, 2000]
+
+print ("第三个元素为 : ", list[2])
+list[2] = 2001
+print ("更新后的第三个元素为 : ", list[2])
+
+list1 = ['Google', 'Runoob', 'Taobao']
+list1.append('Baidu')
+print ("更新后的列表 : ", list1)
+```
+
+执行后结果如下：
+
+```python
+第三个元素为 :  1997
+更新后的第三个元素为 :  2001
+更新后的列表 :  ['Google', 'Runoob', 'Taobao', 'Baidu']
+```
+
+::: warning 注意
+
+`append()` 方法的使用，后续会在[Python列表函数&方法]()中进行再叙。
+
+:::
+
+## 5.删除列表list元素
+
+> 可以使用 del 语句来删除列表中的元素，如下实例：
+
+```python
+#!/usr/bin/python3
+ 
+list = ['Google', 'Runoob', 1997, 2000]
+ 
+print ("原始列表 : ", list)
+del list[2]
+print ("删除第三个元素 : ", list)
+```
+
+以上实例输出结果：
+
+```python
+原始列表 :  ['Google', 'Runoob', 1997, 2000]
+删除第三个元素 :  ['Google', 'Runoob', 2000]
+```
+
+::: warning 注意
+
+`remove()` 方法的使用，后续会在[Python列表函数&方法]()中进行再叙。
+
+:::
+
+## 6. Python列表脚本操作符
+
+> 列表对 `+` 和  `*` 的操作符与字符串相似。`+` 号用于组合列表，`*` 号用于重复列表。
+
+如下表所示：
+
+| Python 表达式                         | 结果                         | 描述                 |
+| ------------------------------------- | ---------------------------- | -------------------- |
+| len([1, 2, 3])                        | 3                            | 长度                 |
+| [1, 2, 3] + [4, 5, 6]                 | [1, 2, 3, 4, 5, 6]           | 组合                 |
+| ['Hi!'] * 4                           | ['Hi!', 'Hi!', 'Hi!', 'Hi!'] | 重复                 |
+| 3 in [1, 2, 3]                        | True                         | 元素是否存在于列表中 |
+| for x in [1, 2, 3]: print(x, end=" ") | 1 2 3                        | 迭代                 |
+
+## 7.Python 列表截取与拼接
+
+Python 的列表截取与字符串操作类似，如下所示：
+
+```python
+ L=['Google', 'Runoob', 'Taobao']
+```
+
+操作：
+
+| Python 表达式 | 结果                 | 描述                                                     |
+| ------------- | -------------------- | -------------------------------------------------------- |
+| L[2]          | 'Taobao'             | 读取第三个元素                                           |
+| L[-2]         | 'Runoob'             | 从右侧开始读取倒数第二个元素: <br />count from the right |
+| L[1:]         | ['Runoob', 'Taobao'] | 输出从第二个元素开始后的所有元素                         |
+
+实例如下：
+
+```python
+#!/usr/bin/python3
+
+L = ['Google', 'Runoob', 'Taobao']
+
+# 读取第三个元素
+print("读取第三个元素: ",L[2])
+
+# 读取list
+print("读取list: ",L)
+
+# 从右侧开始读取倒数第二个元素
+print("从右侧开始读取倒数第二个元素: ", L[-2])
+
+# 输出从第二个元素开始后的所有元素
+print("输出从第二个元素开始后的所有元素: ", L[1:])
+```
+
+执行后结果如下：
+
+```python
+读取第三个元素:  Taobao
+读取list:  ['Google', 'Runoob', 'Taobao']
+从右侧开始读取倒数第二个元素:  Runoob
+输出从第二个元素开始后的所有元素:  ['Runoob', 'Taobao']
+```
+
+> 列表还支持拼接操作：
+
