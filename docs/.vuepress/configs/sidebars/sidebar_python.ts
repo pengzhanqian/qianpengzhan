@@ -39,6 +39,13 @@ export const pythonSidebar = [
             {
                 text: '第九章: Python3 列表(List)',
                 link: '/md/note/python/basic/python_009.md'
+            },{
+                text: '第十章: Python3 元组(tuple)',
+                link: '/md/note/python/basic/python_010.md'
+            },
+            {
+                text: '第十一章: Python3 字典(dict)',
+                link: '/md/note/python/basic/python_011.md' 
             },
         ]
     }

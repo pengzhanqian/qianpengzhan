@@ -257,3 +257,108 @@ print("输出从第二个元素开始后的所有元素: ", L[1:])
 
 > 列表还支持拼接操作：
 
+```python
+#!/usr/bin/python3
+
+# 列表还支持拼接操作
+
+squares = [1,4,9,16, 25]
+
+squares += [36, 49,64, 81, 100]
+
+print(squares)
+```
+
+执行后结果如下：
+
+```python
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+
+## 8.嵌套列表
+
+> 使用嵌套列表即在列表里创建其它列表
+
+实例:
+
+```python
+#!/usr/bin/python3
+
+# 嵌套列表
+
+
+a=['a','b','c']
+
+b=[1,2,3]
+
+c=[a,b]
+
+print(c)
+```
+
+执行后结果如下：
+
+```python
+[['a', 'b', 'c'], [1, 2, 3]]
+c[0] =  ['a', 'b', 'c']
+c[1] =  [1, 2, 3]
+```
+
+## 9.列表比较
+
+> <b>列表比较</b> 需要引入 `operator `模块的 `eq `方法：
+
+实例：
+
+```python
+#!/usr/bin/python3
+
+# 列表比较
+
+# 导入 operator 模块
+
+import operator
+
+a = [1,2]
+
+b = [3,4]
+
+c = [3,4]
+
+print("operator.eq(a,b)", operator.eq(a,b))
+print("operator.eq(c,b)", operator.eq(c,b))
+```
+
+执行后结果如下：
+
+```python
+operator.eq(a,b) False
+operator.eq(c,b) True
+```
+
+## 10.Python的列表的函数和方法
+
+Python包含以下函数:
+
+| 序号 | 函数                           |
+| ---- | ------------------------------ |
+| 1    | `len(list)` 列表元素个数       |
+| 2    | `max(list)`返回列表元素最大值  |
+| 3    | `min(list)` 返回列表元素最小值 |
+| 4    | `list(seq)`将元组转换为列表    |
+
+Python包含以下方法:
+
+| 序号 | 方法                                                         |
+| ---- | ------------------------------------------------------------ |
+| 1    | `list.append(obj)`  <br />在列表末尾添加新的对象             |
+| 2    | `list.count(element)` <br />统计某个元素在列表中出现的次数   |
+| 3    | `list.extend(seq)` <br />在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表） |
+| 4    | `list.index(obj)` <br />从列表中找出某个值第一个匹配项的索引位置 |
+| 5    | `list.insert(obj)`<br />将对象插入列表                       |
+| 6    | [list.pop([index=-1\])](https://www.runoob.com/python3/python3-att-list-pop.html) 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值 |
+| 7    | [list.remove(obj)](https://www.runoob.com/python3/python3-att-list-remove.html) 移除列表中某个值的第一个匹配项 |
+| 8    | [list.reverse()](https://www.runoob.com/python3/python3-att-list-reverse.html) 反向列表中元素 |
+| 9    | [	list.sort( key=None, reverse=False)](https://www.runoob.com/python3/python3-att-list-sort.html) 对原列表进行排序 |
+| 10   | [list.clear()](https://www.runoob.com/python3/python3-att-list-clear.html) 清空列表 |
+| 11   | [list.copy()](https://www.runoob.com/python3/python3-att-list-copy.html) 复制列表 |
